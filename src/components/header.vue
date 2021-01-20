@@ -1,129 +1,139 @@
 <template>
-    <div id="master">
-      <div id="parentx">
- 
-    <vs-sidebar parent="body" default-index="1"  color="primary" class="sidebarx" spacer v-model="active">
+  <div id="master">
+    <div id="parentx">
+      <vs-sidebar
+        parent="body"
+        default-index="1"
+        color="primary"
+        class="sidebarx"
+        spacer
+        v-model="active"
+      >
+        <div class="header-sidebar" slot="header">
+          <vs-avatar
+            size="70px"
+            src="https://randomuser.me/api/portraits/men/85.jpg"
+          />
+          <h4>
+            Harshit Sengar
+          </h4>
+        </div>
 
-      <div class="header-sidebar" slot="header">
-        <vs-avatar  size="70px" src="https://randomuser.me/api/portraits/men/85.jpg"/>
+        <vs-sidebar-item index="1" icon="question_answer">
+          Dashboard
+        </vs-sidebar-item>
 
-        <h4>
-          Harshit Sengar
-          
-        </h4>
+        <vs-sidebar-item index="2" icon="gavel">
+          History
+        </vs-sidebar-item>
 
-      </div>
+        <vs-divider icon="person" position="left">
+          User
+        </vs-divider>
 
-      <vs-sidebar-item index="1" icon="question_answer">
-        Dashboard
-      </vs-sidebar-item>
+        <vs-sidebar-item index="3" icon="verified_user">
+          Configurations
+        </vs-sidebar-item>
+        <vs-sidebar-item index="4" icon="account_box">
+          Profile
+        </vs-sidebar-item>
+        <vs-sidebar-item index="5">
+          Card
+        </vs-sidebar-item>
 
-      <vs-sidebar-item index="2" icon="gavel">
-        History
-      </vs-sidebar-item>
-
-      <vs-divider icon="person" position="left">
-        User
-      </vs-divider>
-
-      <vs-sidebar-item index="3" icon="verified_user">
-        Configurations
-      </vs-sidebar-item>
-      <vs-sidebar-item index="4" icon="account_box">
-        Profile
-      </vs-sidebar-item>
-      <vs-sidebar-item index="5" >
-        Card
-      </vs-sidebar-item>
-
-      <div class="footer-sidebar" slot="footer">
-        <vs-button icon="reply" color="danger" type="flat">log out</vs-button>
-        <vs-button icon="settings" color="primary" type="border"></vs-button>
-      </div>
-
-    </vs-sidebar>
-  </div>    
-<div class="centerx">
-    
-    <vs-navbar
-      v-model="indexActive"
-      text-color="rgba(0,0,0,.6)"
-      active-text-color="rgba(0,0,0,1)"
-      class="myNavbar">
-
-      <div slot="title">
-        <vs-navbar-title >
-          <img @click="active=!active" type="filled" style="margin-top: 4px;" src = "https://cvstaticfiles.s3.ap-south-1.amazonaws.com/logo.png" height="35"/>
-        </vs-navbar-title>
-      </div>
-
-      <vs-navbar-item index="0" >
-        <a href="#">Workbench</a>
-      </vs-navbar-item>
-      <vs-navbar-item index="1" >
-        <a href="#">Support</a>
-      </vs-navbar-item> 
-
-      <vs-spacer></vs-spacer>
-
-      
-    </vs-navbar>
-  </div>
+        <div class="footer-sidebar" slot="footer">
+          <vs-button icon="reply" color="danger" type="flat">log out</vs-button>
+          <vs-button icon="settings" color="primary" type="border"></vs-button>
+        </div>
+      </vs-sidebar>
     </div>
-  
+    <div class="centerx">
+      <vs-navbar
+        v-model="indexActive"
+        text-color="rgba(0,0,0,.6)"
+        active-text-color="rgba(0,0,0,1)"
+        class="myNavbar"
+      >
+        <div slot="title">
+          <vs-navbar-title>
+            <img
+              @click="active = !active"
+              type="filled"
+              style="margin-top: 4px;"
+              src="https://cvstaticfiles.s3.ap-south-1.amazonaws.com/logo.png"
+              height="35"
+            />
+          </vs-navbar-title>
+        </div>
+
+        <vs-navbar-item index="0">
+          <a href="#">Workbench</a>
+        </vs-navbar-item>
+        <vs-navbar-item index="1">
+          <a href="#">Support</a>
+        </vs-navbar-item>
+
+        <vs-spacer></vs-spacer>
+      </vs-navbar>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    name:"NavBar",
-  data: ()=>({ 
-    indexActive: 0,
-     active:false,
-  })
-}
+  name: "NavBar",
+  data() {
+    return {
+      indexActive: 0,
+      active: false
+    };
+  },
+  created: function() {
+    //console.log(this.$keycloak)
+  }
+};
 </script>
 
 <style lang="scss">
-.input-color{
-  margin-bottom : 10px;
-  position : relative;
-  display : block;
+.input-color {
+  margin-bottom: 10px;
+  position: relative;
+  display: block;
 }
-  
-.myNavbar{
-  color: rgb(255,255,255)
+
+.myNavbar {
+  color: rgb(255, 255, 255);
 }
 
 .header-sidebar {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
 }
 
 .header-sidebar h4 {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .header-sidebar h4 > button {
-	margin-left: 10px;
+  margin-left: 10px;
 }
 
 .footer-sidebar {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .footer-sidebar > button {
-	border: 0px solid rgba(0,0,0,0) !important;
-	border-left: 1px solid rgba(0,0,0,0.07) !important;
-	border-radius: 0px !important;
+  border: 0px solid rgba(0, 0, 0, 0) !important;
+  border-left: 1px solid rgba(0, 0, 0, 0.07) !important;
+  border-radius: 0px !important;
 }
-  
 </style>
