@@ -30,12 +30,12 @@ let keycloak = Keycloak(initOptions);
 
 keycloak
   .init({ onLoad: initOptions.onLoad })
-  .success(auth => {
+  .then(auth => {
     if (!auth) {
       window.location.reload();
     } else {
+      Vue.prototype.$keycloakvar=keycloak
       Vue.$log.info("Authenticated");
-      Vue.$log.info(keycloak.createLogoutUrl());
     }
 
     Vue.use(Vuesax);
@@ -52,7 +52,7 @@ keycloak
     setInterval(() => {
       keycloak
         .updateToken(70)
-        .success(refreshed => {
+        .then(refreshed => {
           if (refreshed) {
             Vue.$log.debug("Token refreshed");
           } else {
@@ -67,11 +67,11 @@ keycloak
             );
           }
         })
-        .error(() => {
+        .catch(() => {
           Vue.$log.error("Failed to refresh token");
         });
     }, 60000);
   })
-  .error(() => {
+  .catch(() => {
     Vue.$log.error("Authenticated Failed");
   });

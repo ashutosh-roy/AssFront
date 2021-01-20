@@ -15,7 +15,7 @@
             src="https://randomuser.me/api/portraits/men/85.jpg"
           />
           <h4>
-            Harshit Sengar
+            {{userData.name}}
           </h4>
         </div>
 
@@ -42,8 +42,8 @@
         </vs-sidebar-item>
 
         <div class="footer-sidebar" slot="footer">
-          <vs-button icon="reply" color="danger" type="flat">log out</vs-button>
-          <vs-button icon="settings" color="primary" type="border"></vs-button>
+          <a :href="logoutUrl"><vs-button icon="reply" color="danger" type="flat">log out</vs-button></a>
+          <a :href="accountUrl"><vs-button icon="settings" color="primary" type="border"></vs-button></a>
         </div>
       </vs-sidebar>
     </div>
@@ -85,7 +85,10 @@ export default {
   data() {
     return {
       indexActive: 0,
-      active: false
+      active: false,
+      userData : this.$keycloakvar.idTokenParsed,
+      logoutUrl : this.$keycloakvar.createLogoutUrl(),
+      accountUrl : this.$keycloakvar.createAccountUrl(),
     };
   },
   created: function() {
