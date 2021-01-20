@@ -29,8 +29,6 @@
 <script>
 // import Vue from 'vue'
 export default {
-  created:function(){
-    console.log(this.$keycloakvar)
-  }
+   
 }
 </script>

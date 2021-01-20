@@ -56,7 +56,7 @@ keycloak
           if (refreshed) {
             Vue.$log.debug("Token refreshed");
           } else {
-            Vue.$log.warn(
+            Vue.$log.log(
               "Token not refreshed, valid for " +
                 Math.round(
                   keycloak.tokenParsed.exp +

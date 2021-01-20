@@ -90,9 +90,6 @@ export default {
       logoutUrl : this.$keycloakvar.createLogoutUrl(),
       accountUrl : this.$keycloakvar.createAccountUrl(),
     };
-  },
-  created: function() {
-    //console.log(this.$keycloak)
   }
 };
 </script>
