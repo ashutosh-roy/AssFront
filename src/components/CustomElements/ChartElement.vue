@@ -11,9 +11,11 @@
       <vs-card>
         <div slot="header">
           <h3>
-            {{title}}
+           {{title}}
           </h3>
+          
         </div>
+
         <div>
            <canvas :id="id"></canvas>
         </div>
@@ -27,14 +29,14 @@ import Chart from 'chart.js';
 
 export default {
   name: "ChartElement",
-  props: ['title','tabledata','id'],
+  props: ['title','tabledata','id','type'],
   data: () => ({
      
     
   }),
   mounted:function(){
     new Chart(document.getElementById(this.id), {
-  type: 'polarArea',
+  type: this.type,
   data: {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], 
     datasets: [

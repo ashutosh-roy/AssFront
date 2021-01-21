@@ -73,10 +73,10 @@
         <masterSearch style="margin-right: 25px;" />
 
         <vs-navbar-item index="0">
-          <a href="#">Workbench</a>
+          <router-link to="/">Dashboard</router-link>
         </vs-navbar-item>
         <vs-navbar-item index="1">
-          <a href="#">Support</a>
+          <router-link to="/support">Support</router-link>
         </vs-navbar-item>
 
         <vs-spacer></vs-spacer>
