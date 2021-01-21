@@ -61,7 +61,7 @@ keycloak
                 Math.round(
                   keycloak.tokenParsed.exp +
                     keycloak.timeSkew -
-                    new Date().getTime() / 100000
+                    new Date().getTime() / 1000
                 ) +
                 " seconds"
             );

@@ -212,7 +212,7 @@
         vs-xs="12"
         vs-sm="12"
       >
-        <ChartElement title="Candidates List" />
+        <ChartElement title="Candidates" id="1"/>
       </vs-col>
       <vs-col
         class="card"
@@ -223,7 +223,7 @@
         vs-xs="12"
         vs-sm="12"
       >
-        <ChartElement title="Sony A7RIV" />
+        <ChartElement title="Sony" id="2" />
       </vs-col>
     </vs-row>
   </div>

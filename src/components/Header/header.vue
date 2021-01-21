@@ -104,8 +104,7 @@ export default {
     masterSearch
   },
   created: function() {
-    console.log(this.$keycloakvar);
-    console.log(this.$keycloakvar.hasResourceRole("Assessment_Admin"));
+    //Vue.$log.info(this.$keycloakvar);
   }
 };
 </script>
