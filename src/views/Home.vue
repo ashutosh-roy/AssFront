@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <vs-row vs-justify="center">
-     <!--Test Groups Card-->
+      <!--Test Groups Card-->
       <vs-col
         class="card"
         type="flex"
@@ -11,7 +11,7 @@
         vs-xs="12"
         vs-sm="12"
       >
-      <vs-card>
+        <vs-card>
           <div slot="header">
             <h3>
               Test Groups
@@ -40,9 +40,8 @@
             </vs-row>
           </div>
         </vs-card>
-
       </vs-col>
-                 <!--Tests Card-->
+      <!--Tests Card-->
       <vs-col
         class="card"
         type="flex"
@@ -52,7 +51,7 @@
         vs-xs="12"
         vs-sm="12"
       >
-      <vs-card>
+        <vs-card>
           <div slot="header">
             <h3>
               Tests
@@ -81,9 +80,8 @@
             </vs-row>
           </div>
         </vs-card>
-
-      </vs-col>  
-     <!--Candidates Card-->
+      </vs-col>
+      <!--Candidates Card-->
       <vs-col
         class="card"
         type="flex"
@@ -93,7 +91,7 @@
         vs-xs="12"
         vs-sm="12"
       >
-      <vs-card>
+        <vs-card>
           <div slot="header">
             <h3>
               Candidates
@@ -121,9 +119,8 @@
             </vs-row>
           </div>
         </vs-card>
-
       </vs-col>
-     <!--Upcoming Tests Card-->
+      <!--Upcoming Tests Card-->
       <vs-col
         class="card"
         type="flex"
@@ -133,7 +130,7 @@
         vs-xs="12"
         vs-sm="12"
       >
-      <vs-card>
+        <vs-card>
           <div slot="header">
             <h3>
               Upcoming Tests
@@ -162,9 +159,8 @@
             </vs-row>
           </div>
         </vs-card>
-
       </vs-col>
-           <!--Evaluation Card-->
+      <!--Evaluation Card-->
       <vs-col
         class="card"
         type="flex"
@@ -174,7 +170,7 @@
         vs-xs="12"
         vs-sm="12"
       >
-      <vs-card>
+        <vs-card>
           <div slot="header">
             <h3>
               Evaluation
@@ -202,11 +198,7 @@
             </vs-row>
           </div>
         </vs-card>
-
       </vs-col>
-    
-      
- 
     </vs-row>
   </div>
 </template>
@@ -223,13 +215,16 @@ export default {
 </script>
 
 <style type="scss" scoped>
-.home{
+.home {
   margin: 20px;
 }
-.card{
-  margin: 15px;
+.card {
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 5px;
+  
 }
-.cardbutton{
+.cardbutton {
   margin-left: 5px;
- }
+}
 </style>
