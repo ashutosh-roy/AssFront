@@ -14,23 +14,18 @@
             size="70px"
             src="https://randomuser.me/api/portraits/men/85.jpg"
           />
+
           <h4>
-            {{userData.name}}
+            {{ userData.name }}
           </h4>
         </div>
 
         <vs-sidebar-item index="1" icon="question_answer">
-          Dashboard
+          Sprints
         </vs-sidebar-item>
-
         <vs-sidebar-item index="2" icon="gavel">
           History
         </vs-sidebar-item>
-
-        <vs-divider icon="person" position="left">
-          User
-        </vs-divider>
-
         <vs-sidebar-item index="3" icon="verified_user">
           Configurations
         </vs-sidebar-item>
@@ -42,8 +37,18 @@
         </vs-sidebar-item>
 
         <div class="footer-sidebar" slot="footer">
-          <a :href="logoutUrl"><vs-button icon="reply" color="danger" type="flat">log out</vs-button></a>
-          <a :href="accountUrl"><vs-button icon="settings" color="primary" type="border"></vs-button></a>
+          <a :href="logoutUrl"
+            ><vs-button icon="reply" color="danger" type="flat"
+              >log out</vs-button
+            ></a
+          >
+          <a :href="accountUrl"
+            ><vs-button
+              icon="settings"
+              color="primary"
+              type="border"
+            ></vs-button
+          ></a>
         </div>
       </vs-sidebar>
     </div>
@@ -65,6 +70,7 @@
             />
           </vs-navbar-title>
         </div>
+        <masterSearch style="margin-right: 25px;" />
 
         <vs-navbar-item index="0">
           <a href="#">Workbench</a>
@@ -80,16 +86,26 @@
 </template>
 
 <script>
+import masterSearch from "./masterSearch.vue";
+
 export default {
   name: "NavBar",
   data() {
     return {
       indexActive: 0,
       active: false,
-      userData : this.$keycloakvar.idTokenParsed,
-      logoutUrl : this.$keycloakvar.createLogoutUrl(),
-      accountUrl : this.$keycloakvar.createAccountUrl(),
+      userData: this.$keycloakvar.idTokenParsed,
+      logoutUrl: this.$keycloakvar.createLogoutUrl(),
+      accountUrl: this.$keycloakvar.createAccountUrl(),
+      scope: this.$keycloakvar.createAccountUrl()
     };
+  },
+  components: {
+    masterSearch
+  },
+  created: function() {
+    console.log(this.$keycloakvar);
+    console.log(this.$keycloakvar.hasResourceRole("Assessment_Admin"));
   }
 };
 </script>

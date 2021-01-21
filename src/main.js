@@ -22,7 +22,7 @@ Vue.use(VueLogger, options);
 let initOptions = {
   url: "https://account.simplifycv.com/auth/",
   realm: "keycloak-demo",
-  clientId: "vue-test-app",
+  clientId: "Simplify-Assessment",
   onLoad: "login-required"
 };
 
@@ -34,7 +34,7 @@ keycloak
     if (!auth) {
       window.location.reload();
     } else {
-      Vue.prototype.$keycloakvar=keycloak
+      Vue.prototype.$keycloakvar = keycloak;
       Vue.$log.info("Authenticated");
     }
 
@@ -61,7 +61,7 @@ keycloak
                 Math.round(
                   keycloak.tokenParsed.exp +
                     keycloak.timeSkew -
-                    new Date().getTime() / 1000
+                    new Date().getTime() / 100000
                 ) +
                 " seconds"
             );

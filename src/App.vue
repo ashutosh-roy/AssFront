@@ -1,5 +1,8 @@
 <template>
-  <div id="app">
+  <div>
+    <NavBar />
+    <vs-row vs-w="12"> </vs-row>
+
     <router-view />
   </div>
 </template>
@@ -27,8 +30,10 @@
 }
 </style>
 <script>
-// import Vue from 'vue'
+import NavBar from "./components/Header/header.vue";
 export default {
-   
-}
+  components: {
+    NavBar
+  }
+};
 </script>
