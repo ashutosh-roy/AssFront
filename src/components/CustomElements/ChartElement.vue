@@ -38,25 +38,25 @@ export default {
         datasets: [
           {
             label: "2018 Sales",
-            backgroundColor: "rgba(255, 0, 0, 0.5)",
+            backgroundColor: "rgba(255, 0, 0, 0.33)",
             data: [300, 700, 450, 750, 450]
           },
           {
             label: "2019 Sales",
-            backgroundColor: "rgba(255, 255, 0, 0.75)",
+            backgroundColor: "rgba(0, 255, 0, 0.33)",
             data: [400, 800, 550, 400, 50]
           },
           {
             label: "2020 Sales",
-            backgroundColor: "rgba(255, 0, 255, 0.25)",
-            data: [100, 200, 350, 250, 800]
+            backgroundColor: "rgba(0, 0, 255, 0.33)",
+            data: [800, 500, 150, 800, 900]
           }
         ]
       },
       options: {
-        //    legend: {
-        //       display: false
-        //    },
+            legend: {
+               display: false
+            },
         //    tooltips: {
         //       enabled: false
         //    },
