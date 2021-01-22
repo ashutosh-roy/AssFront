@@ -54,9 +54,9 @@ export default {
         ]
       },
       options: {
-            legend: {
-               display: false
-            },
+        legend: {
+          display: false
+        }
         //    tooltips: {
         //       enabled: false
         //    },
