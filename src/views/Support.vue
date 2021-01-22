@@ -1,11 +1,9 @@
 <template>
-    <div>sad</div>
+  <div>sad</div>
 </template>
 <script>
 export default {
-    name: "supportPage"
-}
+  name: "supportPage"
+};
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>

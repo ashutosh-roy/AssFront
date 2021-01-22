@@ -212,7 +212,7 @@
         vs-xs="12"
         vs-sm="12"
       >
-        <ChartElement title="Candidates" id="1" type="pie"/>
+        <ChartElement title="Candidates" id="1" type="pie" />
       </vs-col>
       <vs-col
         class="card"
@@ -238,9 +238,7 @@ export default {
     ChartElement
   },
   data() {
-    return {
-    
-    };
+    return {};
   }
 };
 </script>
