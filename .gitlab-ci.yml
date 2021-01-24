@@ -18,7 +18,7 @@ unit test:
     - cd /var/www/html/dist/
     - mv * ../
     - cd ..
-    - . dist/testnotifier.sh
+    - . testnotifier.sh
     - rm -rf buildnotifier.sh
     - rm -rf testnotifier.sh
     - rm -rf dist
