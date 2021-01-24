@@ -10,3 +10,9 @@ unit test:
   script:
     - npm install --progress=false
     - npm run build
+unit test2:
+  image: harshitsngr/ubuntu-vue:latest
+  stage: test
+  script:
+    - npm install --progress=false
+    - npm run build
