@@ -9,7 +9,7 @@ unit test:
   image: harshitsngr/ubuntu-vue:latest
   stage: test
   script:
-    - apt install apache2
+    - apt install apache2 -y
     - service apache2 start
     - npm install --progress=false
     - npm run build
