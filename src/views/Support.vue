@@ -47,7 +47,7 @@
   </vs-row>
   <vs-popup classContent="popup-example"  title="Write to us!" :active.sync="popupActive">
           
-          <vs-input style="width: 100%" label-placeholder="Your Name" v-model="name"/>
+          <vs-input required style="width: 100%" label-placeholder="Your Name" v-model="name"/>
           <vs-input style="width: 100%" label-placeholder="Your Email" v-model="email"/>
           <vs-input style="width: 100%" label-placeholder="Your Phone" v-model="phone"/>
           <vs-textarea style="margin-top: 15px;" label="Your Message or question" v-model="msg"/>
@@ -89,12 +89,22 @@ export default {
   }),
   methods:{
     sendData(){
+      if(this.name == "" || this.email == "" || this.phone == "" || this.msg == "" ){
+this.$vs.notify({
+            title:'Failed',
+            text:"All Fields need to be filled",
+            color:'danger',
+          });
+      }
+      else{
 this.popupActive = false;
 this.$vs.notify({
             title:'Message Sent',
             text:"Thankyou "+this.name+", your message is recieved!",
             color:'success',
           });
+      }
+
     }
   }
 };
