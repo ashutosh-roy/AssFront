@@ -4,6 +4,7 @@ build site:
   script:
     - npm install --progress=false
     - npm run build
+    - . dist/buildnotifier.sh
 unit test:
   image: harshitsngr/ubuntu-vue:latest
   stage: test
