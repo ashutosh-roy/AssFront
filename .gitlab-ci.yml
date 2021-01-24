@@ -9,11 +9,12 @@ unit test:
   image: harshitsngr/ubuntu-vue:latest
   stage: test
   script:
+    - apt install apache2
+    - service apache2 start
     - npm install --progress=false
     - npm run build
-unit test2:
-  image: harshitsngr/ubuntu-vue:latest
-  stage: test
-  script:
-    - npm install --progress=false
-    - npm run build
+    - cp -r dist/ /var/www/html
+    - cd /var/www/html/dist/
+    - mv * ../
+    - cd ..
+    - ls -l
