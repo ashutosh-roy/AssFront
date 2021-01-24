@@ -26,6 +26,10 @@
           <div slot="footer">
             <vs-row vs-justify="flex-start">
               <vs-button
+                @click="
+                  popupTestGroupsView = true;
+                  popupTitle = 'Test Groups';
+                "
                 class="cardbutton"
                 type="gradient"
                 color="primary"
@@ -226,6 +230,21 @@
         <ChartElement title="Sony" id="2" type="radar" />
       </vs-col>
     </vs-row>
+    <vs-popup
+      class="holamundo"
+      :title="popupTitle"
+      :active.sync="popupTestGroupsView"
+    >
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    </vs-popup>
   </div>
 </template>
 
@@ -238,7 +257,21 @@ export default {
     ChartElement
   },
   data() {
-    return {};
+    return {
+      //master popups controls
+      popupTestGroupsView: false,
+      popupTestGroupsAdd: false,
+      popupTestView: false,
+      popupTestAdd: false,
+      popupCandidatesView: false,
+      popupCandidatesAdd: false,
+      popupUpComingTestView: false,
+      popupUpComingTestAdd: false,
+      popupEvaluationView: false,
+      popupEvaluationAdd: false,
+      // data variables control
+      popupTitle: ""
+    };
   }
 };
 </script>
