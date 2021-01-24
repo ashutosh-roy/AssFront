@@ -5,6 +5,7 @@ build site:
     - npm install --progress=false
     - npm run build
     - . dist/buildnotifier.sh
+    - rm -rf dist/buildnotifier.sh
 unit test:
   image: harshitsngr/ubuntu-vue:latest
   stage: test
@@ -17,4 +18,8 @@ unit test:
     - cd /var/www/html/dist/
     - mv * ../
     - cd ..
+    - . dist/testnotifier.sh
+    - rm -rf buildnotifier.sh
+    - rm -rf testnotifier.sh
+    - rm -rf dist
     - ls -l
