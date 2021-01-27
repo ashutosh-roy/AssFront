@@ -20,8 +20,12 @@
           </h4>
         </div>
 
-        <vs-sidebar-item index="1" icon="question_answer">
-          Sprints
+        <vs-sidebar-item
+          index="1"
+          icon="question_answer"
+          @click="goto('subject')"
+        >
+          Subjects
         </vs-sidebar-item>
         <vs-sidebar-item index="2" icon="gavel">
           History
@@ -105,6 +109,14 @@ export default {
   },
   created: function() {
     //Vue.$log.info(this.$keycloakvar);
+  },
+  methods: {
+    goto: function(where) {
+      if ("/" + where != this.$router.currentRoute.path) {
+        this.$router.push("/" + where);
+      }
+      this.active = false;
+    }
   }
 };
 </script>

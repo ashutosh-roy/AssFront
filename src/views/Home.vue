@@ -14,13 +14,13 @@
         <vs-card>
           <div slot="header">
             <h3>
-              Test Groups
+              Subjects
             </h3>
           </div>
           <div>
-            <p style="font-size: 2rem;">300 Groups</p>
-            <vs-chip color="success">4 Active</vs-chip>
-            <vs-chip color="danger">1 In-Active</vs-chip>
+            <p style="font-size: 2rem;">5 Subjects</p>
+            <vs-chip color="success">3 Active</vs-chip>
+            <vs-chip color="danger">2 In-Active</vs-chip>
             <vs-chip color="primary">2 Public</vs-chip>
           </div>
           <div slot="footer">
