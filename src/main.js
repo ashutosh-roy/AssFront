@@ -54,9 +54,9 @@ keycloak
         .updateToken(70)
         .then(refreshed => {
           if (refreshed) {
-            Vue.$log.debug("Token refreshed");
+            Vue.$log.info("Token refreshed" + refreshed);
           } else {
-            Vue.$log.log(
+            Vue.$log.info(
               "Token not refreshed, valid for " +
                 Math.round(
                   keycloak.tokenParsed.exp +
@@ -70,7 +70,7 @@ keycloak
         .catch(() => {
           Vue.$log.error("Failed to refresh token");
         });
-    }, 60000);
+    }, 6000);
   })
   .catch(() => {
     Vue.$log.error("Authenticated Failed");

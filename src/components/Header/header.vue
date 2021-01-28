@@ -112,10 +112,8 @@ export default {
   },
   methods: {
     goto: function(where) {
-      if ("/" + where != this.$router.currentRoute.path) {
-        this.$router.push("/" + where);
-      }
       this.active = false;
+      window.location.href = "/" + where;
     }
   }
 };

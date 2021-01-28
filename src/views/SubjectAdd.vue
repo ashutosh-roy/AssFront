@@ -303,7 +303,7 @@ export default {
   methods: {
     goto: function(where) {
       if ("/" + where != this.$router.currentRoute.path) {
-        this.$router.push("/" + where);
+        window.location.href = "/" + where;
       }
     },
 
