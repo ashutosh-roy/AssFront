@@ -168,7 +168,7 @@
                 type="flex"
                 vs-justify="flex-end"
                 vs-align="flex-end"
-                >
+              >
                 <vs-button
                   style="float: right;"
                   type="gradient"
@@ -176,8 +176,7 @@
                   icon="add"
                   size="small"
                 ></vs-button>
-                
-                </vs-col>
+              </vs-col>
             </vs-row>
           </div>
           <div>
