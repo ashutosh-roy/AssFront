@@ -26,17 +26,17 @@ const routes = [
     component: Subject
   },
   {
-    path: "/subject/:slug/",
+    path: "/subject/:subjectID/",
     name: "SubjectIndivisual",
     component: SubjectIndivisual
   },
   {
-    path: "/subject/:slug/:slug/",
+    path: "/subject/:subjectID/:testID/",
     name: "TestView",
     component: TestView
   },
   {
-    path: "/subject/:slug/:slug/:slug/",
+    path: "/subject/:subjectID/:testID/QPBuilder/",
     name: "QuestionPaperBuilder",
     component: QuestionPaperBuilder
   }
