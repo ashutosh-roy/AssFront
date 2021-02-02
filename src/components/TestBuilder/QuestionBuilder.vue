@@ -142,11 +142,24 @@
                               <vs-chip color="primary">
                                 Question {{ ques.id }}</vs-chip
                               >
-                              <vs-chip color="warning">
+                              <vs-chip
+                                style="margin-left: 5px;"
+                                color="warning"
+                              >
                                 {{ ques.type.toUpperCase() }}</vs-chip
                               >
                               <br /><br />
                               <div v-html="ques.value"></div>
+                              <!--Type Of Question specifics printing-->
+
+                              <vs-list v-if="ques.type === 'mcq'">
+                                Options List
+                                <vs-list-item
+                                  v-for="item in ques.response.options"
+                                  :key="item"
+                                  :title="item"
+                                ></vs-list-item>
+                              </vs-list>
                             </h3>
                           </div>
                         </vs-col>
@@ -219,7 +232,15 @@
           vs-xs="4"
           vs-sm="4"
         >
-          Long
+          <div
+            style="width: 100%; height: 100%; text-align: center; padding-top: 40px;"
+            @click="
+              longQuestionBuilder.popup = true;
+              chooseQuestionPopup = false;
+            "
+          >
+            Long
+          </div>
         </vs-col>
         <vs-col
           vs-type="flex"
@@ -435,6 +456,39 @@
         </vs-row>
       </vs-row>
     </vs-popup>
+    <!--Long Question Popup-->
+    <vs-popup
+      class="holamundo"
+      title="Long Question Builder"
+      :active.sync="longQuestionBuilder.popup"
+    >
+      <vs-row vs-align="flex-start" vs-type="flex" vs-justify="center" style="">
+        <vs-col
+          vs-type="flex"
+          vs-justify="center"
+          vs-align="center"
+          style="margin: 10px;"
+          vs-lg="12"
+          vs-xs="12"
+          vs-sm="12"
+        >
+          <vue-editor
+            v-model="longQuestionBuilder.data.value"
+            placeholder="Enter Question Here !"
+          ></vue-editor>
+        </vs-col>
+
+        <vs-row>
+          <vs-button
+            color="primary"
+            @click="addLongQuestion2QuestionPaper"
+            type="gradient"
+            icon="add"
+            >Add Question</vs-button
+          >
+        </vs-row>
+      </vs-row>
+    </vs-popup>
   </vs-row>
 </template>
 <script>
@@ -475,8 +529,148 @@ export default {
           }
         }
       },
+      longQuestionBuilder: {
+        popup: false,
+        data: {
+          type: "long",
+          value: "Write your question here !",
+          response: {
+            type: "long",
+            options: [],
+            correct: null
+          }
+        }
+      },
       temp_sectionchoice: null,
-      sections: []
+      sections: [
+        {
+          id: 1,
+          questions: [
+            {
+              type: "long",
+              value: "<p>Write your question here !</p>",
+              response: { type: "long", options: [], correct: null },
+              id: 1
+            },
+            {
+              type: "short",
+              value: "<p>Write your question here !</p>",
+              response: { type: "short", options: [], correct: null },
+              id: 2
+            },
+            {
+              type: "mcq",
+              value: "<p>Write your question here !</p>",
+              response: { type: "mcq", options: [], correct: null },
+              id: 3
+            },
+            {
+              type: "long",
+              value: "Write your question here !",
+              response: { type: "long", options: [], correct: null },
+              id: 4
+            },
+            {
+              type: "long",
+              value: "Write your question here !",
+              response: { type: "long", options: [], correct: null },
+              id: 5
+            },
+            {
+              type: "mcq",
+              value: "<p>another op question</p>",
+              response: {
+                type: "mcq",
+                options: ["op1", "op2", "op3", "op4"],
+                correct: null
+              },
+              id: 6
+            },
+            {
+              type: "short",
+              value: "Write your question here !",
+              response: { type: "short", options: [], correct: null },
+              id: 7
+            },
+            {
+              type: "long",
+              value: "Write your question here !",
+              response: { type: "long", options: [], correct: null },
+              id: 8
+            },
+            {
+              type: "mcq",
+              value: "<p>Write your question here !</p>",
+              response: { type: "mcq", options: [], correct: null },
+              id: 9
+            },
+            {
+              type: "short",
+              value: "Write your question here !",
+              response: { type: "short", options: [], correct: null },
+              id: 10
+            }
+          ]
+        },
+        {
+          id: 2,
+          questions: [
+            {
+              type: "short",
+              value: "Write your question here !",
+              response: { type: "short", options: [], correct: null },
+              id: 1
+            },
+            {
+              type: "long",
+              value: "Write your question here !",
+              response: { type: "long", options: [], correct: null },
+              id: 2
+            },
+            {
+              type: "mcq",
+              value: "Write your question here !",
+              response: { type: "mcq", options: [], correct: null },
+              id: 3
+            },
+            {
+              type: "long",
+              value: "Write your question here !",
+              response: { type: "long", options: [], correct: null },
+              id: 4
+            },
+            {
+              type: "short",
+              value: "Write your question here !",
+              response: { type: "short", options: [], correct: null },
+              id: 5
+            }
+          ]
+        },
+        {
+          id: 3,
+          questions: [
+            {
+              type: "short",
+              value: "Write your question here !",
+              response: { type: "short", options: [], correct: null },
+              id: 1
+            },
+            {
+              type: "mcq",
+              value: "Write your question here !",
+              response: { type: "mcq", options: [], correct: null },
+              id: 2
+            },
+            {
+              type: "long",
+              value: "Write your question here !",
+              response: { type: "long", options: [], correct: null },
+              id: 3
+            }
+          ]
+        }
+      ]
     };
   },
   methods: {
@@ -537,6 +731,24 @@ export default {
         }
       };
       this.shortQuestionBuilder.popup = false;
+    },
+    addLongQuestion2QuestionPaper: function() {
+      var secid = this.temp_sectionchoice;
+      var index = this.sections.findIndex(section => section.id == secid);
+      const idx = this.sections[index].questions.length + 1;
+      this.longQuestionBuilder.data.id = idx;
+      const abc = this.longQuestionBuilder.data;
+      this.sections[index].questions.push(abc);
+      this.longQuestionBuilder.data = {
+        type: "long",
+        value: "Write your question here !",
+        response: {
+          type: "long",
+          options: [],
+          correct: null
+        }
+      };
+      this.longQuestionBuilder.popup = false;
     }
   }
 };
