@@ -6,7 +6,6 @@ import Vuesax from "vuesax";
 import "vuesax/dist/vuesax.css";
 import VueLogger from "vuejs-logger";
 import * as Keycloak from "keycloak-js";
-import CKEditor from "@ckeditor/ckeditor5-vue2";
 
 Vue.config.productionTip = false;
 const options = {
@@ -20,7 +19,6 @@ const options = {
 };
 Vue.use(VueLogger, options);
 Vue.config.silent = true;
-Vue.use(CKEditor);
 
 let initOptions = {
   url: "https://account.simplifycv.com/auth/",

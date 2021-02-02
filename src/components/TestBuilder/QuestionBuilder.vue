@@ -104,7 +104,11 @@
                       </vs-row>
                     </div>
                     <div>
-                      <vs-row vs-justify="flex-center" style="">
+                      <vs-row
+                        v-if="colapsedView"
+                        vs-justify="flex-center"
+                        style=""
+                      >
                         <vs-col
                           vs-lg="1"
                           vs-xs="2"
@@ -118,6 +122,32 @@
                         >
                           <div style="margin-top:25px; margin-bottom:25px;">
                             <h3>Q{{ ques.id }}</h3>
+                          </div>
+                        </vs-col>
+                      </vs-row>
+                      <vs-row v-else vs-justify="flex-center" style="">
+                        <vs-col
+                          vs-lg="12"
+                          vs-xs="12"
+                          vs-sm="12"
+                          type="flex"
+                          v-for="ques in section.questions"
+                          :key="ques.id"
+                          vs-justify="flex-center"
+                          vs-align="flex-center"
+                          style="border: 1px dotted black; border-radius: 10px; text-align: left; padding: 10px; margin: 4px;"
+                        >
+                          <div style=" ">
+                            <h3>
+                              <vs-chip color="primary">
+                                Question {{ ques.id }}</vs-chip
+                              >
+                              <vs-chip color="warning">
+                                {{ ques.type.toUpperCase() }}</vs-chip
+                              >
+                              <br /><br />
+                              <div v-html="ques.value"></div>
+                            </h3>
                           </div>
                         </vs-col>
                       </vs-row>
@@ -170,7 +200,15 @@
           vs-xs="4"
           vs-sm="4"
         >
-          Short
+          <div
+            style="width: 100%; height: 100%; text-align: center; padding-top: 40px;"
+            @click="
+              shortQuestionBuilder.popup = true;
+              chooseQuestionPopup = false;
+            "
+          >
+            Short
+          </div>
         </vs-col>
         <vs-col
           vs-type="flex"
@@ -270,7 +308,6 @@
     </vs-popup>
     <!--MCQ Question Modal-->
     <vs-popup
-      fullscreen
       class="holamundo"
       title="MCQ Builder"
       :active.sync="mcqQuestionBuilder.popup"
@@ -281,7 +318,7 @@
           vs-justify="center"
           vs-align="center"
           style="margin: 10px;"
-          vs-lg="6"
+          vs-lg="12"
           vs-xs="12"
           vs-sm="12"
         >
@@ -296,7 +333,7 @@
           vs-justify="left"
           vs-align="left"
           style="margin: 10px;"
-          vs-lg="4"
+          vs-lg="12"
           vs-xs="12"
           vs-sm="12"
         >
@@ -308,7 +345,19 @@
             </div>
             <div>
               <vs-list>
-                <vs-list-item :key="item" v-for="item in mcqQuestionBuilder.data.response.options" :title="item"></vs-list-item>
+                <vs-list-item
+                  :key="item"
+                  v-for="item in mcqQuestionBuilder.data.response.options"
+                  :title="item"
+                >
+                  <vs-button
+                    radius
+                    color="danger"
+                    type="gradient"
+                    icon="remove"
+                    size="small"
+                  ></vs-button>
+                </vs-list-item>
               </vs-list>
             </div>
             <div slot="footer">
@@ -317,11 +366,73 @@
                   type="gradient"
                   color="primary"
                   icon="add"
+                  @click="mcqQuestionBuilder.addOptionpopup = true"
                 ></vs-button>
               </vs-row>
             </div>
           </vs-card>
         </vs-col>
+        <vs-row>
+          <vs-button
+            color="primary"
+            @click="addMCQQuestion2QuestionPaper"
+            type="gradient"
+            icon="add"
+            >Add Question</vs-button
+          >
+        </vs-row>
+      </vs-row>
+      <vs-popup
+        classContent="popup-example"
+        title="Add Option Popup"
+        :active.sync="mcqQuestionBuilder.addOptionpopup"
+      >
+        <vs-input
+          class="inputx"
+          placeholder="Enter Option Here!"
+          v-model="tempValue"
+        />
+
+        <vs-button
+          color="primary"
+          @click="addMCQOption"
+          style="margin-top: 10px;"
+          type="filled"
+          >Add</vs-button
+        >
+      </vs-popup>
+    </vs-popup>
+    <!--Short Question Popup-->
+    <vs-popup
+      class="holamundo"
+      title="Short Question Builder"
+      :active.sync="shortQuestionBuilder.popup"
+    >
+      <vs-row vs-align="flex-start" vs-type="flex" vs-justify="center" style="">
+        <vs-col
+          vs-type="flex"
+          vs-justify="center"
+          vs-align="center"
+          style="margin: 10px;"
+          vs-lg="12"
+          vs-xs="12"
+          vs-sm="12"
+        >
+          <vue-editor
+            v-model="shortQuestionBuilder.data.value"
+            placeholder="Enter Question Here !"
+          ></vue-editor>
+        </vs-col>
+
+        <vs-row>
+          <vs-button
+            color="primary"
+            @click="addShortQuestion2QuestionPaper"
+            type="gradient"
+            icon="add"
+            >Add Question</vs-button
+          >
+        </vs-row>
       </vs-row>
     </vs-popup>
   </vs-row>
@@ -336,29 +447,36 @@ export default {
   },
   data: function() {
     return {
-        
-      colapsedView: true,
+      colapsedView: false,
       chooseQuestionPopup: false,
+      tempValue: null,
       mcqQuestionBuilder: {
         popup: false,
+        addOptionpopup: false,
         data: {
-          id: 1,
           type: "mcq",
           value: "Write your question here !",
           response: {
             type: "mcq",
-            options: ["option 1","option 2"],
+            options: [],
+            correct: null
+          }
+        }
+      },
+      shortQuestionBuilder: {
+        popup: false,
+        data: {
+          type: "short",
+          value: "Write your question here !",
+          response: {
+            type: "short",
+            options: [],
             correct: null
           }
         }
       },
       temp_sectionchoice: null,
-      sections: [
-        {
-          id: 1,
-          questions: []
-        }
-      ]
+      sections: []
     };
   },
   methods: {
@@ -378,19 +496,47 @@ export default {
     addMCQQuestion: function() {
       this.chooseQuestionPopup = false;
       this.mcqQuestionBuilder.popup = true;
-      var index = this.sections.findIndex(
-        section => section.id == this.temp_sectionchoice
-      );
-      this.sections[index].questions.push({
-        id: this.sections[index].questions.length + 1,
+    },
+    addMCQOption: function() {
+      this.mcqQuestionBuilder.data.response.options.push(this.tempValue);
+      this.tempValue = null;
+      this.mcqQuestionBuilder.addOptionpopup = false;
+    },
+    addMCQQuestion2QuestionPaper: function() {
+      var secid = this.temp_sectionchoice;
+      var index = this.sections.findIndex(section => section.id == secid);
+      const idx = this.sections[index].questions.length + 1;
+      this.mcqQuestionBuilder.data.id = idx;
+      const abc = this.mcqQuestionBuilder.data;
+      this.sections[index].questions.push(abc);
+      this.mcqQuestionBuilder.data = {
+        type: "mcq",
+        value: "Write your question here !",
+        response: {
+          type: "mcq",
+          options: [],
+          correct: null
+        }
+      };
+      this.mcqQuestionBuilder.popup = false;
+    },
+    addShortQuestion2QuestionPaper: function() {
+      var secid = this.temp_sectionchoice;
+      var index = this.sections.findIndex(section => section.id == secid);
+      const idx = this.sections[index].questions.length + 1;
+      this.shortQuestionBuilder.data.id = idx;
+      const abc = this.shortQuestionBuilder.data;
+      this.sections[index].questions.push(abc);
+      this.shortQuestionBuilder.data = {
         type: "short",
-        value: "what is your name ?",
+        value: "Write your question here !",
         response: {
           type: "short",
           options: [],
           correct: null
         }
-      });
+      };
+      this.shortQuestionBuilder.popup = false;
     }
   }
 };
