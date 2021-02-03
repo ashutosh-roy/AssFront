@@ -44,7 +44,7 @@
                     color="primary"
                     icon="add"
                     size="small"
-                    @click="addSection"
+                    @click="AddSectionPopup=true;"
                     >Section</vs-button
                   >
                 </vs-col>
@@ -72,7 +72,7 @@
                           type="flex"
                           vs-justify="left"
                           vs-align="left"
-                          ><h1>Section {{ section.id }}</h1></vs-col
+                          ><h1>{{ section.name }}</h1></vs-col
                         >
                         <vs-col
                           vs-lg="6"
@@ -121,7 +121,7 @@
                           style="border: 1px dotted black; border-radius: 10px; text-align: center; margin: 4px;"
                         >
                           <div style="margin-top:25px; margin-bottom:25px;">
-                            <h3>Q{{ ques.id }}</h3>
+                            <h3>{{ ques.type }}</h3>
                           </div>
                         </vs-col>
                       </vs-row>
@@ -423,6 +423,26 @@
         >
       </vs-popup>
     </vs-popup>
+    <!--Add Section Popup-->
+       <vs-popup
+        classContent="popup-example"
+        title="Add Option Popup"
+        :active.sync="AddSectionPopup"
+      >
+        <vs-input
+          class="inputx"
+          placeholder="Enter Option Here!"
+          v-model="newSectionName"
+        />
+
+        <vs-button
+          color="primary"
+          @click="addSection"
+          style="margin-top: 10px;"
+          type="filled"
+          >Add</vs-button
+        >
+      </vs-popup>
     <!--Short Question Popup-->
     <vs-popup
       class="holamundo"
@@ -501,6 +521,8 @@ export default {
   },
   data: function() {
     return {
+      AddSectionPopup: false,
+      newSectionName: null,
       colapsedView: false,
       chooseQuestionPopup: false,
       tempValue: null,
@@ -542,141 +564,15 @@ export default {
         }
       },
       temp_sectionchoice: null,
-      sections: [
-        {
-          id: 1,
-          questions: [
-            {
-              type: "long",
-              value: "<p>Write your question here !</p>",
-              response: { type: "long", options: [], correct: null },
-              id: 1
-            },
-            {
-              type: "short",
-              value: "<p>Write your question here !</p>",
-              response: { type: "short", options: [], correct: null },
-              id: 2
-            },
-            {
-              type: "mcq",
-              value: "<p>Write your question here !</p>",
-              response: { type: "mcq", options: [], correct: null },
-              id: 3
-            },
-            {
-              type: "long",
-              value: "Write your question here !",
-              response: { type: "long", options: [], correct: null },
-              id: 4
-            },
-            {
-              type: "long",
-              value: "Write your question here !",
-              response: { type: "long", options: [], correct: null },
-              id: 5
-            },
-            {
-              type: "mcq",
-              value: "<p>another op question</p>",
-              response: {
-                type: "mcq",
-                options: ["op1", "op2", "op3", "op4"],
-                correct: null
-              },
-              id: 6
-            },
-            {
-              type: "short",
-              value: "Write your question here !",
-              response: { type: "short", options: [], correct: null },
-              id: 7
-            },
-            {
-              type: "long",
-              value: "Write your question here !",
-              response: { type: "long", options: [], correct: null },
-              id: 8
-            },
-            {
-              type: "mcq",
-              value: "<p>Write your question here !</p>",
-              response: { type: "mcq", options: [], correct: null },
-              id: 9
-            },
-            {
-              type: "short",
-              value: "Write your question here !",
-              response: { type: "short", options: [], correct: null },
-              id: 10
-            }
-          ]
-        },
-        {
-          id: 2,
-          questions: [
-            {
-              type: "short",
-              value: "Write your question here !",
-              response: { type: "short", options: [], correct: null },
-              id: 1
-            },
-            {
-              type: "long",
-              value: "Write your question here !",
-              response: { type: "long", options: [], correct: null },
-              id: 2
-            },
-            {
-              type: "mcq",
-              value: "Write your question here !",
-              response: { type: "mcq", options: [], correct: null },
-              id: 3
-            },
-            {
-              type: "long",
-              value: "Write your question here !",
-              response: { type: "long", options: [], correct: null },
-              id: 4
-            },
-            {
-              type: "short",
-              value: "Write your question here !",
-              response: { type: "short", options: [], correct: null },
-              id: 5
-            }
-          ]
-        },
-        {
-          id: 3,
-          questions: [
-            {
-              type: "short",
-              value: "Write your question here !",
-              response: { type: "short", options: [], correct: null },
-              id: 1
-            },
-            {
-              type: "mcq",
-              value: "Write your question here !",
-              response: { type: "mcq", options: [], correct: null },
-              id: 2
-            },
-            {
-              type: "long",
-              value: "Write your question here !",
-              response: { type: "long", options: [], correct: null },
-              id: 3
-            }
-          ]
-        }
-      ]
+      sections: []
     };
   },
   methods: {
     addSection: function() {
+      
       this.sections.push({
         id: this.sections.length + 1,
+        name: this.newSectionName,
         questions: []
       });
     },
