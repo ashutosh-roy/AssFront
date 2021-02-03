@@ -9,7 +9,7 @@
         vs-xs="12"
         vs-sm="12"
       >
-      <h2 style="padding:10px;">Test Settings</h2>
+        <h2 style="padding:10px;">Test Settings</h2>
         <vs-collapse accordion>
           <vs-collapse-item class="divisions">
             <div slot="header">
@@ -24,7 +24,11 @@
                 vs-w="12"
                 style="padding-bottom:10px;"
               >
-                <vs-input label-placeholder="Name" v-model="value1" width="100%" />
+                <vs-input
+                  label-placeholder="Name"
+                  v-model="value1"
+                  width="100%"
+                />
               </vs-col>
               <vs-col
                 vs-type="flex"
@@ -47,7 +51,8 @@
                 vs-offset="1"
                 vs-w="2"
                 style="padding-bottom:10px; font-size:15px;"
-                vs-justify="center" vs-align="center"
+                vs-justify="center"
+                vs-align="center"
               >
                 <b>Start Time</b>
               </vs-col>
@@ -56,7 +61,8 @@
                 vs-offset="1"
                 vs-w="2"
                 style="padding-bottom:10px; font-size:15px;"
-                vs-justify="center" vs-align="center"
+                vs-justify="center"
+                vs-align="center"
               >
                 <datetime v-model="date" type="datetime"></datetime>
               </vs-col>
@@ -67,7 +73,8 @@
                 vs-offset="1"
                 vs-w="2"
                 style="padding-bottom:10px; font-size:15px;"
-                vs-justify="center" vs-align="center"
+                vs-justify="center"
+                vs-align="center"
               >
                 <b>End Time</b>
               </vs-col>
@@ -76,7 +83,8 @@
                 vs-offset="1"
                 vs-w="2"
                 style="padding-bottom:10px; font-size:15px;"
-                vs-justify="center" vs-align="center"
+                vs-justify="center"
+                vs-align="center"
               >
                 <datetime v-model="date" type="datetime"></datetime>
               </vs-col>
@@ -87,24 +95,33 @@
                 vs-offset="1"
                 vs-w="2"
                 style="padding-bottom:10px; font-size:15px;"
-                vs-justify="center" vs-align="center"
+                vs-justify="center"
+                vs-align="center"
               >
                 <b>Time Limit</b>
               </vs-col>
               <vs-col
-              
                 vs-type="flex"
                 vs-offset="1"
                 vs-w="2"
                 style="padding-bottom:10px; font-size:15px;"
-                vs-justify="center" vs-align="center"
+                vs-justify="center"
+                vs-align="center"
               >
-                <vs-input label-placeholder="Name" v-model="value1" style="height:45px; width:140px"/>
+                <vs-input
+                  label-placeholder="Name"
+                  v-model="value1"
+                  style="height:45px; width:140px"
+                />
                 <vs-dropdown>
-                  <vs-button type="filled" label="Name" icon="expand_more"></vs-button>
-                  <vs-dropdown-menu>  
+                  <vs-button
+                    type="filled"
+                    label="Name"
+                    icon="expand_more"
+                  ></vs-button>
+                  <vs-dropdown-menu>
                     <vs-dropdown-item v-for="item in timeline" :key="item">
-                      {{item.time}}
+                      {{ item.time }}
                     </vs-dropdown-item>
                   </vs-dropdown-menu>
                 </vs-dropdown>
@@ -295,14 +312,19 @@ export default {
   name: "TestView",
   components: {
     VueEditor,
-    datetime: Datetime,
+    datetime: Datetime
   },
-  data: function(){
+  data: function() {
     return {
-      timeline: [{ time: "Month" }, { time: "Week" }, { time: "Hour" }, { time: "Minute" }, { time: "Second" }]
-    }
+      timeline: [
+        { time: "Month" },
+        { time: "Week" },
+        { time: "Hour" },
+        { time: "Minute" },
+        { time: "Second" }
+      ]
+    };
   }
-   
 };
 </script>
 <style scoped>
