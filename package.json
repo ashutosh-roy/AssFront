@@ -10,6 +10,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^25.0.0",
     "@ckeditor/ckeditor5-vue2": "^1.0.5",
+    "@syncfusion/ej2-vue-dropdowns": "^18.4.41",
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "chart.js": "^2.9.4",
