@@ -11,6 +11,7 @@
       >
       <h2 style="padding:10px;">Test Settings</h2>
         <vs-collapse accordion>
+
           <vs-collapse-item class="divisions">
             <div slot="header">
               <h3>General</h3>
@@ -37,6 +38,7 @@
               </vs-col>
             </vs-row>
           </vs-collapse-item>
+
           <vs-collapse-item class="divisions">
             <div slot="header">
               <h3>Timing</h3>
@@ -47,16 +49,16 @@
                 vs-offset="1"
                 vs-w="2"
                 style="padding-bottom:10px; font-size:15px;"
-                vs-justify="center" vs-align="center"
+                vs-justify="left" vs-align="center"
               >
-                <b>Start Time</b>
+                Start Time
               </vs-col>
               <vs-col
                 vs-type="flex"
                 vs-offset="1"
                 vs-w="2"
                 style="padding-bottom:10px; font-size:15px;"
-                vs-justify="center" vs-align="center"
+                vs-justify="left" vs-align="center"
               >
                 <datetime v-model="date" type="datetime"></datetime>
               </vs-col>
@@ -67,18 +69,18 @@
                 vs-offset="1"
                 vs-w="2"
                 style="padding-bottom:10px; font-size:15px;"
-                vs-justify="center" vs-align="center"
+                vs-justify="left" vs-align="center"
               >
-                <b>End Time</b>
+                End Time
               </vs-col>
               <vs-col
                 vs-type="flex"
                 vs-offset="1"
                 vs-w="2"
                 style="padding-bottom:10px; font-size:15px;"
-                vs-justify="center" vs-align="center"
+                vs-justify="left" vs-align="center"
               >
-                <datetime v-model="date" type="datetime"></datetime>
+                <datetime v-model="date" class="calenderbox" type="datetime"></datetime>
               </vs-col>
             </vs-row>
             <vs-row>
@@ -87,9 +89,9 @@
                 vs-offset="1"
                 vs-w="2"
                 style="padding-bottom:10px; font-size:15px;"
-                vs-justify="center" vs-align="center"
+                vs-justify="left" vs-align="center"
               >
-                <b>Time Limit</b>
+                Time Limit
               </vs-col>
               <vs-col
               
@@ -97,17 +99,18 @@
                 vs-offset="1"
                 vs-w="2"
                 style="padding-bottom:10px; font-size:15px;"
-                vs-justify="center" vs-align="center"
+                vs-justify="left" vs-align="center"
               >
-                <vs-input label-placeholder="Name" v-model="value1" style="height:45px; width:140px"/>
-                <vs-dropdown>
+                <vs-input v-model="value1" style="padding-right:5px; width:135px"/>
+                <!-- <vs-dropdown>
                   <vs-button type="filled" label="Name" icon="expand_more"></vs-button>
                   <vs-dropdown-menu>  
                     <vs-dropdown-item v-for="item in timeline" :key="item">
                       {{item.time}}
                     </vs-dropdown-item>
                   </vs-dropdown-menu>
-                </vs-dropdown>
+                </vs-dropdown> -->
+                <ejs-dropdownlist id='dropdownlist' popupHeight="200px" popupWidth="100%" :dataSource='timeline' placeholder='hours'></ejs-dropdownlist>
               </vs-col>
             </vs-row>
             <vs-row>
@@ -120,35 +123,174 @@
               </vs-col>
             </vs-row>
           </vs-collapse-item>
+
           <vs-collapse-item class="divisions">
             <div slot="header">
               <h3>Grade</h3>
             </div>
-
-            Suspendisse aliquet condimentum diam, sed aliquam nisl dapibus et.
-            Aliquam euismod ullamcorper dolor eu
+            <vs-row>
+              <vs-col
+                vs-type="flex"
+                vs-offset="1"
+                vs-w="2"
+                style="padding-bottom:10px; font-size:15px;"
+                vs-justify="left" vs-align="center"
+              >
+                Grade Category
+              </vs-col>
+              <vs-col
+                vs-type="flex"
+                vs-offset="1"
+                vs-w="2"
+                style="padding-bottom:10px; font-size:15px;"
+                vs-justify="left" vs-align="center"
+              >
+                <ejs-dropdownlist id='dropdownlist' popupHeight="200px" popupWidth="100%" :dataSource='gradeCategory' placeholder='Percentage'></ejs-dropdownlist>
+              </vs-col>
+            </vs-row>
+            <vs-row>
+              <vs-col
+                vs-type="flex"
+                vs-offset="1"
+                vs-w="2"
+                style="padding-bottom:10px; font-size:15px;"
+                vs-justify="left" vs-align="center"
+              >
+                Grade To Pass
+              </vs-col>
+              <vs-col
+              
+                vs-type="flex"
+                vs-offset="1"
+                vs-w="2"
+                style="padding-bottom:10px; font-size:15px;"
+                vs-justify="left" vs-align="center"
+              >
+                <vs-input v-model="value1" style="padding-right:5px; width:135px"/>
+                <!-- <vs-dropdown>
+                  <vs-button type="filled" label="Name" icon="expand_more"></vs-button>
+                  <vs-dropdown-menu>  
+                    <vs-dropdown-item v-for="item in timeline" :key="item">
+                      {{item.time}}
+                    </vs-dropdown-item>
+                  </vs-dropdown-menu>
+                </vs-dropdown> -->
+                <ejs-dropdownlist id='dropdownlist' popupHeight="200px" popupWidth="100%" :dataSource='timeline' placeholder='hours'></ejs-dropdownlist>
+              </vs-col>
+            </vs-row>
+             <vs-row>
+              <vs-col
+                vs-type="flex"
+                vs-offset="1"
+                vs-w="2"
+                style="padding-bottom:10px; font-size:15px;"
+                vs-justify="left" vs-align="center"
+              >
+                Attempts Allowed
+              </vs-col>
+              <vs-col
+                vs-type="flex"
+                vs-offset="1"
+                vs-w="2"
+                style="padding-bottom:10px; font-size:15px;"
+                vs-justify="left" vs-align="center"
+              >
+                <ejs-dropdownlist id='dropdownlist' popupHeight="200px" popupWidth="100%" :dataSource='AttemptsAllowed' placeholder='Unlimited'></ejs-dropdownlist>
+              </vs-col>
+            </vs-row>
+             <vs-row>
+              <vs-col
+                vs-type="flex"
+                vs-offset="1"
+                vs-w="2"
+                style="padding-bottom:10px; font-size:15px;"
+                vs-justify="left" vs-align="center"
+              >
+                Grading Method
+              </vs-col>
+              <vs-col
+                vs-type="flex"
+                vs-offset="1"
+                vs-w="2"
+                style="padding-bottom:10px; font-size:15px;"
+                vs-justify="left" vs-align="center"
+              >
+                <ejs-dropdownlist id='dropdownlist' popupHeight="200px" popupWidth="100%" :dataSource='GradingMethod' placeholder='Highest Grade'></ejs-dropdownlist>
+              </vs-col>
+            </vs-row>
           </vs-collapse-item>
+
           <vs-collapse-item class="divisions">
             <div slot="header">
               <h3>Layout</h3>
             </div>
-
-            Suspendisse aliquet condimentum diam, sed aliquam nisl dapibus et.
-            Aliquam euismod ullamcorper dolor eu imperdiet. Nullam eget odio at
-            magna gravida suscipit sed vestibulum odio. Maecenas porta elit vel
-            lectus molestie, eget aliquam enim feugiat. Vivamus nec faucibus
-            nisl. Nunc venenatis tempus finibus.
+            <vs-row>
+              <vs-col
+                vs-type="flex"
+                vs-offset="1"
+                vs-w="2"
+                style="padding-bottom:10px; font-size:15px;"
+                vs-justify="left" vs-align="center"
+              >
+                New Page
+              </vs-col>
+              <vs-col
+                vs-type="flex"
+                vs-offset="1"
+                vs-w="2"
+                style="padding-bottom:10px; font-size:15px;"
+                vs-justify="left" vs-align="center"
+              >
+                <ejs-dropdownlist id='dropdownlist' popupHeight="200px" popupWidth="100%" :dataSource='NewPage' placeholder='Every Question'></ejs-dropdownlist>
+              </vs-col>
+            </vs-row>
           </vs-collapse-item>
+
           <vs-collapse-item class="divisions">
             <div slot="header">
               <h3>Question Behaviour</h3>
             </div>
 
-            Suspendisse aliquet condimentum diam, sed aliquam nisl dapibus et.
-            Aliquam euismod ullamcorper dolor eu imperdiet. Nullam eget odio at
-            magna gravida suscipit sed vestibulum odio. Maecenas porta elit vel
-            lectus molestie, eget aliquam enim feugiat. Vivamus nec faucibus
-            nisl. Nunc venenatis tempus finibus.
+             <vs-row>
+              <vs-col
+                vs-type="flex"
+                vs-offset="1"
+                vs-w="2"
+                style="padding-bottom:10px; font-size:15px;"
+                vs-justify="left" vs-align="center"
+              >
+                Shuffle With Questions
+              </vs-col>
+              <vs-col
+                vs-type="flex"
+                vs-offset="1"
+                vs-w="2"
+                style="padding-bottom:10px; font-size:15px;"
+                vs-justify="left" vs-align="center"
+              >
+                <ejs-dropdownlist id='dropdownlist' popupHeight="200px" popupWidth="100%" :dataSource='YesNo' placeholder='Yes'></ejs-dropdownlist>
+              </vs-col>
+            </vs-row>
+             <vs-row>
+              <vs-col
+                vs-type="flex"
+                vs-offset="1"
+                vs-w="2"
+                style="padding-bottom:10px; font-size:15px;"
+                vs-justify="left" vs-align="center"
+              >
+                How Questions Behave
+              </vs-col>
+              <vs-col
+                vs-type="flex"
+                vs-offset="1"
+                vs-w="2"
+                style="padding-bottom:10px; font-size:15px;"
+                vs-justify="left" vs-align="center"
+              >
+                <ejs-dropdownlist id='dropdownlist' popupHeight="200px" popupWidth="100%" :dataSource='HowQuestionsBehave' placeholder='Every Question'></ejs-dropdownlist>
+              </vs-col>
+            </vs-row>
           </vs-collapse-item>
           <vs-collapse-item class="divisions">
             <div slot="header">
@@ -284,13 +426,25 @@
   padding-bottom: 3px;
   box-shadow: 5px 5px 5px 1px #ccc;
 }
+.vdatetime-input{
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  height: 25px;
+  border-radius: 5px;
+  width: 200px;
+  text-align: center;
+}
+@import "../../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-vue-dropdowns/styles/material.css";
 </style>
 <script>
 import { VueEditor } from "vue2-editor";
 import { Datetime } from "vue-datetime";
 // You need a specific loader for CSS files
 import "vue-datetime/dist/vue-datetime.css";
-
+import Vue from 'vue';
+import { DropDownListPlugin } from "@syncfusion/ej2-vue-dropdowns";
+Vue.use(DropDownListPlugin);
 export default {
   name: "TestView",
   components: {
@@ -299,7 +453,13 @@ export default {
   },
   data: function(){
     return {
-      timeline: [{ time: "Month" }, { time: "Week" }, { time: "Hour" }, { time: "Minute" }, { time: "Second" }]
+      timeline: ["Month", "Week", "Hour", "Minute", "Second"],
+      YesNo: ["Yes","No"],
+      gradeCategory: ["percentage","CGPA","GPA"],
+      HowQuestionsBehave: ["Deffered Feedback","Adaptive Mode","Adaptive Mode(No Penalties)","Deferred feedback with CBM","Immediate feedback","Immediate feedback with CBM","Interactive with multiple tries"],
+      AttemptsAllowed: ["Unlimited","1","2","3","4","5","6","7","8","9","10"],
+      GradingMethod: ["Highest Grade","Average Grade","First Attempt","Last Attempt"],
+      NewPage : ["Every Question","Every 2 Questions","Every 5 Questions","Every 10 Questions","Every 12 Questions","Every 15 Questions","Every 20 Questions","Every 25 Questions","Every 50 Questions"]     
     }
   }
    
