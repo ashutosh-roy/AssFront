@@ -51,7 +51,7 @@
                 style="padding-bottom:10px; font-size:15px;"
                 vs-justify="left" vs-align="center"
               >
-                Start Time
+                Start Time  
               </vs-col>
               <vs-col
                 vs-type="flex"
@@ -71,7 +71,7 @@
                 style="padding-bottom:10px; font-size:15px;"
                 vs-justify="left" vs-align="center"
               >
-                End Time
+                End Time  
               </vs-col>
               <vs-col
                 vs-type="flex"
@@ -91,7 +91,7 @@
                 style="padding-bottom:10px; font-size:15px;"
                 vs-justify="left" vs-align="center"
               >
-                Time Limit
+                Time Limit  
               </vs-col>
               <vs-col
               
@@ -136,7 +136,7 @@
                 style="padding-bottom:10px; font-size:15px;"
                 vs-justify="left" vs-align="center"
               >
-                Grade Category
+                Grade Category  
               </vs-col>
               <vs-col
                 vs-type="flex"
@@ -156,7 +156,7 @@
                 style="padding-bottom:10px; font-size:15px;"
                 vs-justify="left" vs-align="center"
               >
-                Grade To Pass
+                Grade To Pass 
               </vs-col>
               <vs-col
               
@@ -186,7 +186,7 @@
                 style="padding-bottom:10px; font-size:15px;"
                 vs-justify="left" vs-align="center"
               >
-                Attempts Allowed
+                Attempts Allowed  
               </vs-col>
               <vs-col
                 vs-type="flex"
@@ -206,7 +206,7 @@
                 style="padding-bottom:10px; font-size:15px;"
                 vs-justify="left" vs-align="center"
               >
-                Grading Method
+                Grading Method  
               </vs-col>
               <vs-col
                 vs-type="flex"
@@ -232,7 +232,7 @@
                 style="padding-bottom:10px; font-size:15px;"
                 vs-justify="left" vs-align="center"
               >
-                New Page
+                New Page  
               </vs-col>
               <vs-col
                 vs-type="flex"
@@ -259,7 +259,7 @@
                 style="padding-bottom:10px; font-size:15px;"
                 vs-justify="left" vs-align="center"
               >
-                Shuffle With Questions
+                Shuffle With Questions  
               </vs-col>
               <vs-col
                 vs-type="flex"
@@ -279,7 +279,7 @@
                 style="padding-bottom:10px; font-size:15px;"
                 vs-justify="left" vs-align="center"
               >
-                How Questions Behave
+                How Questions Behave  
               </vs-col>
               <vs-col
                 vs-type="flex"

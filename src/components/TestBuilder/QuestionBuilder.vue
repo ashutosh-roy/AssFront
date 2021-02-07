@@ -44,7 +44,7 @@
                     color="primary"
                     icon="add"
                     size="small"
-                    @click="AddSectionPopup=true;"
+                    @click="AddSectionPopup = true"
                     >Section</vs-button
                   >
                 </vs-col>
@@ -424,25 +424,25 @@
       </vs-popup>
     </vs-popup>
     <!--Add Section Popup-->
-       <vs-popup
-        classContent="popup-example"
-        title="Add Option Popup"
-        :active.sync="AddSectionPopup"
-      >
-        <vs-input
-          class="inputx"
-          placeholder="Enter Option Here!"
-          v-model="newSectionName"
-        />
+    <vs-popup
+      classContent="popup-example"
+      title="Add Option Popup"
+      :active.sync="AddSectionPopup"
+    >
+      <vs-input
+        class="inputx"
+        placeholder="Enter Option Here!"
+        v-model="newSectionName"
+      />
 
-        <vs-button
-          color="primary"
-          @click="addSection"
-          style="margin-top: 10px;"
-          type="filled"
-          >Add</vs-button
-        >
-      </vs-popup>
+      <vs-button
+        color="primary"
+        @click="addSection"
+        style="margin-top: 10px;"
+        type="filled"
+        >Add</vs-button
+      >
+    </vs-popup>
     <!--Short Question Popup-->
     <vs-popup
       class="holamundo"
@@ -569,7 +569,6 @@ export default {
   },
   methods: {
     addSection: function() {
-      
       this.sections.push({
         id: this.sections.length + 1,
         name: this.newSectionName,
