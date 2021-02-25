@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <NavBar />
-    <vs-row vs-w="12"> </vs-row>
-
+  <div id="app">
+    <div id="nav"></div>
     <router-view />
   </div>
 </template>
@@ -29,11 +27,3 @@
   }
 }
 </style>
-<script>
-import NavBar from "./components/Header/header.vue";
-export default {
-  components: {
-    NavBar
-  }
-};
-</script>

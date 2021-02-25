@@ -1,4 +1,4 @@
-# simplifycv-assessment-frontend
+# assessment-poc
 
 ## Project setup
 ```
