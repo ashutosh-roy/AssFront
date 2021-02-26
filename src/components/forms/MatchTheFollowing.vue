@@ -34,7 +34,7 @@
                 </b-row>
                 </div>                
             </b-container>
-            <!-- grid implementation endss -->                                 
+            <!-- grid implementation endss -->                                
 
             <!-- radio start -->
               <div class="inputanswers" v-for="(input,k) in inputs" :key="k">  
