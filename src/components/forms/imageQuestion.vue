@@ -3,6 +3,7 @@
     <b-card class="card" header-tag="header">
       <template #header>
         <div>
+          Image
           <b-row align-h="end">
             <b-button
               variant="outline"
