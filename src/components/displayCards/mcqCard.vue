@@ -73,27 +73,28 @@
 
 
 
-  <b-input-group style="padding-left:70%" >
-      <b-form-checkbox 
-      v-model="checked" 
-      class="switch"
-      name='check-button'
-      switch
-      >
-      Auto Correction |
-      </b-form-checkbox>
-    
-      <b-form-checkbox  
-      v-model="checked"
-      class="switch"
-      name='check-button'
-      switch 
-    
-      >
-      Required
-      </b-form-checkbox>
+  <div>
+            <b-row align-h="end">
+              <b-form-checkbox
+                v-model="entry.autoCorrection"
+                class="switch"
+                name="check-button"
+                switch
+              >
+                Auto Correction
+              </b-form-checkbox>
+
+              <b-form-checkbox
+                v-model="entry.required"
+                class="switch"
+                name="check-button"
+                switch
+              >
+                Required
+              </b-form-checkbox>
+            </b-row>
+          </div>
      
-  </b-input-group>
 
         
 

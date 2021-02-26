@@ -82,17 +82,34 @@
         <div :key="audiodata">
           <AudioCard :data="audiodata" v-if="audiodata.length != 0" />
         </div>
+        <div :key="imagedata">
+          <ImageCard :data="imagedata" v-if="imagedata.length != 0" />
+        </div>
+        <div :key="longQuestionData">
+          <LongAnswerCard
+            :data="longQuestionData"
+            v-if="longQuestionData.length != 0"
+          />
+        </div>
       </b-col>
     </b-row>
     <b-row align-h="center">
       <b-col cols="7">
         <multipleTypeQuestions v-show="false" />
-        <LongAnswer v-if="longanswer" v-on:delete-form="longanswer = false" />
+        <LongAnswer
+          v-if="longanswer"
+          v-on:delete-form="longanswer = false"
+          v-on:question-added="addlongquestion"
+        />
         <ShortAnswer
           v-if="shortAnswer"
           v-on:delete-form="shortAnswer = false"
         />
-        <Image v-if="image" v-on:delete-form="image = false" />
+        <Image
+          v-if="image"
+          v-on:delete-form="image = false"
+          v-on:question-added="addimagequestion"
+        />
         <Video v-if="video" v-on:delete-form="video = false" />
         <Audio
           v-if="audio"
@@ -107,7 +124,9 @@
 
 <script>
 // @ is an alias to /src
+import LongAnswerCard from "../components/displayCards/longAnswerCard";
 import AudioCard from "../components/displayCards/audioCard";
+import ImageCard from "../components/displayCards/imageCard";
 import MatchTheFollowing from "../components/forms/MatchTheFollowing.vue";
 import multipleTypeQuestions from "../components/forms/multipleType";
 import LongAnswer from "../components/forms/longAnswer";
@@ -126,6 +145,8 @@ export default {
     Audio,
     MatchTheFollowing,
     AudioCard,
+    ImageCard,
+    LongAnswerCard,
   },
   data() {
     return {
@@ -136,6 +157,8 @@ export default {
       audio: false,
       match: false,
       audiodata: [],
+      imagedata: [],
+      longQuestionData: [],
     };
   },
   methods: {
@@ -149,6 +172,14 @@ export default {
     addaudioquestion(audiodata) {
       this.audiodata.push(audiodata);
       this.audio = false;
+    },
+    addimagequestion(imagedata) {
+      this.imagedata.push(imagedata);
+      this.image = false;
+    },
+    addlongquestion(longquesdata) {
+      this.longQuestionData.push(longquesdata);
+      this.longanswer = false;
     },
   },
 };

@@ -179,8 +179,5 @@ export default {
   border: none;
   outline: none;
 }
-.switch {
-  margin-top: 2vh;
-  margin-right: 2vh;
-}
+
 </style>

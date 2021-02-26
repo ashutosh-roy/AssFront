@@ -28,25 +28,28 @@
       </span>
 
       <b-card-text>
-        <b-form inline>
-          <b-form-checkbox
-            v-model="entry.autoCorrection"
-            class="switch"
-            name="check-button"
-            switch
-          >
-            Auto Correction
-          </b-form-checkbox>
+          <div>
+            <b-row align-h="end">
+              <b-form-checkbox
+                v-model="entry.autoCorrection"
+                class="switch"
+                name="check-button"
+                switch
+              >
+                Auto Correction
+              </b-form-checkbox>
 
-          <b-form-checkbox
-            v-model="entry.required"
-            class="switch"
-            name="check-button"
-            switch
-          >
-            Required
-          </b-form-checkbox>
-        </b-form>
+              <b-form-checkbox
+                v-model="entry.required"
+                class="switch"
+                name="check-button"
+                switch
+              >
+                Required
+              </b-form-checkbox>
+            </b-row>
+          </div>
+        
       </b-card-text>
     </b-card>
   </div>

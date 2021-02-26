@@ -56,7 +56,13 @@
               >
                 Required
               </b-form-checkbox>
-              <b-dropdown split text="Add" class="m-2 p-0 " variant="primary">
+              <b-dropdown
+                split
+                text="Add"
+                class="m-2 p-0 "
+                variant="primary"
+                @click="addquestion()"
+              >
                 <b-dropdown-item
                   @click="imagedata.addToDatabank = !imagedata.addToDatabank"
                 >
@@ -114,6 +120,11 @@ export default {
         fileUpload: "",
       },
     };
+  },
+  methods: {
+    addquestion() {
+      this.$emit("question-added", this.imagedata);
+    },
   },
 };
 </script>
