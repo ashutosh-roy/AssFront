@@ -95,7 +95,7 @@
 </template>
 <script>
 export default {
-  name: "Image",
+  name: "ImageQuestion",
   data() {
     return {
       options: [

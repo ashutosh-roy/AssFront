@@ -91,11 +91,18 @@
             v-if="longQuestionData.length != 0"
           />
         </div>
+        <div :key="shortQuestionData">
+          <ShortAnswerCard
+            :data="shortQuestionData"
+            v-if="shortQuestionData.length != 0"
+          />
+        </div>
       </b-col>
+
     </b-row>
     <b-row align-h="center">
       <b-col cols="7">
-        <multipleTypeQuestions v-show="false" />
+        <!-- <multipleTypeQuestions v-show="false" /> -->
         <LongAnswer
           v-if="longanswer"
           v-on:delete-form="longanswer = false"
@@ -104,8 +111,9 @@
         <ShortAnswer
           v-if="shortAnswer"
           v-on:delete-form="shortAnswer = false"
+          v-on:question-added="addshortquestion"
         />
-        <Image
+        <ImageQuestion
           v-if="image"
           v-on:delete-form="image = false"
           v-on:question-added="addimagequestion"
@@ -117,6 +125,7 @@
           v-on:question-added="addaudioquestion"
         />
         <MatchTheFollowing v-if="match" v-on:delete-form="match = false" />
+        <mcq v-if="mcq" v-on:delete-form="mcq=false"/>
       </b-col>
     </b-row>
   </div>
@@ -128,25 +137,29 @@ import LongAnswerCard from "../components/displayCards/longAnswerCard";
 import AudioCard from "../components/displayCards/audioCard";
 import ImageCard from "../components/displayCards/imageCard";
 import MatchTheFollowing from "../components/forms/MatchTheFollowing.vue";
-import multipleTypeQuestions from "../components/forms/multipleType";
+// import multipleTypeQuestions from "../components/forms/multipleType";
 import LongAnswer from "../components/forms/longAnswer";
 import ShortAnswer from "../components/forms/shortAnswer";
-import Image from "../components/forms/imageQuestion";
+import ImageQuestion from "../components/forms/imageQuestion";
 import Video from "../components/forms/videoQuestion";
+import mcq from "../components/forms/Mcq"
 import Audio from "../components/forms/audioQuestion";
+import ShortAnswerCard from "../components/displayCards/shortAnswerCard"
 export default {
   name: "Home",
   components: {
-    multipleTypeQuestions,
+    // multipleTypeQuestions,
     LongAnswer,
     ShortAnswer,
-    Image,
+    ImageQuestion,
     Video,
     Audio,
     MatchTheFollowing,
     AudioCard,
     ImageCard,
     LongAnswerCard,
+    mcq,
+    ShortAnswerCard
   },
   data() {
     return {
@@ -159,6 +172,7 @@ export default {
       audiodata: [],
       imagedata: [],
       longQuestionData: [],
+      shortQuestionData:[]
     };
   },
   methods: {
@@ -181,6 +195,10 @@ export default {
       this.longQuestionData.push(longquesdata);
       this.longanswer = false;
     },
+    addshortquestion(shortquesdata) {
+      this.shortQuestionData.push(shortquesdata);
+      this.shortAnswer=false;
+    }
   },
 };
 </script>
