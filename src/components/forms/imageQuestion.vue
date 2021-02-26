@@ -17,6 +17,7 @@
       <b-card-text>
         <b-form inline>
           <div style="width:100%">
+            <b-form-file accept="image/*"></b-form-file>
             <b-form-input
               class="input"
               v-model="imagedata.topic"
@@ -95,7 +96,7 @@
 </template>
 <script>
 export default {
-  name: "Image",
+  name: "ImageQuestion",
   data() {
     return {
       options: [
