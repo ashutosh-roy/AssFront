@@ -64,7 +64,13 @@
       <b-button class="buttonchoice" variant="outline-secondary"
         >Fill in the Blanks</b-button
       >
-      <b-button class="buttonchoice" variant="outline-secondary"
+      <b-button
+        class="buttonchoice"
+        variant="outline-secondary"
+        @click="
+          match = true;
+          $bvModal.hide('modal-1');
+        "
         >Match the Following</b-button
       >
       <b-button class="buttonchoice" variant="outline-secondary"
@@ -82,6 +88,7 @@
         <Image v-if="image" v-on:delete-form="image = false" />
         <Video v-if="video" v-on:delete-form="video = false" />
         <Audio v-if="audio" v-on:delete-form="audio = false" />
+        <MatchTheFollowing v-if="match" v-on:delete-form="match = false" />
       </b-col>
     </b-row>
   </div>
@@ -89,6 +96,7 @@
 
 <script>
 // @ is an alias to /src
+import MatchTheFollowing from "../components/forms/MatchTheFollowing.vue";
 import multipleTypeQuestions from "../components/forms/multipleType";
 import LongAnswer from "../components/forms/longAnswer";
 import ShortAnswer from "../components/forms/shortAnswer";
@@ -104,6 +112,7 @@ export default {
     Image,
     Video,
     Audio,
+    MatchTheFollowing,
   },
   data() {
     return {
@@ -112,6 +121,7 @@ export default {
       image: false,
       video: false,
       audio: false,
+      match: false,
     };
   },
   methods: {
