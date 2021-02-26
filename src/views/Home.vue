@@ -205,7 +205,15 @@ export default {
   },
   methods: {
     formActivity() {
-      if (this.shortAnswer == true || this.longanswer == true) {
+      if (
+        this.shortAnswer ||
+        this.longanswer ||
+        this.mcq ||
+        this.match ||
+        this.image ||
+        this.audio ||
+        this.video
+      ) {
         return true;
       } else {
         return false;
