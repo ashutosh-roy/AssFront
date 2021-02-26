@@ -19,19 +19,19 @@
           <div style="width:100%">
             <b-form-input
               class="input"
-              v-model="text"
+              v-model="imagedata.topic"
               autofocus
               placeholder="Topic"
             ></b-form-input>
             <b-form-select
-              v-model="selected"
+              v-model="imagedata.difficultyLevel"
               :options="options"
               class="input"
             ></b-form-select>
             <br />
             <b-form-input
               class="input"
-              v-model="text"
+              v-model="imagedata.question"
               placeholder="Question"
               style="width:100%;margin-top:1vh"
             >
@@ -40,7 +40,7 @@
 
             <b-row align-h="end">
               <b-form-checkbox
-                v-model="checked"
+                v-model="imagedata.autoCorrection"
                 class="switch"
                 name="check-button"
                 switch
@@ -49,7 +49,7 @@
               </b-form-checkbox>
 
               <b-form-checkbox
-                v-model="checked"
+                v-model="imagedata.required"
                 class="switch"
                 name="check-button"
                 switch
@@ -57,19 +57,23 @@
                 Required
               </b-form-checkbox>
               <b-dropdown split text="Add" class="m-2 p-0 " variant="primary">
-                <b-dropdown-item @click="databank = !databank">
+                <b-dropdown-item
+                  @click="imagedata.addToDatabank = !imagedata.addToDatabank"
+                >
                   <b-form-checkbox
                     id="checkbox-1"
-                    v-model="databank"
+                    v-model="imagedata.addToDatabank"
                     name="checkbox-1"
                   >
                     Add to Databank
                   </b-form-checkbox>
                 </b-dropdown-item>
-                <b-dropdown-item @click="publicly = !publicly">
+                <b-dropdown-item
+                  @click="imagedata.addToPublic = !imagedata.addToPublic"
+                >
                   <b-form-checkbox
                     id="checkbox-2"
-                    v-model="publicly"
+                    v-model="imagedata.addToPublic"
                     name="checkbox-2"
                   >
                     Add Publicly
@@ -88,7 +92,6 @@ export default {
   name: "Image",
   data() {
     return {
-      selected: "null",
       options: [
         { value: null, text: "Difficulty", disabled: true },
         { value: "1", text: "Difficulty Level 1" },
@@ -97,8 +100,19 @@ export default {
         { value: "4", text: "Difficulty Level 4" },
         { value: "5", text: "Difficulty Level 5" },
       ],
-      databank: false,
-      publicly: false,
+      imagedata: {
+        topic: "",
+        difficultyLevel: null,
+        question: "",
+        questionType: "image",
+        answerKey: "",
+        autoCorrection: 0,
+        required: 0,
+        addToPublic: false,
+        addToDatabank: false,
+        sizelimit: 0,
+        fileUpload: "",
+      },
     };
   },
 };

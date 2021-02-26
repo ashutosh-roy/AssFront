@@ -79,6 +79,13 @@
     </b-modal>
     <b-row align-h="center">
       <b-col cols="7">
+        <div :key="audiodata">
+          <AudioCard :data="audiodata" v-if="audiodata.length != 0" />
+        </div>
+      </b-col>
+    </b-row>
+    <b-row align-h="center">
+      <b-col cols="7">
         <multipleTypeQuestions v-show="false" />
         <LongAnswer v-if="longanswer" v-on:delete-form="longanswer = false" />
         <ShortAnswer
@@ -87,7 +94,11 @@
         />
         <Image v-if="image" v-on:delete-form="image = false" />
         <Video v-if="video" v-on:delete-form="video = false" />
-        <Audio v-if="audio" v-on:delete-form="audio = false" />
+        <Audio
+          v-if="audio"
+          v-on:delete-form="audio = false"
+          v-on:question-added="addaudioquestion"
+        />
         <MatchTheFollowing v-if="match" v-on:delete-form="match = false" />
       </b-col>
     </b-row>
@@ -96,6 +107,7 @@
 
 <script>
 // @ is an alias to /src
+import AudioCard from "../components/displayCards/audioCard";
 import MatchTheFollowing from "../components/forms/MatchTheFollowing.vue";
 import multipleTypeQuestions from "../components/forms/multipleType";
 import LongAnswer from "../components/forms/longAnswer";
@@ -113,6 +125,7 @@ export default {
     Video,
     Audio,
     MatchTheFollowing,
+    AudioCard,
   },
   data() {
     return {
@@ -122,6 +135,7 @@ export default {
       video: false,
       audio: false,
       match: false,
+      audiodata: [],
     };
   },
   methods: {
@@ -131,6 +145,10 @@ export default {
       } else {
         return false;
       }
+    },
+    addaudioquestion(audiodata) {
+      this.audiodata.push(audiodata);
+      this.audio = false;
     },
   },
 };

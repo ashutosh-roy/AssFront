@@ -19,19 +19,19 @@
           <div style="width:100%">
             <b-form-input
               class="input"
-              v-model="text"
+              v-model="audiodata.topic"
               autofocus
               placeholder="Topic"
             ></b-form-input>
             <b-form-select
-              v-model="selected"
+              v-model="audiodata.difficultyLevel"
               :options="options"
               class="input"
             ></b-form-select>
             <br />
             <b-form-input
               class="input"
-              v-model="text"
+              v-model="audiodata.question"
               placeholder="Question"
               style="width:100%;margin-top:1vh"
             >
@@ -40,7 +40,7 @@
 
             <b-row align-h="end">
               <b-form-checkbox
-                v-model="checked"
+                v-model="audiodata.autoCorrection"
                 class="switch"
                 name="check-button"
                 switch
@@ -49,27 +49,37 @@
               </b-form-checkbox>
 
               <b-form-checkbox
-                v-model="checked"
+                v-model="audiodata.required"
                 class="switch"
                 name="check-button"
                 switch
               >
                 Required
               </b-form-checkbox>
-              <b-dropdown split text="Add" class="m-2 p-0 " variant="primary">
-                <b-dropdown-item @click="databank = !databank">
+              <b-dropdown
+                split
+                text="Add"
+                class="m-2 p-0 "
+                variant="primary"
+                @click="addquestion()"
+              >
+                <b-dropdown-item
+                  @click="audiodata.addToDatabank = !audiodata.addToDatabank"
+                >
                   <b-form-checkbox
                     id="checkbox-1"
-                    v-model="databank"
+                    v-model="audiodata.addToDatabank"
                     name="checkbox-1"
                   >
                     Add to Databank
                   </b-form-checkbox>
                 </b-dropdown-item>
-                <b-dropdown-item @click="publicly = !publicly">
+                <b-dropdown-item
+                  @click="audiodata.addToPublic = !audiodata.addToPublic"
+                >
                   <b-form-checkbox
                     id="checkbox-2"
-                    v-model="publicly"
+                    v-model="audiodata.addToPublic"
                     name="checkbox-2"
                   >
                     Add Publicly
@@ -99,7 +109,37 @@ export default {
       ],
       databank: false,
       publicly: false,
+      audiodata: {
+        topic: "",
+        difficultyLevel: null,
+        question: "",
+        questionType: "audio",
+        answerKey: "",
+        autoCorrection: 0,
+        required: 0,
+        addToPublic: false,
+        addToDatabank: false,
+        sizelimit: 0,
+        fileUpload: "",
+      },
+      /*subject = data["subject"]
+        topic = data["topic"]
+        difficultyLevel = data["difficultyLevel"]
+        question = data["question"]
+        questionType = data["questionType"]        
+        answerKey = data["answerKey"]
+        autoCorrection = data["autoCorrection"]
+        required = data["required"]
+        addToPublic = data["addToPublic"]
+        addToDatabank = data["addToDatabank"]
+        sizelimit = data["sizelimit"]
+        fileUpload = data["fileUpload"] */
     };
+  },
+  methods: {
+    addquestion() {
+      this.$emit("question-added", this.audiodata);
+    },
   },
 };
 </script>
