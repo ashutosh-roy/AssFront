@@ -59,7 +59,7 @@
         </b-form>
       </b-card-text>
     </b-card>
-    <b-card class="card" sub-title="Short Questions">
+    <!-- <b-card class="card" sub-title="Short Questions">
       <span style="color:grey" class="ml-3">Question</span>
       <br />
       <span class="ml-5">
@@ -134,15 +134,15 @@
           </b-form-checkbox>
         </b-form>
       </b-card-text>
-    </b-card>
+    </b-card> -->
   </div>
 </template>
 <script>
-import Media from "@dongido/vue-viaudio";
+// import Media from "@dongido/vue-viaudio";
 export default {
   name: "multipleTypeQuestions",
   components: {
-    Media,
+    // Media,
   },
   data() {
     return {
