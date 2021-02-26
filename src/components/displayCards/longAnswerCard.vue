@@ -1,46 +1,49 @@
 <template>
   <div>
-      <b-card class="card" sub-title="Short Questions" v-for="entry in data" :key="entry.question">
-    <span style="color:grey" class="ml-3">Question</span>
-    <br />
-    <span class="ml-5">
-      {{entry.question}}
-    </span>
+    <b-card
+      class="card"
+      sub-title="Long Answer Questions"
+      v-for="entry in data"
+      :key="entry.question"
+    >
+      <span style="color:grey" class="ml-3">Question</span>
+      <br />
+      <span class="ml-5">
+        {{ entry.question }}
+      </span>
 
-    <b-card-text>
-      
+      <b-card-text>
         <div>
-            <b-row align-h="end">
-              <b-form-checkbox
-                v-model="entry.autoCorrection"
-                class="switch"
-                name="check-button"
-                switch
-              >
-                Auto Correction
-              </b-form-checkbox>
+          <b-row align-h="end">
+            <b-form-checkbox
+              v-model="entry.autoCorrection"
+              class="switch"
+              name="check-button"
+              switch
+            >
+              Auto Correction
+            </b-form-checkbox>
 
-              <b-form-checkbox
-                v-model="entry.required"
-                class="switch"
-                name="check-button"
-                switch
-              >
-                Required
-              </b-form-checkbox>
-            </b-row>
-          </div>
-      
-    </b-card-text>
-  </b-card>
+            <b-form-checkbox
+              v-model="entry.required"
+              class="switch"
+              name="check-button"
+              switch
+            >
+              Required
+            </b-form-checkbox>
+          </b-row>
+        </div>
+      </b-card-text>
+    </b-card>
   </div>
 </template>
 <script>
 export default {
   name: "LongAnswerCard",
-  props:{
-      data:Array
-  }
+  props: {
+    data: Array,
+  },
 };
 </script>
 <style scoped>

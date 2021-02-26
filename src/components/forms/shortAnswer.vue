@@ -40,7 +40,7 @@
 
             <b-row align-h="end">
               <b-form-checkbox
-                v-model="question.autoCorrection"
+                v-model="questions.autoCorrection"
                 class="switch"
                 name="check-button"
                 switch
@@ -49,24 +49,34 @@
               </b-form-checkbox>
 
               <b-form-checkbox
-                v-model="question.required"
+                v-model="questions.required"
                 class="switch"
                 name="check-button"
                 switch
               >
                 Required
               </b-form-checkbox>
-              <b-dropdown split text="Add" class="m-2 p-0 " variant="primary" @click="addquestion()">
-                <b-dropdown-item @click="question.addToDatabank = !question.addToDatabank">
+              <b-dropdown
+                split
+                text="Add"
+                class="m-2 p-0 "
+                variant="primary"
+                @click="addquestion()"
+              >
+                <b-dropdown-item
+                  @click="questions.addToDatabank = !questions.addToDatabank"
+                >
                   <b-form-checkbox
                     id="checkbox-1"
-                    v-model="question.addToDatabank"
+                    v-model="questions.addToDatabank"
                     name="checkbox-1"
                   >
                     Add to Databank
                   </b-form-checkbox>
                 </b-dropdown-item>
-                <b-dropdown-item @click="questions.addToPublic = !questions.addToPublic">
+                <b-dropdown-item
+                  @click="questions.addToPublic = !questions.addToPublic"
+                >
                   <b-form-checkbox
                     id="checkbox-2"
                     v-model="questions.addToPublic"
@@ -88,18 +98,18 @@ export default {
   name: "ShortAnswer",
   data() {
     return {
-      questions:{
-        topic : "",
-        difficultyLevel : null,
-        question : "",
-        questionType : "Short Answer Questions",
-        answerKey : "",
-        autoCorrection : 0,
-        required : 0,
-        addToPublic : false,
-        addToDatabank : false,
-        sizelimit : 0,
-        fileUpload : "",
+      questions: {
+        topic: "",
+        difficultyLevel: null,
+        question: "",
+        questionType: "Short Answer Questions",
+        answerKey: "",
+        autoCorrection: 0,
+        required: 0,
+        addToPublic: false,
+        addToDatabank: false,
+        sizelimit: 0,
+        fileUpload: "",
       },
       options: [
         { value: null, text: "Difficulty", disabled: true },
@@ -111,11 +121,11 @@ export default {
       ],
     };
   },
-  methods:{
-    addquestion(){
-      this.$emit('question-added',this.questions)
-    }
-  }
+  methods: {
+    addquestion() {
+      this.$emit("question-added", this.questions);
+    },
+  },
 };
 </script>
 <style scoped>

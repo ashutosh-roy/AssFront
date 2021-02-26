@@ -65,8 +65,16 @@
               >
                 Required
               </b-form-checkbox>
-              <b-dropdown split text="Add" class="m-2 p-0 " variant="primary">
-                <b-dropdown-item @click="databank = !databank">
+              <b-dropdown
+                split
+                text="Add"
+                class="m-2 p-0 "
+                variant="primary"
+                @click="addquestion()"
+              >
+                <b-dropdown-item
+                  @click="questions.addToDatabank = !questions.addToDatabank"
+                >
                   <b-form-checkbox
                     id="checkbox-1"
                     v-model="questions.addToDatabank"
@@ -75,7 +83,9 @@
                     Add to Databank
                   </b-form-checkbox>
                 </b-dropdown-item>
-                <b-dropdown-item @click="publicly = !publicly">
+                <b-dropdown-item
+                  @click="questions.addToPublic = !questions.addToPublic"
+                >
                   <b-form-checkbox
                     id="checkbox-2"
                     v-model="questions.addToPublic"
@@ -97,20 +107,19 @@ export default {
   name: "Video",
   data() {
     return {
-      questions:{
-        topic : "",
-        difficultyLevel : null,
-        question : "",
-        questionType : "Long Answer Questions",
-        answerKey : "",
-        autoCorrection : 0,
-        required : 0,
-        addToPublic : false,
-        addToDatabank : false,
-        sizelimit : 0,
-        fileUpload : "",
-       },
-      selected: "null",
+      questions: {
+        topic: "",
+        difficultyLevel: null,
+        question: "",
+        questionType: "Long Answer Questions",
+        answerKey: "",
+        autoCorrection: 0,
+        required: 0,
+        addToPublic: false,
+        addToDatabank: false,
+        sizelimit: 0,
+        fileUpload: "",
+      },
       options: [
         { value: null, text: "Difficulty", disabled: true },
         { value: "1", text: "Difficulty Level 1" },
@@ -119,8 +128,6 @@ export default {
         { value: "4", text: "Difficulty Level 4" },
         { value: "5", text: "Difficulty Level 5" },
       ],
-      databank: false,
-      publicly: false,
     };
   },
   methods: {

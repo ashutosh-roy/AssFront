@@ -2,7 +2,7 @@
   <div>
     <b-card
       class="card"
-      sub-title="Short Questions"
+      sub-title="Audio Questions"
       v-for="entry in data"
       :key="entry.question"
     >
@@ -28,28 +28,27 @@
       </span>
 
       <b-card-text>
-          <div>
-            <b-row align-h="end">
-              <b-form-checkbox
-                v-model="entry.autoCorrection"
-                class="switch"
-                name="check-button"
-                switch
-              >
-                Auto Correction
-              </b-form-checkbox>
+        <div>
+          <b-row align-h="end">
+            <b-form-checkbox
+              v-model="entry.autoCorrection"
+              class="switch"
+              name="check-button"
+              switch
+            >
+              Auto Correction
+            </b-form-checkbox>
 
-              <b-form-checkbox
-                v-model="entry.required"
-                class="switch"
-                name="check-button"
-                switch
-              >
-                Required
-              </b-form-checkbox>
-            </b-row>
-          </div>
-        
+            <b-form-checkbox
+              v-model="entry.required"
+              class="switch"
+              name="check-button"
+              switch
+            >
+              Required
+            </b-form-checkbox>
+          </b-row>
+        </div>
       </b-card-text>
     </b-card>
   </div>

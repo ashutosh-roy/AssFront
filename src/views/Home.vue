@@ -19,7 +19,15 @@
       title="Choose Question Type"
       style="width:90vh"
     >
-      <b-button class="buttonchoice" variant="outline-secondary">MCQ</b-button>
+      <b-button
+        class="buttonchoice"
+        variant="outline-secondary"
+        @click="
+          mcq = true;
+          $bvModal.hide('modal-1');
+        "
+        >MCQ</b-button
+      >
       <b-button
         class="buttonchoice"
         variant="outline-secondary"
@@ -101,8 +109,13 @@
             v-if="shortQuestionData.length != 0"
           />
         </div>
+        <div :key="videodata">
+          <VideoCard :data="videodata" v-if="videodata.length != 0" />
+        </div>
+        <div :key="mcqdata">
+          <MCQCard :data="mcqdata" v-if="mcqdata.length != 0" />
+        </div>
       </b-col>
-
     </b-row>
     <b-row align-h="center">
       <b-col cols="7">
@@ -122,14 +135,22 @@
           v-on:delete-form="image = false"
           v-on:question-added="addimagequestion"
         />
-        <Video v-if="video" v-on:delete-form="video = false" />
+        <Video
+          v-if="video"
+          v-on:delete-form="video = false"
+          v-on:question-added="addvideoquestion"
+        />
         <Audio
           v-if="audio"
           v-on:delete-form="audio = false"
           v-on:question-added="addaudioquestion"
         />
         <MatchTheFollowing v-if="match" v-on:delete-form="match = false" />
-        <mcq v-if="mcq" v-on:delete-form="mcq=false"/>
+        <mcq
+          v-if="mcq"
+          v-on:delete-form="mcq = false"
+          v-on:question-added="addmcq"
+        />
       </b-col>
     </b-row>
   </div>
@@ -141,14 +162,16 @@ import LongAnswerCard from "../components/displayCards/longAnswerCard";
 import AudioCard from "../components/displayCards/audioCard";
 import ImageCard from "../components/displayCards/imageCard";
 import MatchTheFollowing from "../components/forms/MatchTheFollowing.vue";
+import MCQCard from "../components/displayCards/mcqCard.vue";
 // import multipleTypeQuestions from "../components/forms/multipleType";
 import LongAnswer from "../components/forms/longAnswer";
 import ShortAnswer from "../components/forms/shortAnswer";
 import ImageQuestion from "../components/forms/imageQuestion";
 import Video from "../components/forms/videoQuestion";
-import mcq from "../components/forms/Mcq"
+import mcq from "../components/forms/Mcq";
 import Audio from "../components/forms/audioQuestion";
-import ShortAnswerCard from "../components/displayCards/shortAnswerCard"
+import VideoCard from "../components/displayCards/videoCard";
+import ShortAnswerCard from "../components/displayCards/shortAnswerCard";
 export default {
   name: "Home",
   components: {
@@ -163,7 +186,9 @@ export default {
     ImageCard,
     LongAnswerCard,
     mcq,
-    ShortAnswerCard
+    ShortAnswerCard,
+    VideoCard,
+    MCQCard,
   },
   data() {
     return {
@@ -173,10 +198,13 @@ export default {
       video: false,
       audio: false,
       match: false,
+      mcq: false,
       audiodata: [],
       imagedata: [],
       longQuestionData: [],
-      shortQuestionData:[]
+      shortQuestionData: [],
+      videodata: [],
+      mcqdata: [],
     };
   },
   methods: {
@@ -201,8 +229,16 @@ export default {
     },
     addshortquestion(shortquesdata) {
       this.shortQuestionData.push(shortquesdata);
-      this.shortAnswer=false;
-    }
+      this.shortAnswer = false;
+    },
+    addvideoquestion(videodata) {
+      this.videodata.push(videodata);
+      this.video = false;
+    },
+    addmcq(mcqdata) {
+      this.mcqdata.push(mcqdata);
+      this.mcq = false;
+    },
   },
 };
 </script>

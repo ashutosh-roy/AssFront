@@ -22,8 +22,8 @@
                   Upload an audio file:
                   <input type="file" @change="previewAudio" accept="image/*">
               </div>
-              <div class="image-preview" v-if="questions.fileUpload.length>0">
-                  <img class="preview" :src="questions.fileUpload">
+              <div class="image-preview" v-if="audiodata.fileUpload.length>0">
+                  <img class="preview" :src="audiodata.fileUpload">
               </div>
             </div>
             <b-form-input
@@ -161,7 +161,7 @@ export default {
             reader.onload = (e) => {
                 // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
                 // Read image as base64 and set to imageData
-                this.imagedata.fileUpload = e.target.result;
+                this.audiodata.fileUpload = e.target.result;
                 // console.log(this.imagedata.fileUpload)
             }
             // Start the reader job - read file as a data url (base64 format)
