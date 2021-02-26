@@ -19,19 +19,19 @@
           <div style="width:100%">
             <b-form-input
               class="input"
-              v-model="text"
+              v-model="questions.topic"
               autofocus
               placeholder="Topic"
             ></b-form-input>
             <b-form-select
-              v-model="selected"
+              v-model="questions.difficultyLevel"
               :options="options"
               class="input"
             ></b-form-select>
             <br />
             <b-form-input
               class="input"
-              v-model="text"
+              v-model="questions.question"
               placeholder="Question"
               style="width:100%;margin-top:1vh"
             >
@@ -40,7 +40,7 @@
 
             <b-row align-h="end">
               <b-form-checkbox
-                v-model="checked"
+                v-model="question.autoCorrection"
                 class="switch"
                 name="check-button"
                 switch
@@ -49,7 +49,7 @@
               </b-form-checkbox>
 
               <b-form-checkbox
-                v-model="checked"
+                v-model="question.required"
                 class="switch"
                 name="check-button"
                 switch
@@ -60,7 +60,7 @@
                 <b-dropdown-item @click="databank = !databank">
                   <b-form-checkbox
                     id="checkbox-1"
-                    v-model="databank"
+                    v-model="question.addToDatabank"
                     name="checkbox-1"
                   >
                     Add to Databank
@@ -69,7 +69,7 @@
                 <b-dropdown-item @click="publicly = !publicly">
                   <b-form-checkbox
                     id="checkbox-2"
-                    v-model="publicly"
+                    v-model="questions.addToPublic"
                     name="checkbox-2"
                   >
                     Add Publicly
@@ -88,6 +88,19 @@ export default {
   name: "ShortAnswer",
   data() {
     return {
+      questions:{
+        topic : "",
+        difficultyLevel : null,
+        question : "",
+        questionType : "Long Answer Questions",
+        answerKey : "",
+        autoCorrection : 0,
+        required : 0,
+        addToPublic : false,
+        addToDatabank : false,
+        sizelimit : 0,
+        fileUpload : "",
+      },
       selected: "null",
       options: [
         { value: null, text: "Difficulty", disabled: true },
