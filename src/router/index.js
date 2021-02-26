@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import multipleTypeQuestions from "../components/forms/multipleType.vue"
+import MatchTheFollowing from "../components/forms/MatchTheFollowing.vue"
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,11 @@ const routes = [
     path: "/home",
     name: "Home",
     component: Home
+  },
+  {
+    path: "/MatchTheFollowing",
+    name: "assessmentquestions",
+    component: MatchTheFollowing
   },
   {
     path: "/about",
