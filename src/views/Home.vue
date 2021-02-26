@@ -1,5 +1,9 @@
 <template>
   <div>
+    <!-- <Longuestion/> -->
+    <!-- <b-row align-h="center">
+     <Image v-if="image" v-on:delete-form="image = false" v-on:add-image="addimage"/>
+    </b-row> -->
     <b-row align-h="center">
       <b-button
         style="float:right; margin-left:90%"

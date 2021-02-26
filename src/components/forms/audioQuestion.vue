@@ -12,11 +12,20 @@
               ><i class="fas fa-trash"></i
             ></b-button>
           </b-row>
-        </div>
+        </div> 
       </template>
       <b-card-text>
         <b-form inline>
           <div style="width:100%">
+            <div>
+              <div class="file-upload-form">
+                  Upload an audio file:
+                  <input type="file" @change="previewAudio" accept="image/*">
+              </div>
+              <div class="image-preview" v-if="audiodata.fileUpload.length>0">
+                  <img class="preview" :src="audiodata.fileUpload">
+              </div>
+            </div>
             <b-form-input
               class="input"
               v-model="audiodata.topic"
@@ -94,6 +103,7 @@
   </div>
 </template>
 <script>
+// import axios from "axios" ;
 export default {
   name: "Audio",
   data() {
@@ -140,6 +150,25 @@ export default {
     addquestion() {
       this.$emit("question-added", this.audiodata);
     },
+    previewAudio: function(event) 
+     {
+        var input = event.target;
+        // Ensure that you have a file before attempting to read it
+        if (input.files && input.files[0]) {
+            // create a new FileReader to read this image and convert to base64 format
+            var reader = new FileReader();
+            // Define a callback function to run, when FileReader finishes its job
+            reader.onload = (e) => {
+                // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
+                // Read image as base64 and set to imageData
+                this.audiodata.fileUpload = e.target.result;
+                // console.log(this.imagedata.fileUpload)
+            }
+            // Start the reader job - read file as a data url (base64 format)
+            reader.readAsDataURL(input.files[0]);
+            console.log(input.files[0]);
+        }
+    }
   },
 };
 </script>
@@ -169,4 +198,18 @@ export default {
   margin-top: 2vh;
   margin-right: 2vh;
 }
+.file-upload-form, .image-preview {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    padding: 20px;
+}
+img.preview {
+    width: 200px;
+    background-color: white;
+    border: 1px solid #DDD;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
 </style>
