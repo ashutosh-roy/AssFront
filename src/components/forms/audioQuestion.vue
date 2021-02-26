@@ -3,7 +3,7 @@
     <b-card class="card" header-tag="header">
       <template #header>
         <div>
-          Long Answer
+          Audio
           <b-row align-h="end">
             <b-button
               variant="outline-secondary"
@@ -85,7 +85,7 @@
 </template>
 <script>
 export default {
-  name: "LongAnswer",
+  name: "Audio",
   data() {
     return {
       selected: "null",

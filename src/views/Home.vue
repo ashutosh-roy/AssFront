@@ -52,7 +52,13 @@
         "
         >Video</b-button
       >
-      <b-button class="buttonchoice" variant="outline-secondary"
+      <b-button
+        class="buttonchoice"
+        variant="outline-secondary"
+        @click="
+          audio = true;
+          $bvModal.hide('modal-1');
+        "
         >Audio</b-button
       >
       <b-button class="buttonchoice" variant="outline-secondary"
@@ -75,6 +81,7 @@
         />
         <Image v-if="image" v-on:delete-form="image = false" />
         <Video v-if="video" v-on:delete-form="video = false" />
+        <Audio v-if="audio" v-on:delete-form="audio = false" />
       </b-col>
     </b-row>
   </div>
@@ -87,7 +94,7 @@ import LongAnswer from "../components/forms/longAnswer";
 import ShortAnswer from "../components/forms/shortAnswer";
 import Image from "../components/forms/imageQuestion";
 import Video from "../components/forms/videoQuestion";
-
+import Audio from "../components/forms/audioQuestion";
 export default {
   name: "Home",
   components: {
@@ -96,6 +103,7 @@ export default {
     ShortAnswer,
     Image,
     Video,
+    Audio,
   },
   data() {
     return {
@@ -103,6 +111,7 @@ export default {
       longanswer: false,
       image: false,
       video: false,
+      audio: false,
     };
   },
   methods: {
