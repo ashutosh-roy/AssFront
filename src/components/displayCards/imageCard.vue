@@ -2,7 +2,7 @@
   <div>
     <b-card
       class="card"
-      sub-title="Short Questions"
+      sub-title="Image Questions"
       v-for="entry in data"
       :key="entry.question"
     >
