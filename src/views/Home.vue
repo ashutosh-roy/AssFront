@@ -188,7 +188,7 @@ export default {
     mcq,
     ShortAnswerCard,
     VideoCard,
-    MCQCard,
+    MCQCard
   },
   data() {
     return {
@@ -204,7 +204,7 @@ export default {
       longQuestionData: [],
       shortQuestionData: [],
       videodata: [],
-      mcqdata: [],
+      mcqdata: []
     };
   },
   methods: {
@@ -238,8 +238,8 @@ export default {
     addmcq(mcqdata) {
       this.mcqdata.push(mcqdata);
       this.mcq = false;
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

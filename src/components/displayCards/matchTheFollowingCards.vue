@@ -220,8 +220,8 @@ export default {
       inputs: [
         {
           sideA: "",
-          sideB: "",
-        },
+          sideB: ""
+        }
       ],
       selected: "null",
       options: [
@@ -230,8 +230,8 @@ export default {
         { value: "2", text: "Difficulty Level 2" },
         { value: "3", text: "Difficulty Level 3" },
         { value: "4", text: "Difficulty Level 4" },
-        { value: "5", text: "Difficulty Level 5" },
-      ],
+        { value: "5", text: "Difficulty Level 5" }
+      ]
       //   selectedoptions: 'first',
       //     options1: [
       //       { text: 'First radio', value: 'first' },
@@ -243,26 +243,26 @@ export default {
   methods: {
     addsideA() {
       this.inputs.push({
-        sideA: "",
+        sideA: ""
       });
       console.log(this.inputs);
     },
 
     addsideB() {
       this.inputs.push({
-        sideB: "",
+        sideB: ""
       });
       console.log(this.inputs);
     },
 
     remove(index) {
       this.inputs.splice(index, 1);
-    },
+    }
 
     // remove (index) {
     //   this.inputs.splice(index, 1)
     // },
-  },
+  }
 };
 </script>
 <style scoped>

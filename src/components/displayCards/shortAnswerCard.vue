@@ -42,8 +42,8 @@
 export default {
   name: "ShortAnswerCard",
   props: {
-    data: Array,
-  },
+    data: Array
+  }
 };
 </script>
 <style scoped>

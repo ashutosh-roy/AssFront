@@ -58,11 +58,11 @@ import Media from "@dongido/vue-viaudio";
 export default {
   name: "AudioCard",
   components: {
-    Media,
+    Media
   },
   props: {
-    data: Array,
-  },
+    data: Array
+  }
 };
 </script>
 <style scoped>

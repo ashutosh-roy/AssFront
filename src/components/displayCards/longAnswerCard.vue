@@ -42,8 +42,8 @@
 export default {
   name: "LongAnswerCard",
   props: {
-    data: Array,
-  },
+    data: Array
+  }
 };
 </script>
 <style scoped>
