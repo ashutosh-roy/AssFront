@@ -123,7 +123,7 @@ export default {
         topic: "",
         difficultyLevel: null,
         question: "",
-        questionType: "audio",
+        questionType: "Audio",
         answerKey: "",
         autoCorrection: 0,
         required: 0,

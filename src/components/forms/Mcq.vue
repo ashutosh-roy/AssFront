@@ -3,6 +3,7 @@
     <b-card class="card" header-tag="header">
       <template #header>
         <div>
+          MCQ
           <b-row align-h="end">
             <b-button
               variant="outline-secondary"
@@ -45,26 +46,37 @@
             <br />
             <br />
             <div class="base">
-              <div v-for="index in answerlist" :key="index">
+              <div v-for="i in optionnum" :key="i">
                 <b-input-group>
                   <b-input-group-prepend is-text>
                     <input type="radio" disabled />
                   </b-input-group-prepend>
                   <b-form-input
-                    v-on:keyup.enter="addOptions"
                     autofocus
                     class="input"
-                    v-model="question.options[index]"
+                    v-model="question.options[i - 1]"
                     placeholder="Answer"
                     style="width:60%;margin-top:1vh"
                   >
                   </b-form-input>
+                  <div :key="answer[i - 1]">
+                    <b-button
+                      :variant="answer[i - 1]"
+                      @click="answerchange(question.options[i - 1], i)"
+                      style="border:none"
+                    >
+                      <i class="fas fa-check 7x"></i>
+                    </b-button>
+                  </div>
 
                   <b-button variant="outline">
-                    <i class="fas fa-check 7x"></i>
-                  </b-button>
-                  <b-button variant="outline" @click="deleteOptions(index)">
-                    <i class="fas fa-trash"></i>
+                    <i
+                      class="fas fa-trash"
+                      @click="
+                        question.options.splice(i - 1, 1);
+                        optionnum -= 1;
+                      "
+                    ></i>
                   </b-button>
                 </b-input-group>
               </div>
@@ -74,66 +86,68 @@
                 variant="outline"
                 class="btts"
                 style="float:left"
-                v-on:click.enter="addOptions"
+                @click.enter="addOptions()"
                 >Add Option</b-button
               >
               <b-button
                 variant="outline"
                 class="btts-1"
                 style="float:left"
-                @click="addOptions"
+                @click="addOptions()"
                 >/ Others</b-button
               >
             </div>
 
             <b-row align-h="end">
-              <b-form-checkbox
-                v-model="question.autoCorrection"
-                class="switch"
-                name="check-button"
-                switch
-              >
-                Auto Correction |
-              </b-form-checkbox>
+              <b-form inline>
+                <b-form-checkbox
+                  v-model="question.autoCorrection"
+                  class="switch"
+                  name="check-button"
+                  switch
+                >
+                  Auto Correction
+                </b-form-checkbox>
 
-              <b-form-checkbox
-                v-model="question.required"
-                class="switch"
-                name="check-button"
-                switch
-              >
-                Required
-              </b-form-checkbox>
-              <b-dropdown
-                split
-                variant="primary"
-                text="Add"
-                class="m-2 mt-2 p-0 add-btn"
-                @click="addquestion()"
-              >
-                <b-dropdown-item
-                  @click="question.addToDatabank = !question.addToDatabank"
+                <b-form-checkbox
+                  v-model="question.required"
+                  class="switch"
+                  name="check-button"
+                  switch
                 >
-                  <b-form-checkbox
-                    id="checkbox-1"
-                    v-model="question.addToDatabank"
-                    name="checkbox-1"
+                  Required
+                </b-form-checkbox>
+                <b-dropdown
+                  split
+                  variant="primary"
+                  text="Add"
+                  class="m-2 mt-2 p-0 add-btn"
+                  @click="addquestion()"
+                >
+                  <b-dropdown-item
+                    @click="question.addToDatabank = !question.addToDatabank"
                   >
-                    Add to date bank
-                  </b-form-checkbox>
-                </b-dropdown-item>
-                <b-dropdown-item
-                  @click="question.addToPublic = !question.addToPublic"
-                >
-                  <b-form-checkbox
-                    id="checkbox-1"
-                    v-model="question.addToPublic"
-                    name="checkbox-1"
+                    <b-form-checkbox
+                      id="checkbox-1"
+                      v-model="question.addToDatabank"
+                      name="checkbox-1"
+                    >
+                      Add to date bank
+                    </b-form-checkbox>
+                  </b-dropdown-item>
+                  <b-dropdown-item
+                    @click="question.addToPublic = !question.addToPublic"
                   >
-                    Add Publicly
-                  </b-form-checkbox></b-dropdown-item
-                >
-              </b-dropdown>
+                    <b-form-checkbox
+                      id="checkbox-1"
+                      v-model="question.addToPublic"
+                      name="checkbox-1"
+                    >
+                      Add Publicly
+                    </b-form-checkbox></b-dropdown-item
+                  >
+                </b-dropdown>
+              </b-form>
             </b-row>
           </div>
         </b-form>
@@ -142,24 +156,24 @@
   </div>
 </template>
 <script>
+import { postMCQquestion } from "../../apiFunctions";
 export default {
   name: "mcq",
   components: {},
   data() {
     return {
       selected: "null",
-
+      answer: ["outline-dark"],
       options: [
         { value: null, text: "Difficulty", disabled: true },
-        { value: "1", text: "Difficulty 1" },
-        { value: "2", text: "Difficulty 2" },
-        { value: "3", text: "Difficulty 3" },
-        { value: "4", text: "Difficulty 4" },
-        { value: "5", text: "Difficulty 5" }
+        { value: "1", text: "Difficulty Level 1" },
+        { value: "2", text: "Difficulty Level 2" },
+        { value: "3", text: "Difficulty Level 3" },
+        { value: "4", text: "Difficulty Level 4" },
+        { value: "5", text: "Difficulty Level 5" },
       ],
 
-      answerlist: ["as"],
-      option: "",
+      optionnum: 1,
       question: {
         topic: "",
         difficultyLevel: null,
@@ -170,8 +184,8 @@ export default {
         required: 0,
         addToPublic: false,
         addToDatabank: false,
-        fileUpload: ""
-      }
+        fileUpload: "",
+      },
 
       /*subject = data["subject"]
         topic = data["topic"]
@@ -187,18 +201,39 @@ export default {
     };
   },
   methods: {
+    answerchange(ans, i) {
+      console.log("we're here atleast" + ans);
+      if (this.answer[i - 1] == "outline-dark") {
+        if (ans != null) {
+          this.answer[i - 1] = "outline-success";
+          this.question.answerkey.push(ans);
+        }
+
+        console.log(this.question.answerkey);
+      } else {
+        this.answer[i - 1] = "outline-dark";
+        this.question.answerkey = this.question.answerkey.filter(
+          (added) => added != ans
+        );
+        console.log(this.question.answerkey);
+      }
+    },
     addOptions() {
-      this.answerlist.push();
+      this.optionnum = this.optionnum + 1;
+      this.answer.push("outline-dark");
     },
     deleteOptions(i) {
       this.question.options = this.question.options.filter(
-        choice => choice != choice[i]
+        (choice) => choice != choice[i]
       );
     },
     addquestion() {
+      postMCQquestion(this.question)
+        .then((res) => console.log("MCQ data saved!" + res))
+        .catch((err) => console.log(err));
       this.$emit("question-added", this.question);
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
@@ -206,6 +241,7 @@ export default {
   border-radius: 12px;
   margin: 2vh;
   box-shadow: 7px 10px 7px #c5c2c2;
+  text-align: left;
 }
 .input {
   border-top: none;

@@ -71,6 +71,7 @@
               class="switch"
               name="check-button"
               switch
+              disabled
             >
               Auto Correction
             </b-form-checkbox>
@@ -80,6 +81,7 @@
               class="switch"
               name="check-button"
               switch
+              disabled
             >
               Required
             </b-form-checkbox>

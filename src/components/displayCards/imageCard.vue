@@ -8,11 +8,7 @@
     >
       <span style="color:grey" class="ml-3">Question</span>
       <br />
-      <b-img
-        src="https://picsum.photos/1024/400/?image=41"
-        fluid
-        alt="Responsive image"
-      ></b-img>
+      <b-img :src="entry.fileUpload" fluid alt="Responsive image"></b-img>
       <br />
       <span class="ml-5">
         {{ entry.question }}
@@ -26,6 +22,7 @@
               class="switch"
               name="check-button"
               switch
+              disabled
             >
               Auto Correction
             </b-form-checkbox>
@@ -35,6 +32,7 @@
               class="switch"
               name="check-button"
               switch
+              disabled
             >
               Required
             </b-form-checkbox>

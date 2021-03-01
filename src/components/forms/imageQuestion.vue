@@ -119,7 +119,7 @@ export default {
         topic: "",
         difficultyLevel: null,
         question: "",
-        questionType: "image",
+        questionType: "Image",
         answerKey: "",
         autoCorrection: 0,
         required: 0,

@@ -44,8 +44,7 @@
               placeholder="Question"
               style="width:100%;margin-top:1vh"
             >
-              ></b-form-input
-            >
+            </b-form-input>
 
             <b-row align-h="end">
               <b-form-checkbox
@@ -111,7 +110,7 @@ export default {
         topic: "",
         difficultyLevel: null,
         question: "",
-        questionType: "Long Answer Questions",
+        questionType: "Video",
         answerKey: "",
         autoCorrection: 0,
         required: 0,
@@ -147,6 +146,9 @@ export default {
         // Start the reader job - read file as a data url (base64 format)
         reader.readAsDataURL(input.files[0]);
       }
+    },
+    addquestion() {
+      this.$emit("question-added", this.videodata);
     }
   }
 };

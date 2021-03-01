@@ -1,19 +1,19 @@
 import service from "./request.js";
-export function putMCQquestion() {
+export function putMCQquestion(data) {
   return service({
     url: `mcqQuestions/`,
     method: "put",
     data
   });
 }
-export function postMCQquestion() {
+export function postMCQquestion(data) {
   return service({
     url: `mcqQuestions/`,
     method: "post",
     data
   });
 }
-export function deleteMCQquestion() {
+export function deleteMCQquestion(data) {
   return service({
     url: `mcqQuestions/`,
     method: "delete",
@@ -23,34 +23,32 @@ export function deleteMCQquestion() {
 export function getMCQquestion() {
   return service({
     url: `mcqQuestions/`,
-    method: "get",
-    data
+    method: "get"
   });
 }
-export function putCommonQuestion() {
+export function putCommonQuestion(data) {
   return service({
-    url: `mcqQuestions/`,
+    url: `commonQuestions/`,
     method: "put",
     data
   });
 }
-export function postCommonQuestion() {
+export function postCommonQuestion(data) {
   return service({
-    url: `mcqQuestions/`,
+    url: `commonQuestions/`,
     method: "post",
     data
   });
 }
 export function getCommonQuestion() {
   return service({
-    url: `mcqQuestions/`,
-    method: "get",
-    data
+    url: `commonQuestions/`,
+    method: "get"
   });
 }
-export function deleteCommonQuestion() {
+export function deleteCommonQuestion(data) {
   return service({
-    url: `mcqQuestions/`,
+    url: `commonQuestions/`,
     method: "delete",
     data
   });
