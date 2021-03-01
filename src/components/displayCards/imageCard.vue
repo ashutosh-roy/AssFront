@@ -47,8 +47,8 @@ export default {
   name: "ImageCard",
   components: {},
   props: {
-    data: Array,
-  },
+    data: Array
+  }
 };
 </script>
 <style scoped>

@@ -190,6 +190,14 @@ export default {
     };
   },
   methods: {
+    addOptions() {
+      this.answerlist.push();
+    },
+    deleteOptions(i) {
+      this.question.options = this.question.options.filter(
+        (choice) => choice != choice[i]
+      );
+    },
     addquestion() {
       postMCQquestion(this.question)
         .then((res) => console.log("MCQ data saved!" + res))

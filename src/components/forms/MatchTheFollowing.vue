@@ -167,7 +167,12 @@ export default {
   name: "multipleTypeQuestions",
   data() {
     return {
-      inputs: [],
+      inputs: [
+        {
+          sideA: "",
+          sideB: "",
+        },
+      ],
       selected: "null",
       options: [
         { value: null, text: "Difficulty" },
