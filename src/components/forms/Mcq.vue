@@ -45,16 +45,15 @@
             <br />
             <br />
             <div class="base">
-              <div v-for="index in answerlist" :key="index">
+              <div v-for="i in optionnum" :key="i">
                 <b-input-group>
                   <b-input-group-prepend is-text>
                     <input type="radio" disabled />
                   </b-input-group-prepend>
                   <b-form-input
-                    v-on:keyup.enter="addOptions"
                     autofocus
                     class="input"
-                    v-model="question.options[index]"
+                    v-model="question.options[i - 1]"
                     placeholder="Answer"
                     style="width:60%;margin-top:1vh"
                   >
@@ -63,8 +62,14 @@
                   <b-button variant="outline">
                     <i class="fas fa-check 7x"></i>
                   </b-button>
-                  <b-button variant="outline" @click="deleteOptions(index)">
-                    <i class="fas fa-trash"></i>
+                  <b-button variant="outline">
+                    <i
+                      class="fas fa-trash"
+                      @click="
+                        question.options.splice(i - 1, 1);
+                        optionnum -= 1;
+                      "
+                    ></i>
                   </b-button>
                 </b-input-group>
               </div>
@@ -74,66 +79,64 @@
                 variant="outline"
                 class="btts"
                 style="float:left"
-                v-on:click.enter="addOptions"
+                @click="optionnum = optionnum + 1"
                 >Add Option</b-button
               >
-              <b-button
-                variant="outline"
-                class="btts-1"
-                style="float:left"
-                @click="addOptions"
+              <b-button variant="outline" class="btts-1" style="float:left"
                 >/ Others</b-button
               >
             </div>
 
             <b-row align-h="end">
-              <b-form-checkbox
-                v-model="question.autoCorrection"
-                class="switch"
-                name="check-button"
-                switch
-              >
-                Auto Correction |
-              </b-form-checkbox>
+              <b-form inline>
+                <b-form-checkbox
+                  v-model="question.autoCorrection"
+                  class="switch"
+                  name="check-button"
+                  switch
+                >
+                  Auto Correction
+                </b-form-checkbox>
 
-              <b-form-checkbox
-                v-model="question.required"
-                class="switch"
-                name="check-button"
-                switch
-              >
-                Required
-              </b-form-checkbox>
-              <b-dropdown
-                split
-                variant="primary"
-                text="Add"
-                class="m-2 mt-2 p-0 add-btn"
-                @click="addquestion()"
-              >
-                <b-dropdown-item
-                  @click="question.addToDatabank = !question.addToDatabank"
+                <b-form-checkbox
+                  v-model="question.required"
+                  class="switch"
+                  name="check-button"
+                  switch
                 >
-                  <b-form-checkbox
-                    id="checkbox-1"
-                    v-model="question.addToDatabank"
-                    name="checkbox-1"
+                  Required
+                </b-form-checkbox>
+                <b-dropdown
+                  split
+                  variant="primary"
+                  text="Add"
+                  class="m-2 mt-2 p-0 add-btn"
+                  @click="addquestion()"
+                >
+                  <b-dropdown-item
+                    @click="question.addToDatabank = !question.addToDatabank"
                   >
-                    Add to date bank
-                  </b-form-checkbox>
-                </b-dropdown-item>
-                <b-dropdown-item
-                  @click="question.addToPublic = !question.addToPublic"
-                >
-                  <b-form-checkbox
-                    id="checkbox-1"
-                    v-model="question.addToPublic"
-                    name="checkbox-1"
+                    <b-form-checkbox
+                      id="checkbox-1"
+                      v-model="question.addToDatabank"
+                      name="checkbox-1"
+                    >
+                      Add to date bank
+                    </b-form-checkbox>
+                  </b-dropdown-item>
+                  <b-dropdown-item
+                    @click="question.addToPublic = !question.addToPublic"
                   >
-                    Add Publicly
-                  </b-form-checkbox></b-dropdown-item
-                >
-              </b-dropdown>
+                    <b-form-checkbox
+                      id="checkbox-1"
+                      v-model="question.addToPublic"
+                      name="checkbox-1"
+                    >
+                      Add Publicly
+                    </b-form-checkbox></b-dropdown-item
+                  >
+                </b-dropdown>
+              </b-form>
             </b-row>
           </div>
         </b-form>
@@ -142,6 +145,7 @@
   </div>
 </template>
 <script>
+import { postMCQquestion } from "../../apiFunctions";
 export default {
   name: "mcq",
   components: {},
@@ -158,8 +162,7 @@ export default {
         { value: "5", text: "Difficulty 5" },
       ],
 
-      answerlist: ["as"],
-      option: "",
+      optionnum: 1,
       question: {
         topic: "",
         difficultyLevel: null,
@@ -187,15 +190,10 @@ export default {
     };
   },
   methods: {
-    addOptions() {
-      this.answerlist.push();
-    },
-    deleteOptions(i) {
-      this.question.options = this.question.options.filter(
-        (choice) => choice != choice[i]
-      );
-    },
     addquestion() {
+      postMCQquestion(this.question)
+        .then((res) => console.log("MCQ data saved!" + res))
+        .catch((err) => console.log(err));
       this.$emit("question-added", this.question);
     },
   },

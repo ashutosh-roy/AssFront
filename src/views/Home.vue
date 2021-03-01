@@ -90,7 +90,7 @@
       >
     </b-modal>
     <b-row align-h="center">
-      <b-col cols="7">
+      <b-col md="7" sm="12">
         <div :key="audiodata">
           <AudioCard :data="audiodata" v-if="audiodata.length != 0" />
         </div>
@@ -118,7 +118,7 @@
       </b-col>
     </b-row>
     <b-row align-h="center">
-      <b-col cols="7">
+      <b-col md="7" sm="12">
         <!-- <multipleTypeQuestions v-show="false" /> -->
         <LongAnswer
           v-if="longanswer"
@@ -172,6 +172,7 @@ import mcq from "../components/forms/Mcq";
 import Audio from "../components/forms/audioQuestion";
 import VideoCard from "../components/displayCards/videoCard";
 import ShortAnswerCard from "../components/displayCards/shortAnswerCard";
+import { getMCQquestion, getCommonQuestion } from "../apiFunctions";
 export default {
   name: "Home",
   components: {
@@ -247,6 +248,27 @@ export default {
       this.mcqdata.push(mcqdata);
       this.mcq = false;
     },
+  },
+  created: function() {
+    getMCQquestion()
+      .then((res) => (this.mcqdata = res.data.data))
+      .catch((err) => console.log(err));
+    getCommonQuestion().then((res) => {
+      var i = 0;
+      while (i < res.data.data.length) {
+        if (res.data.data[i].questionType == "Long Answer Questions") {
+          this.longQuestionData.push(res.data.data[i]);
+        } else if (res.data.data[i].questionType == "Short Answer Questions") {
+          this.shortQuestionData.push(res.data.data[i]);
+        } else if (res.data.data[i].questionType == "Video") {
+          this.videodata.push(res.data.data[i]);
+        } else if (res.data.data[i].questionType == "Audio") {
+          this.audiodata.push(res.data.data[i]);
+        } else {
+          this.imagedata.push(res.data.data[i]);
+        }
+      }
+    });
   },
 };
 </script>
