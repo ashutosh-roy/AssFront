@@ -1,12 +1,23 @@
 <template>
-    <div id="asp">
-    <b-card class="card">
-      
+    <div>
+    <b-card class="card" header="header">
+         <template #header>
+        <div>
+          Comprehensive
+          <b-row align-h="end">
+            <b-button
+              variant="outline-secondary"
+              @click="$emit('delete-form')"
+              style="border:none"
+              ><i class="fas fa-trash"></i
+            ></b-button>
+          </b-row>
+        </div>
+      </template>
       <b-card-text>
-        <b-form inline @submit.prevent>
-        
-          
-            <b-form-input 
+        <b-form  inline @submit.prevent>
+          <div style="width:100%">
+        <b-form-input 
           class="input"
           v-model="text"
           autofocus
@@ -21,8 +32,6 @@
       ></b-form-select>
       <br>
 
-      <b-button variant="outline" class="btnn" type="submit">  <i class="fas fa-trash"></i></b-button>
-  
       <b-form-input 
       class="input"
       v-model="text2"
@@ -31,22 +40,24 @@
       </b-form-input>
           <b-button variant="outline" class="btnn" type="submit">  <i class="fas fa-images"></i></b-button>
       <br>
-      <br>
-      <br>
+      
+    
 <div class="base">
-  <div v-for="(ball, bat) in answerlist" :key="bat"  >
-
+ 
+  <div >
        <b-input-group>
     <b-input-group-prepend is-text>
       <input type="radio" disabled>
     </b-input-group-prepend>
  
        
-<div class="question-3">
+<div v-for="j in addQues" :key="j" class="question-3">
     <b-form-input 
-     v-on:keyup.enter="addQuestions" 
+     v-on:keyup.enter="addQuestion" 
+    
+     
       class="question-2"
-      v-model="ball.bat"
+      v-model="j.addQues"
       placeholder="Question"
       style="width:80%;margin-top:1vh;">
       </b-form-input>
@@ -54,7 +65,7 @@
      <b-button variant="outline" >
           <i class="fas fa-images"></i>
                  </b-button>
-                  <b-button variant="outline" @click="deleteOptions(item.index)">
+                  <b-button variant="outline" @click="deleteOptions(index)">
           <i class="fas fa-trash"></i>
                  </b-button>
     
@@ -62,7 +73,7 @@
            </b-input-group>
             
            
-<div v-for="(item, index) in answerlist" :key="index"  >
+<div v-for="i in answerlist" :key="i"  >
   <b-input-group>
     <b-input-group-prepend is-text>
       <input type="radio" disabled>
@@ -74,8 +85,8 @@
     v-on:keyup.enter="addOptions" 
     autofocus
     class="input-type"
-     v-model="item.index"
-     placeholder="Answer"
+    v-model="i.answerlist"
+    placeholder="Answer"
 >
     </b-form-input>
 
@@ -84,7 +95,7 @@
         <b-button variant="outline" >
           <i class="fas fa-check 7x"></i>
                  </b-button>
-                  <b-button variant="outline" @click="deleteOptions(item.index)">
+                  <b-button variant="outline" @click="deleteOptions(answerlist -= 1)">
           <i class="fas fa-trash"></i>
                  </b-button>
      </b-input-group>
@@ -102,11 +113,11 @@
       v-model="selected1"
       :options="options1"
      style="width:100%;"
-    @change="addQuestions"
+    @change="addQuestion"
       ></b-form-select>
 
 
-  <b-input-group style="padding-left:70%" >
+  <b-row align-h="end">
       <b-form-checkbox 
       v-model="checked" 
       class="switch"
@@ -145,7 +156,9 @@
           </b-form-checkbox></b-dropdown-item
           >
       </b-dropdown>
-  </b-input-group>
+  </b-row>
+  
+  </div>
         </b-form>
          
       </b-card-text>
@@ -155,9 +168,7 @@
 <script>
 export default {
     name:"Comprehensive",
-    components:{
-
-    },
+    components:{},
      data(){
     return {
       selected:"null",
@@ -180,17 +191,17 @@ export default {
         { text: 'Image Question', value: '5' },
         { text: 'Question', value: '6' },
       ],
-      answerlist:["as"],
-      addQuestions:['ad']
+      answerlist:1,
+      addQues:0
       
       }
   },
 methods:{
   addOptions(){
-    this.answerlist.push("as"); 
+    this.answerlist += 1; 
   },
-  addQuestions(){
-    this.addQuestions.push("ad")
+  addQuestion(){
+    this.addQues += 1;
   },
   deleteOptions(option){
     this.answerlist.splice(option,1)
@@ -205,7 +216,9 @@ methods:{
   border-radius: 12px;
   margin: 2vh;
   box-shadow: 7px 10px 7px #c5c2c2;
+  text-align: left;
 }
+
 .input{
   border-top: none;
   border-right:none;

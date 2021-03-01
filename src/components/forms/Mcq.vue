@@ -3,6 +3,7 @@
     <b-card class="card" header-tag="header">
       <template #header>
         <div>
+          MCQ
           <b-row align-h="end">
             <b-button
               variant="outline-secondary"
@@ -206,6 +207,7 @@ export default {
   border-radius: 12px;
   margin: 2vh;
   box-shadow: 7px 10px 7px #c5c2c2;
+  text-align: left;
 }
 .input {
   border-top: none;
