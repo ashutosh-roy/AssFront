@@ -17,15 +17,15 @@
       <b-card-text>
         <b-form inline>
           <div style="width:100%">
-             <div>
-                <div class="file-upload-form">
-                    Upload an image file:
-                    <input type="file" @change="previewImage" accept="image/*">
-                </div>
-                <div class="image-preview" v-if="imagedata.fileUpload.length>0">
-                    <img class="preview" :src="imagedata.fileUpload">
-                </div>
-             </div>
+            <div>
+              <div class="file-upload-form">
+                Upload an image file:
+                <input type="file" @change="previewImage" accept="image/*" />
+              </div>
+              <div class="image-preview" v-if="imagedata.fileUpload.length > 0">
+                <img class="preview" :src="imagedata.fileUpload" />
+              </div>
+            </div>
             <b-form-input
               class="input"
               v-model="imagedata.topic"
@@ -113,7 +113,7 @@ export default {
         { value: "2", text: "Difficulty Level 2" },
         { value: "3", text: "Difficulty Level 3" },
         { value: "4", text: "Difficulty Level 4" },
-        { value: "5", text: "Difficulty Level 5" },
+        { value: "5", text: "Difficulty Level 5" }
       ],
       imagedata: {
         topic: "",
@@ -126,34 +126,33 @@ export default {
         addToPublic: false,
         addToDatabank: false,
         sizelimit: 0,
-        fileUpload: "",
-      },
+        fileUpload: ""
+      }
     };
   },
   methods: {
     addquestion() {
       this.$emit("question-added", this.imagedata);
     },
-     previewImage: function(event) 
-     {
-        var input = event.target;
-        // Ensure that you have a file before attempting to read it
-        if (input.files && input.files[0]) {
-            // create a new FileReader to read this image and convert to base64 format
-            var reader = new FileReader();
-            // Define a callback function to run, when FileReader finishes its job
-            reader.onload = (e) => {
-                // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
-                // Read image as base64 and set to imageData
-                this.imagedata.fileUpload = e.target.result;
-                // console.log(this.imagedata.fileUpload)
-            }
-            // Start the reader job - read file as a data url (base64 format)
-            reader.readAsDataURL(input.files[0]);
-            console.log(input.files[0]);
-        }
+    previewImage: function(event) {
+      var input = event.target;
+      // Ensure that you have a file before attempting to read it
+      if (input.files && input.files[0]) {
+        // create a new FileReader to read this image and convert to base64 format
+        var reader = new FileReader();
+        // Define a callback function to run, when FileReader finishes its job
+        reader.onload = e => {
+          // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
+          // Read image as base64 and set to imageData
+          this.imagedata.fileUpload = e.target.result;
+          // console.log(this.imagedata.fileUpload)
+        };
+        // Start the reader job - read file as a data url (base64 format)
+        reader.readAsDataURL(input.files[0]);
+        console.log(input.files[0]);
+      }
     }
-  },
+  }
 };
 </script>
 <style scoped>
@@ -182,18 +181,18 @@ export default {
   margin-top: 2vh;
   margin-right: 2vh;
 }
-.file-upload-form, .image-preview {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    padding: 20px;
+.file-upload-form,
+.image-preview {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 20px;
 }
 img.preview {
-    width: 200px;
-    background-color: white;
-    border: 1px solid #DDD;
-    padding: 5px;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
+  width: 200px;
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
 }
-
 </style>

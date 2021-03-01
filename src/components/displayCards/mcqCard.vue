@@ -93,8 +93,8 @@
 export default {
   name: "MCQCard",
   props: {
-    data: Array,
-  },
+    data: Array
+  }
 };
 </script>
 <style scoped>

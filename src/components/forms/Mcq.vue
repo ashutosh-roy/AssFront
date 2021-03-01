@@ -156,7 +156,7 @@ export default {
         { value: "2", text: "Difficulty 2" },
         { value: "3", text: "Difficulty 3" },
         { value: "4", text: "Difficulty 4" },
-        { value: "5", text: "Difficulty 5" },
+        { value: "5", text: "Difficulty 5" }
       ],
 
       answerlist: ["as"],
@@ -171,8 +171,8 @@ export default {
         required: 0,
         addToPublic: false,
         addToDatabank: false,
-        fileUpload: "",
-      },
+        fileUpload: ""
+      }
 
       /*subject = data["subject"]
         topic = data["topic"]
@@ -193,13 +193,13 @@ export default {
     },
     deleteOptions(i) {
       this.question.options = this.question.options.filter(
-        (choice) => choice != choice[i]
+        choice => choice != choice[i]
       );
     },
     addquestion() {
       this.$emit("question-added", this.question);
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
