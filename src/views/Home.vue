@@ -85,7 +85,13 @@
         "
         >Match the Following</b-button
       >
-      <b-button class="buttonchoice" variant="outline-secondary"
+      <b-button
+        class="buttonchoice"
+        variant="outline-secondary"
+        @click="
+          Comprehensive = true;
+          $bvModal.hide('modal-1');
+        "
         >Unseen Passage</b-button
       >
     </b-modal>
@@ -151,6 +157,10 @@
           v-on:delete-form="mcq = false"
           v-on:question-added="addmcq"
         />
+        <Comprehensive
+          v-if="Comprehensive"
+          v-on:delete-form="Comprehensive = false"
+        />
       </b-col>
     </b-row>
   </div>
@@ -173,6 +183,8 @@ import Audio from "../components/forms/audioQuestion";
 import VideoCard from "../components/displayCards/videoCard";
 import ShortAnswerCard from "../components/displayCards/shortAnswerCard";
 import { getMCQquestion, getCommonQuestion } from "../apiFunctions";
+import Comprehensive from "../components/forms/Comprehensive";
+
 export default {
   name: "Home",
   components: {
@@ -190,6 +202,7 @@ export default {
     ShortAnswerCard,
     VideoCard,
     MCQCard,
+    Comprehensive,
   },
   data() {
     return {
@@ -200,12 +213,14 @@ export default {
       audio: false,
       match: false,
       mcq: false,
+      Comprehensive: false,
       audiodata: [],
       imagedata: [],
       longQuestionData: [],
       shortQuestionData: [],
       videodata: [],
       mcqdata: [],
+      ComprehensiveData: [],
     };
   },
   methods: {
@@ -247,6 +262,10 @@ export default {
     addmcq(mcqdata) {
       this.mcqdata.push(mcqdata);
       this.mcq = false;
+    },
+    addComprehensive(ComprehensiveData) {
+      this.ComprehensiveData.push(ComprehensiveData);
+      this.Comprehensive = false;
     },
   },
   created: function() {

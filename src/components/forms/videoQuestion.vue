@@ -44,7 +44,7 @@
               placeholder="Question"
               style="width:100%;margin-top:1vh"
             >
-              ></b-form-input
+              </b-form-input
             >
 
             <b-row align-h="end">
