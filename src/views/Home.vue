@@ -107,6 +107,7 @@
           <LongAnswerCard
             :data="longQuestionData"
             v-if="longQuestionData.length != 0"
+            v-on:delete-entry="deleteEntry"
           />
         </div>
         <div :key="shortQuestionData">
@@ -238,6 +239,11 @@ export default {
       } else {
         return false;
       }
+    },
+    deleteEntry(question) {
+      this.longQuestionData = this.longQuestionData.filter(
+        (data) => data.question != question
+      );
     },
     addaudioquestion(audiodata) {
       this.audiodata.push(audiodata);

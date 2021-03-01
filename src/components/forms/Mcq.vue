@@ -59,10 +59,16 @@
                     style="width:60%;margin-top:1vh"
                   >
                   </b-form-input>
+                  <div :key="answer[i - 1]">
+                    <b-button
+                      :variant="answer[i - 1]"
+                      @click="answerchange(question.options[i - 1], i)"
+                      style="border:none"
+                    >
+                      <i class="fas fa-check 7x"></i>
+                    </b-button>
+                  </div>
 
-                  <b-button variant="outline">
-                    <i class="fas fa-check 7x"></i>
-                  </b-button>
                   <b-button variant="outline">
                     <i
                       class="fas fa-trash"
@@ -80,10 +86,14 @@
                 variant="outline"
                 class="btts"
                 style="float:left"
-                @click="optionnum = optionnum + 1"
+                @click.enter="addOptions()"
                 >Add Option</b-button
               >
-              <b-button variant="outline" class="btts-1" style="float:left"
+              <b-button
+                variant="outline"
+                class="btts-1"
+                style="float:left"
+                @click="addOptions()"
                 >/ Others</b-button
               >
             </div>
@@ -153,14 +163,14 @@ export default {
   data() {
     return {
       selected: "null",
-
+      answer: ["outline-dark"],
       options: [
         { value: null, text: "Difficulty", disabled: true },
-        { value: "1", text: "Difficulty 1" },
-        { value: "2", text: "Difficulty 2" },
-        { value: "3", text: "Difficulty 3" },
-        { value: "4", text: "Difficulty 4" },
-        { value: "5", text: "Difficulty 5" },
+        { value: "1", text: "Difficulty Level 1" },
+        { value: "2", text: "Difficulty Level 2" },
+        { value: "3", text: "Difficulty Level 3" },
+        { value: "4", text: "Difficulty Level 4" },
+        { value: "5", text: "Difficulty Level 5" },
       ],
 
       optionnum: 1,
@@ -191,8 +201,26 @@ export default {
     };
   },
   methods: {
+    answerchange(ans, i) {
+      console.log("we're here atleast" + ans);
+      if (this.answer[i - 1] == "outline-dark") {
+        if (ans != null) {
+          this.answer[i - 1] = "outline-success";
+          this.question.answerkey.push(ans);
+        }
+
+        console.log(this.question.answerkey);
+      } else {
+        this.answer[i - 1] = "outline-dark";
+        this.question.answerkey = this.question.answerkey.filter(
+          (added) => added != ans
+        );
+        console.log(this.question.answerkey);
+      }
+    },
     addOptions() {
-      this.answerlist.push();
+      this.optionnum = this.optionnum + 1;
+      this.answer.push("outline-dark");
     },
     deleteOptions(i) {
       this.question.options = this.question.options.filter(

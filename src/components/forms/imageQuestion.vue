@@ -113,7 +113,7 @@ export default {
         { value: "2", text: "Difficulty Level 2" },
         { value: "3", text: "Difficulty Level 3" },
         { value: "4", text: "Difficulty Level 4" },
-        { value: "5", text: "Difficulty Level 5" },
+        { value: "5", text: "Difficulty Level 5" }
       ],
       imagedata: {
         topic: "",
@@ -126,8 +126,8 @@ export default {
         addToPublic: false,
         addToDatabank: false,
         sizelimit: 0,
-        fileUpload: "",
-      },
+        fileUpload: ""
+      }
     };
   },
   methods: {
@@ -141,7 +141,7 @@ export default {
         // create a new FileReader to read this image and convert to base64 format
         var reader = new FileReader();
         // Define a callback function to run, when FileReader finishes its job
-        reader.onload = (e) => {
+        reader.onload = e => {
           // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
           // Read image as base64 and set to imageData
           this.imagedata.fileUpload = e.target.result;
@@ -151,8 +151,8 @@ export default {
         reader.readAsDataURL(input.files[0]);
         console.log(input.files[0]);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

@@ -44,8 +44,7 @@
               placeholder="Question"
               style="width:100%;margin-top:1vh"
             >
-              </b-form-input
-            >
+            </b-form-input>
 
             <b-row align-h="end">
               <b-form-checkbox
@@ -118,7 +117,7 @@ export default {
         addToPublic: false,
         addToDatabank: false,
         sizelimit: 0,
-        fileUpload: "",
+        fileUpload: ""
       },
       options: [
         { value: null, text: "Difficulty", disabled: true },
@@ -126,8 +125,8 @@ export default {
         { value: "2", text: "Difficulty Level 2" },
         { value: "3", text: "Difficulty Level 3" },
         { value: "4", text: "Difficulty Level 4" },
-        { value: "5", text: "Difficulty Level 5" },
-      ],
+        { value: "5", text: "Difficulty Level 5" }
+      ]
     };
   },
   methods: {
@@ -138,7 +137,7 @@ export default {
         // create a new FileReader to read this image and convert to base64 format
         var reader = new FileReader();
         // Define a callback function to run, when FileReader finishes its job
-        reader.onload = (e) => {
+        reader.onload = e => {
           // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
           // Read image as base64 and set to imageData
           this.questions.fileUpload = e.target.result;
@@ -150,8 +149,8 @@ export default {
     },
     addquestion() {
       this.$emit("question-added", this.videodata);
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
