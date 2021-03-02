@@ -5,7 +5,26 @@
       sub-title="Long Answer Questions"
       v-for="entry in data"
       :key="entry.question"
+      header-tag="header"
     >
+      <template #header>
+        <div>
+          <b-row align-h="end">
+            <b-button
+              variant="outline"
+              @click="$emit('edit-entry', entry.id)"
+              style="border:none"
+              ><i class="fas fa-edit"></i
+            ></b-button>
+            <b-button
+              variant="outline"
+              @click="$emit('delete-entry', entry.question)"
+              style="border:none"
+              ><i class="fas fa-trash"></i
+            ></b-button>
+          </b-row>
+        </div>
+      </template>
       <span style="color:grey" class="ml-3">Question</span>
       <br />
       <span class="ml-5">
@@ -44,8 +63,8 @@
 export default {
   name: "LongAnswerCard",
   props: {
-    data: Array
-  }
+    data: Array,
+  },
 };
 </script>
 <style scoped>

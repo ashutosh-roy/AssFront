@@ -94,9 +94,12 @@
   </div>
 </template>
 <script>
-import { postCommonQuestion } from '../../apiFunctions';
+import { postCommonQuestion,getCommonQuestion } from '../../apiFunctions';
 export default {
   name: "LongAnswer",
+  props: {
+    entry: Number,
+  },
   data() {
     return {
       // databank:false,
@@ -106,13 +109,13 @@ export default {
         difficultyLevel: null,
         question: "",
         questionType: "Long Answer Questions",
-        answerKey: "",
+        answerKey: "some answer",
         autoCorrection: 0,
         required: 0,
         addToPublic: false,
         addToDatabank: false,
         sizelimit: 0,
-        fileUpload: ""
+        fileUpload: "",
       },
       selected: "null",
       options: [
@@ -121,8 +124,8 @@ export default {
         { value: "2", text: "Difficulty Level 2" },
         { value: "3", text: "Difficulty Level 3" },
         { value: "4", text: "Difficulty Level 4" },
-        { value: "5", text: "Difficulty Level 5" }
-      ]
+        { value: "5", text: "Difficulty Level 5" },
+      ],
     };
   },
   methods: {
@@ -131,8 +134,21 @@ export default {
        .then(res=> console.log("LongAnswer data saved" + res))
        .catch(err=> console.log(err));
       this.$emit("question-added", this.questions);
+    },
+  },
+  created: function() {
+    if (this.entry != -1) {
+      getCommonQuestion().then((res) => {
+        var i = 0;
+        while (i < res.data.data.length) {
+          if (res.data.data[i].id == this.entry) {
+            this.questions = res.data.data[i];
+          }
+          i++;
+        }
+      });
     }
-  }
+  },
 };
 </script>
 <style scoped>
