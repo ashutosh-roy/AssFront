@@ -6,7 +6,21 @@
       v-for="entry in data"
       :key="entry.question"
     >
+    <template #header>
+        <div>
+          Image
+          <b-row align-h="end">
+            <b-button
+              variant="outline"
+              @click="$emit('delete-entry', entry.question)"
+              style="border:none"
+              ><i class="fas fa-trash"></i
+            ></b-button>
+          </b-row>
+        </div>
+      </template>
       <span style="color:grey" class="ml-3">Question</span>
+      
       <br />
       <b-img :src="entry.fileUpload" fluid alt="Responsive image"></b-img>
       <br />

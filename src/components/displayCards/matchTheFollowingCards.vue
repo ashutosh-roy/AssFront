@@ -23,7 +23,9 @@
                   <b-button
                     variant="outline-secondary"
                     style="margin-left:450%"
+                    @click="$emit('delete-entry', entry.question)"
                   >
+                  <template #header>        
                     <i class="fas fa-trash-alt"></i>
                   </b-button>
                   <br />

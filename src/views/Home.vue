@@ -98,10 +98,10 @@
     <b-row align-h="center">
       <b-col md="7" sm="12">
         <div :key="audiodata">
-          <AudioCard :data="audiodata" v-if="audiodata.length != 0" />
+          <AudioCard :data="audiodata" v-if="audiodata.length != 0" v-on:delete-entry="deleteaudioEntry" />
         </div>
         <div :key="imagedata">
-          <ImageCard :data="imagedata" v-if="imagedata.length != 0" />
+          <ImageCard :data="imagedata" v-if="imagedata.length != 0" v-on:delete-entry="deleteImageEntry"/>
         </div>
         <div :key="longQuestionData">
           <LongAnswerCard
@@ -114,14 +114,15 @@
           <ShortAnswerCard
             :data="shortQuestionData"
             v-if="shortQuestionData.length != 0"
+            v-on:delete-entry="deleteShortEntry"
           />
         </div>
         <div :key="videodata">
-          <VideoCard :data="videodata" v-if="videodata.length != 0" />
+          <VideoCard :data="videodata" v-if="videodata.length != 0" v-on:delete-entry="deleteVideoEntry" />
         </div>
         <div :key="mcqdata">
-          <MCQCard :data="mcqdata" v-if="mcqdata.length != 0" />
-        </div>
+          <MCQCard :data="mcqdata" v-if="mcqdata.length != 0" v-on:delete-entry="deleteMcqEntry" />
+        </div>                
       </b-col>
     </b-row>
     <b-row align-h="center">
@@ -245,6 +246,31 @@ export default {
         (data) => data.question != question
       );
     },
+    deleteaudioEntry(question) {
+      this.audiodata = this.audiodata.filter(
+        (data) => data.question != question
+      );
+    },
+    deleteImageEntry(question) {
+      this.imagedata = this.imagedata.filter(
+        (data) => data.question != question
+      );
+    },
+    deleteShortEntry(question){
+      this.shortQuestionData = this.shortQuestionData.filter(
+        (data) => data.question != question
+      );
+    },
+    deleteVideoEntry(question){
+      this.videodata = this.videodata.filter(
+        (data) => data.question != question
+      );
+    },
+    deleteMcqEntry(question){
+      this.mcqdata = this.mcqdata.filter(
+        (data) => data.question != question
+      );
+    },    
     addaudioquestion(audiodata) {
       this.audiodata.push(audiodata);
       this.audio = false;

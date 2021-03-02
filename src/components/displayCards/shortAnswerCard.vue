@@ -4,8 +4,21 @@
       class="card"
       sub-title="Short Questions"
       v-for="entry in data"
-      :key="entry.question"
+      :key="entry.question"     
     >
+    <template #header>
+        <div>
+          Short Answer Questions
+          <b-row align-h="end">
+            <b-button
+              variant="outline"
+              @click="$emit('delete-entry', entry.question)"
+              style="border:none"
+              ><i class="fas fa-trash"></i
+            ></b-button>
+          </b-row>
+        </div>
+      </template>
       <span style="color:grey" class="ml-3">Question</span>
       <br />
       <span class="ml-5">
