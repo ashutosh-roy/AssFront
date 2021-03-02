@@ -94,6 +94,7 @@
   </div>
 </template>
 <script>
+import { postCommonQuestion } from '../../apiFunctions';
 export default {
   name: "LongAnswer",
   data() {
@@ -126,6 +127,9 @@ export default {
   },
   methods: {
     addquestion() {
+       postCommonQuestion(this.questions)
+       .then(res=> console.log("LongAnswer data saved" + res))
+       .catch(err=> console.log(err));
       this.$emit("question-added", this.questions);
     }
   }

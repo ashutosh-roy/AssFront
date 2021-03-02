@@ -94,6 +94,7 @@
   </div>
 </template>
 <script>
+import { postCommonQuestion } from '../../apiFunctions';
 export default {
   name: "ShortAnswer",
   data() {
@@ -123,6 +124,9 @@ export default {
   },
   methods: {
     addquestion() {
+      postCommonQuestion(this.questions)
+      .then(res=>console.log('ShortAnser data saved' + res))
+      .catch(err => console.log(err));
       this.$emit("question-added", this.questions);
     }
   }
