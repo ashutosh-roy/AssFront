@@ -44,85 +44,104 @@
             ></b-button>
             <br />
 
-            <div class="base">
-              <div>
-                <b-input-group>
-                  <b-input-group-prepend is-text>
-                    <input type="radio" disabled />
-                  </b-input-group-prepend>
+            <b-dropdown
+              id="dropdown-1"
+              text="Select Question Type"
+              class="m-md-2"
+            >
+              <b-dropdown-item @click="longQuestions += 1"
+                >Long Answer</b-dropdown-item
+              >
+              <b-dropdown-item @click="shortQuestions += 1"
+                >Short Answer</b-dropdown-item
+              >
+              <b-dropdown-item @click="mcqQuestions += 1"
+                >Multiple Choice</b-dropdown-item
+              >
+              <b-dropdown-item @click="fillInBlanks += 1"
+                >Fill in the Blanks</b-dropdown-item
+              >
+              <b-dropdown-item @click="matchthefollowing += 1"
+                >Match the Following</b-dropdown-item
+              >
+            </b-dropdown>
 
-                  <div v-for="j in addQues" :key="j" class="question-3">
-                    <b-form-input
-                      v-on:keyup.enter="addQuestion"
-                      class="question-2"
-                      v-model="j.addQues"
-                      placeholder="Question"
-                      style="width:80%;margin-top:1vh;"
-                    >
-                    </b-form-input>
-
-                    <b-button variant="outline">
-                      <i class="fas fa-images"></i>
-                    </b-button>
-                    <b-button variant="outline" @click="deleteOptions(index)">
-                      <i class="fas fa-trash"></i>
-                    </b-button>
-                  </div>
-                </b-input-group>
-
-                <div v-for="i in answerlist" :key="i">
+            <div name="longAnswerQuestions" v-for="i in longQuestions" :key="i">
+              <b-form-input
+                class="input"
+                v-model="text"
+                placeholder="Long Answer Question"
+                style="width:100%;margin-top:1vh"
+              ></b-form-input>
+            </div>
+            <div
+              name="shortAnswerQuestions"
+              v-for="i in shortQuestions"
+              :key="i"
+            >
+              <b-form-input
+                class="input"
+                v-model="text"
+                placeholder="Short Answer Question"
+                style="width:100%;margin-top:1vh"
+              ></b-form-input>
+            </div>
+            <div name="mcqQuestions" v-for="i in mcqQuestions" :key="i">
+              <b-form-input
+                class="input"
+                v-model="question"
+                placeholder="Question"
+                style="width:80%;margin-top:1vh"
+              >
+              </b-form-input>
+              <b-button variant="outline" class="btnn">
+                <i class="fas fa-images"></i
+              ></b-button>
+              <br />
+              <br />
+              <br />
+              <div class="base">
+                <div v-for="b in optionnum" :key="b">
                   <b-input-group>
                     <b-input-group-prepend is-text>
                       <input type="radio" disabled />
                     </b-input-group-prepend>
-
+                    <b-form-input
+                      autofocus
+                      class="input"
+                      placeholder="Answer"
+                      style="width:60%;margin-top:1vh"
+                    >
+                    </b-form-input>
                     <div>
-                      <b-form-input
-                        v-on:keyup.enter="addOptions"
-                        autofocus
-                        class="input-type"
-                        v-model="i.answerlist"
-                        placeholder="Answer"
-                      >
-                      </b-form-input>
+                      <b-button style="border:none">
+                        <i class="fas fa-check 7x"></i>
+                      </b-button>
                     </div>
 
                     <b-button variant="outline">
-                      <i class="fas fa-check 7x"></i>
-                    </b-button>
-                    <b-button
-                      variant="outline"
-                      @click="deleteOptions((answerlist -= 1))"
-                    >
-                      <i class="fas fa-trash"></i>
+                      <i class="fas fa-trash" @click="optionnum -= 1"></i>
                     </b-button>
                   </b-input-group>
                 </div>
+
+                <br />
+                <b-button
+                  variant="outline"
+                  class="btts"
+                  style="float:left"
+                  @click.enter="optionnum += 1"
+                  >Add Option</b-button
+                >
+                <b-button
+                  variant="outline"
+                  class="btts-1"
+                  style="float:left"
+                  @click="optionnum += 1"
+                  >/ Others</b-button
+                >
               </div>
-              <br />
-              <b-button
-                variant="outline"
-                class="btts"
-                style="float:left"
-                v-on:click.enter="addOptions"
-                >Add Option</b-button
-              >
-              <b-button
-                variant="outline"
-                class="btts-1"
-                style="float:left"
-                @click="addOptions"
-                >/ Others</b-button
-              >
             </div>
-
-            <b-form-select
-              v-model="selected1"
-              :options="options1"
-              style="width:100%;"
-              @change="addQuestion"
-            ></b-form-select>
-
             <b-row align-h="end">
               <b-form-checkbox
                 v-model="checked"
@@ -180,7 +199,7 @@ export default {
   data() {
     return {
       selected: "null",
-
+      optionnum: 1,
       options: [
         { value: null, text: "Difficulty", disabled: true },
         { value: "1", text: "Difficulty 1" },
@@ -189,26 +208,29 @@ export default {
         { value: "4", text: "Difficulty 4" },
         { value: "5", text: "Difficulty 5" },
       ],
-      selected1: "null",
-      options1: [
-        { value: null, text: "Select Question Type", disabled: true },
-        { text: "Long Question", value: "1" },
-        { text: "Short Question", value: "2" },
-        { text: "Multiple Choice Question", value: "3" },
-        { text: "Audio Question", value: "4" },
-        { text: "Image Question", value: "5" },
-        { text: "Question", value: "6" },
-      ],
-      answerlist: 1,
-      addQues: 0,
+      longQuestions: 0,
+      shortQuestions: 0,
+      mcqQuestions: 0,
+      fillInBlanks: 0,
+      matchthefollowing: 0,
     };
   },
   methods: {
     addOptions() {
       this.answerlist += 1;
     },
-    addQuestion() {
-      this.addQues += 1;
+    addQuestion(selectedQues) {
+      if (selectedQues == "1") {
+        this.longQuestions += 1;
+      } else if (selectedQues == "2") {
+        this.shortQuestions += 1;
+      } else if (selectedQues == "3") {
+        this.mcqQuestions += 1;
+      } else if (selectedQues == "4") {
+        this.fillInBlanks += 1;
+      } else if (selectedQues == "5") {
+        this.matchthefollowing += 1;
+      }
     },
     deleteOptions(option) {
       this.answerlist.splice(option, 1);
