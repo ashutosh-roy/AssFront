@@ -96,6 +96,9 @@
 <script>
 export default {
   name: "LongAnswer",
+  props: {
+    entry: Object,
+  },
   data() {
     return {
       // databank:false,
@@ -111,7 +114,7 @@ export default {
         addToPublic: false,
         addToDatabank: false,
         sizelimit: 0,
-        fileUpload: ""
+        fileUpload: "",
       },
       selected: "null",
       options: [
@@ -120,15 +123,22 @@ export default {
         { value: "2", text: "Difficulty Level 2" },
         { value: "3", text: "Difficulty Level 3" },
         { value: "4", text: "Difficulty Level 4" },
-        { value: "5", text: "Difficulty Level 5" }
-      ]
+        { value: "5", text: "Difficulty Level 5" },
+      ],
     };
   },
   methods: {
     addquestion() {
       this.$emit("question-added", this.questions);
+    },
+  },
+  created: function() {
+    alert(this.entry.toString());
+    if (this.entry != {}) {
+      console.log("no");
+      this.questions = this.entry;
     }
-  }
+  },
 };
 </script>
 <style scoped>

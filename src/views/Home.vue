@@ -108,6 +108,7 @@
             :data="longQuestionData"
             v-if="longQuestionData.length != 0"
             v-on:delete-entry="deleteEntry"
+            v-on:edit-entry="editLongQuestion"
           />
         </div>
         <div :key="shortQuestionData">
@@ -127,11 +128,14 @@
     <b-row align-h="center">
       <b-col md="7" sm="12">
         <!-- <multipleTypeQuestions v-show="false" /> -->
-        <LongAnswer
-          v-if="longanswer"
-          v-on:delete-form="longanswer = false"
-          v-on:question-added="addlongquestion"
-        />
+        <div :key="longanswer">
+          <LongAnswer
+            v-if="longanswer"
+            v-on:delete-form="longanswer = false"
+            v-on:question-added="addlongquestion"
+            :entry="editLong"
+          />
+        </div>
         <ShortAnswer
           v-if="shortAnswer"
           v-on:delete-form="shortAnswer = false"
@@ -222,6 +226,7 @@ export default {
       videodata: [],
       mcqdata: [],
       ComprehensiveData: [],
+      editLong: {},
     };
   },
   methods: {
@@ -272,6 +277,17 @@ export default {
     addComprehensive(ComprehensiveData) {
       this.ComprehensiveData.push(ComprehensiveData);
       this.Comprehensive = false;
+    },
+    editLongQuestion(identifierQues) {
+      var i = 0;
+      while (i < this.longQuestionData.length) {
+        if (this.longQuestionData[i].question == identifierQues) {
+          this.editLong = this.longQuestionData[i];
+          console.log(this.editLong);
+          this.longQuestionData.splice(i, 1);
+          this.longanswer = true;
+        }
+      }
     },
   },
   created: function() {
