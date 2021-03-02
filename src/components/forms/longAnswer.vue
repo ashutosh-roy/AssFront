@@ -98,7 +98,7 @@ import { getCommonQuestion } from "../../apiFunctions";
 export default {
   name: "LongAnswer",
   props: {
-    entry: Number,
+    entry: Number
   },
   data() {
     return {
@@ -115,7 +115,7 @@ export default {
         addToPublic: false,
         addToDatabank: false,
         sizelimit: 0,
-        fileUpload: "",
+        fileUpload: ""
       },
       selected: "null",
       options: [
@@ -124,18 +124,18 @@ export default {
         { value: "2", text: "Difficulty Level 2" },
         { value: "3", text: "Difficulty Level 3" },
         { value: "4", text: "Difficulty Level 4" },
-        { value: "5", text: "Difficulty Level 5" },
-      ],
+        { value: "5", text: "Difficulty Level 5" }
+      ]
     };
   },
   methods: {
     addquestion() {
       this.$emit("question-added", this.questions);
-    },
+    }
   },
   created: function() {
     if (this.entry != -1) {
-      getCommonQuestion().then((res) => {
+      getCommonQuestion().then(res => {
         var i = 0;
         while (i < res.data.data.length) {
           if (res.data.data[i].id == this.entry) {
@@ -145,7 +145,7 @@ export default {
         }
       });
     }
-  },
+  }
 };
 </script>
 <style scoped>

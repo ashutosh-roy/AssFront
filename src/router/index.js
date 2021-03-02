@@ -4,6 +4,8 @@ import Home from "../views/Home.vue";
 // import multipleTypeQuestions from "../components/forms/multipleType.vue"
 import MatchTheFollowing from "../components/forms/MatchTheFollowing.vue";
 import QPBuilder from "../views/QPBuilder.vue";
+import TestView from "../views/Tests.vue";
+import TestConfiguration from "../views/TestConfiguration.vue";
 
 Vue.use(VueRouter);
 
@@ -22,6 +24,17 @@ const routes = [
     path: "/MatchTheFollowing",
     name: "assessmentquestions",
     component: MatchTheFollowing
+  },
+  {
+    path: "/test",
+    name: "Test",
+    component: TestView
+  },
+  {
+    path: "/testConfiguration",
+    name: "Test Configuration",
+    component: TestConfiguration,
+    props:true
   },
   {
     path: "/about",
