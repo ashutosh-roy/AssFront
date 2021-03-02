@@ -8,22 +8,27 @@
     >
       <template #header>
         <div>
-          Short Answer Questions
-          <b-row align-h="end">          
+          <b-row>
+            <b-col>
+            Short Answer Questions
+            </b-col>
+            <b-col>
+              <b-row align-h="end">          
             <b-button
               variant="outline"
               @click="$emit('edit-entry', entry.id)"
               style="border:none"
               ><i class="fas fa-edit"></i
             ></b-button>
-            <b-button
-            <b-button
+            <b-button            
               variant="outline"
               @click="$emit('delete-entry', entry.question)"
               style="border:none"
               ><i class="fas fa-trash"></i
             ></b-button>
-          </b-row>
+            </b-row>
+            </b-col>         
+          </b-row>          
         </div>
       </template>
       <span style="color:grey" class="ml-3">Question</span>
