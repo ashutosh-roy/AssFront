@@ -1,18 +1,19 @@
 <template>
 <div>
-  <b-card class="card" >
-  <b-container fluid >
-    <b-row>
-      <b-col style="height: 10vh; width: 40px;">
+<b-card class="card">
+  <b-container fluid>
+    <b-row cols="10" style="width:100vw;">
+      <b-col  style="height: 14vh; width: 40px; overflow-x: auto;">
         <b-container
           fluid
-   
-      >
-          <div class="col-12 col-sm-6 col-md-8">
+          :style="cssVars"
+          style="height: 10vh; margin-top: 0.5vw; border-radius: 10px; overflow: hidden; width: var(--seclen);"
+        >
+          <div>
             <div
               v-for="sec in sections"
               :key="sec"
-              style="border-right: 1px solid black; margin: 1vh; width: 12vw;float:left;"
+              style="border-right: 1px solid black; height: 15vh; margin: 1vh; width: 12vw;  float:left;"
             >
               <div style="font-size: 2vh;">{{ sec.name }}</div>
               <div>15 Questions</div>
@@ -22,44 +23,42 @@
                 MCQ, Long, Short, Comprehension
               </div>
             </div>
-          
           </div>
-      
-                
         </b-container>
-          
       </b-col>
-<div class="button-1">
+      
+  <b-col cols="2">
+      <div class="button-1">
              <button class="button-2" type="button" @click="addSection">
             <i class="fas fa-plus fa-3x"></i>
             
           </button>
           </div>
+  </b-col>
+
     </b-row>
     
   </b-container>
-       
-  </b-card>
-  <b-card class="card-2">
-    <div >
-      <button  class="button-3" type="button">
-            <i class="fas fa-plus fa-10x"></i>
-            
-          </button>
-    </div>
-  </b-card>
+</b-card>
+<div v-if="sections.length!=0">
+  <Home/>
   </div>
+</div>
 </template>
 
 <script>
+import Home from './Home.vue';
 export default {
   name: "QPBuilder",
+  components:{
+    Home,
+  },
   data() {
     return {
       DBWidth: "6",
       QPWidth: "6",
-      sectionLength: "100%",
-      sections: [{ name: "Section 1" }]
+      sectionLength: "100vw",
+      sections: []
     };
   },
   computed: {
@@ -95,30 +94,15 @@ export default {
   border-radius: 12px;
   box-shadow: 2px 2px 2px #c5c2c2;
   margin: 2vh;
-
-
-  }
-.card-2{
-  height: 75vh;
-  display: grid;
-  align-items: center;
-  padding: 150px;
-  background: transparent;
-  
-}
+}  
 
 .button-1{
 text-align: right;
 position: static;
 margin-right: 10px;
-padding: 0px 20px;
+padding: 15px 30px;
+}
 
-}
-.row-s{
-  display: flex;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
 .button-2{
   border: none;
   color: gray;
@@ -129,6 +113,14 @@ padding: 0px 20px;
   padding: 0px;
   border-left: 1px solid gray;
 }
+.card-2{
+  height: 75vh;
+  display: grid;
+  align-items: center;
+  padding: 150px;
+  background: transparent;
+  
+}
 
 .button-3{
   border: none;
@@ -138,4 +130,5 @@ padding: 0px 20px;
   font-size: 14px;
 
 }
+
 </style>

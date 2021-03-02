@@ -4,7 +4,7 @@
     <!-- <b-row align-h="center">
      <Image v-if="image" v-on:delete-form="image = false" v-on:add-image="addimage"/>
     </b-row> -->
-    <b-row align-h="center">
+    <b-row align-h="center" v-if="checkQuestions() == true">
       <b-button
         style="float:right; margin-left:90%"
         v-b-modal.modal-1
@@ -12,6 +12,25 @@
         ><i class="fas fa-plus"></i
       ></b-button>
     </b-row>
+    <div
+      style="height:100%;width:100%;"
+      v-if="checkQuestions() == false && formActivity() == false"
+    >
+     <b-card class="card">
+      <b-row align-h="center" align-v="center">
+        <b-button
+          variant="outline"
+          style="border:none; color:grey"
+          v-b-modal.modal-1
+          ><i class="fas fa-plus fa-7x"></i
+        ></b-button>
+      </b-row>
+     
+      <b-row align-h="center" align-v="center">
+        <span style="color:grey">Click to start adding tests</span>
+      </b-row>
+      </b-card>
+    </div>
     <b-modal
       id="modal-1"
       centered
@@ -167,6 +186,17 @@ export default {
     };
   },
   methods: {
+    checkQuestions() {
+      if (
+        this.longQuestionData.length != 0 ||
+        this.shortQuestionData.length != 0 ||
+        this.mcqdata.length != 0
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     formActivity() {
       if (this.shortAnswer || this.longanswer || this.mcq || this.match) {
         return true;
@@ -242,4 +272,12 @@ export default {
   border: 1px dashed;
   padding: 0px;
 }
+.card{
+  height: 75vh;
+  display: grid;
+  align-items: center;
+  padding: 150px;
+  background: transparent;
+}
+
 </style>
