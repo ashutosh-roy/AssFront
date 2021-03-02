@@ -8,6 +8,11 @@
     >
       <span style="color:grey" class="ml-3">Question</span>
       <br />
+      <b-img
+        :src='entry.fileUpload'
+        fluid
+        alt="Responsive image"
+      ></b-img>
       <span class="ml-5">
         {{ entry.question }}
       </span>

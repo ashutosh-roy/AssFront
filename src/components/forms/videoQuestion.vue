@@ -148,7 +148,10 @@ export default {
             // Start the reader job - read file as a data url (base64 format)
             reader.readAsDataURL(input.files[0]);
         }
-    }
+    },
+    addquestion() {
+      this.$emit("question-added", this.questions);
+    },
   },
 };
 </script>

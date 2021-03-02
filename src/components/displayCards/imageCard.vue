@@ -9,7 +9,7 @@
       <span style="color:grey" class="ml-3">Question</span>
       <br />
       <b-img
-        src="https://picsum.photos/1024/400/?image=41"
+        :src='entry.fileUpload'
         fluid
         alt="Responsive image"
       ></b-img>

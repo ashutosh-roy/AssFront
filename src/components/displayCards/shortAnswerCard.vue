@@ -7,6 +7,11 @@
       :key="entry.question"
     >
       <span style="color:grey" class="ml-3">Question</span>
+      <b-img
+        :src='entry.fileUpload'
+        fluid
+        alt="Responsive image"
+      ></b-img>
       <br />
       <span class="ml-5">
         {{ entry.question }}
