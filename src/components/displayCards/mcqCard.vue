@@ -9,6 +9,13 @@
           <div>
             MCQ
             <b-row align-h="end">
+            <b-button
+              variant="outline"
+              @click="$emit('edit-entry', entry.id)"
+              style="border:none"
+              ><i class="fas fa-edit"></i
+            ></b-button>
+            <b-button
               <b-button
                 variant="outline"
                 @click="$emit('delete-entry', entry.question)"

@@ -83,6 +83,7 @@
             :data="shortQuestionData"
             v-if="shortQuestionData.length != 0"
             v-on:delete-entry="deleteShortEntry"
+            v-on:edit-entry="editShortQuestion"
           />
         </div>
 
@@ -91,6 +92,7 @@
             :data="mcqdata"
             v-if="mcqdata.length != 0"
             v-on:delete-entry="deleteMcqEntry"
+            v-on:edit-entry="editMcqQuestion"
           />
         </div>
       </b-col>
@@ -110,12 +112,14 @@
           v-if="shortAnswer"
           v-on:delete-form="shortAnswer = false"
           v-on:question-added="addshortquestion"
+          :entry="editShortID"
         />
         <MatchTheFollowing v-if="match" v-on:delete-form="match = false" />
         <mcq
           v-if="mcq"
           v-on:delete-form="mcq = false"
           v-on:question-added="addmcq"
+          :entry="editMcqID"
         />
         <Comprehensive
           v-if="Comprehensive"
@@ -164,6 +168,8 @@ export default {
       mcqdata: [],
       ComprehensiveData: [],
       editLongID: -1,
+      editShortID: -1,
+      editMcqID: -1
     };
   },
   methods: {
@@ -210,6 +216,14 @@ export default {
     editLongQuestion(id) {
       this.editLongID = id;
       this.longanswer = true;
+    },
+    editShortQuestion(id) {
+      this.editShortID = id;
+      this.shortAnswer = true;
+    },
+    editMcqQuestion(id) {
+      this.editMcqID = id;
+      this.mcq = true;
     },
   },
   created: function() {

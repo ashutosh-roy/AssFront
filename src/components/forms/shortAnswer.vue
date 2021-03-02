@@ -94,8 +94,12 @@
   </div>
 </template>
 <script>
+import { getCommonQuestion } from "../../apiFunctions";
 export default {
   name: "ShortAnswer",
+  props: {
+    entry: Number,
+  },
   data() {
     return {
       questions: {
@@ -125,7 +129,20 @@ export default {
     addquestion() {
       this.$emit("question-added", this.questions);
     }
-  }
+  },
+  created: function() {
+    if (this.entry != -1) {
+      getCommonQuestion().then((res) => {
+        var i = 0;
+        while (i < res.data.data.length) {
+          if (res.data.data[i].id == this.entry) {
+            this.questions = res.data.data[i];
+          }
+          i++;
+        }
+      });
+    }
+  },
 };
 </script>
 <style scoped>
