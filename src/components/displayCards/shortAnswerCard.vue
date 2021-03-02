@@ -1,32 +1,36 @@
 <template>
   <div>
-    <b-card
-      class="card"
-      sub-title="Short Questions"
-      v-for="entry in data"
-      :key="entry.question"
-    >
+    <b-card class="card" v-for="entry in data" :key="entry.question">
       <template #header>
         <div>
-          Short Answer Questions
-          <b-row align-h="end">
-            <b-button
-              variant="outline"
-              @click="$emit('delete-entry', entry.question)"
-              style="border:none"
-              ><i class="fas fa-trash"></i
-            ></b-button>
+          <b-row>
+            <b-col>
+              <b-row align-h="end">
+                <b-button
+                  variant="outline"
+                  @click="$emit('edit-entry', entry.id)"
+                  style="border:none"
+                  ><i class="fas fa-edit"></i
+                ></b-button>
+                <b-button
+                  variant="outline"
+                  @click="$emit('delete-entry', entry.question)"
+                  style="border:none"
+                  ><i class="fas fa-trash"></i
+                ></b-button>
+              </b-row>
+            </b-col>
           </b-row>
         </div>
       </template>
       <span style="color:grey" class="ml-3">Question</span>
       <br />
-       <div>
+      <div>
         <b-row align-h="center">
           <div>
             <div v-if="isImage(entry.fileType)">
               <div v-if="entry.fileUpload.length > 0">
-                <img class="preview" :src="entry.fileUpload" />
+                <img class="audio=preview" :src="entry.fileUpload" />
               </div>
             </div>
             <div v-if="isAudio(entry.fileType)">
@@ -90,13 +94,17 @@
   </div>
 </template>
 <script>
+import Media from "@dongido/vue-viaudio";
 import { isImage, isVideo, isAudio } from "../../checkFileType.js";
 export default {
   name: "ShortAnswerCard",
+  components: {
+    Media
+  },
   props: {
     data: Array
   },
-   mounted() {
+  mounted() {
     isImage(this.file);
     isVideo(this.file);
     isAudio(this.file);
@@ -106,7 +114,6 @@ export default {
     isAudio,
     isVideo
   }
-
 };
 </script>
 <style scoped>

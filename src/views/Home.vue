@@ -1,6 +1,10 @@
 <template>
   <div>
-    <b-row align-h="center">
+    <!-- <Longuestion/> -->
+    <!-- <b-row align-h="center">
+     <Image v-if="image" v-on:delete-form="image = false" v-on:add-image="addimage"/>
+    </b-row> -->
+    <b-row align-h="center" v-if="checkQuestions() == true">
       <b-button
         style="float:right; margin-left:90%"
         v-b-modal.modal-1
@@ -8,6 +12,25 @@
         ><i class="fas fa-plus"></i
       ></b-button>
     </b-row>
+    <div
+      style="height:100%;width:100%;"
+      v-if="checkQuestions() == false && formActivity() == false"
+    >
+      <b-card class="card">
+        <b-row align-h="center" align-v="center">
+          <b-button
+            variant="outline"
+            style="border:none; color:grey"
+            v-b-modal.modal-1
+            ><i class="fas fa-plus fa-7x"></i
+          ></b-button>
+        </b-row>
+
+        <b-row align-h="center" align-v="center">
+          <span style="color:grey">Click to start adding tests</span>
+        </b-row>
+      </b-card>
+    </div>
     <b-modal
       id="modal-1"
       centered
@@ -42,33 +65,6 @@
         "
         >Short Answer</b-button
       >
-      <b-button
-        class="buttonchoice"
-        variant="outline-secondary"
-        @click="
-          image = true;
-          $bvModal.hide('modal-1');
-        "
-        >Image</b-button
-      >
-      <b-button
-        class="buttonchoice"
-        variant="outline-secondary"
-        @click="
-          video = true;
-          $bvModal.hide('modal-1');
-        "
-        >Video</b-button
-      >
-      <b-button
-        class="buttonchoice"
-        variant="outline-secondary"
-        @click="
-          audio = true;
-          $bvModal.hide('modal-1');
-        "
-        >Audio</b-button
-      >
       <b-button class="buttonchoice" variant="outline-secondary"
         >Fill in the Blanks</b-button
       >
@@ -93,20 +89,6 @@
     </b-modal>
     <b-row align-h="center">
       <b-col md="7" sm="12">
-        <div :key="audiodata">
-          <AudioCard
-            :data="audiodata"
-            v-if="audiodata.length != 0"
-            v-on:delete-entry="deleteaudioEntry"
-          />
-        </div>
-        <div :key="imagedata">
-          <ImageCard
-            :data="imagedata"
-            v-if="imagedata.length != 0"
-            v-on:delete-entry="deleteImageEntry"
-          />
-        </div>
         <div :key="longQuestionData">
           <LongAnswerCard
             :data="longQuestionData"
@@ -120,13 +102,7 @@
             :data="shortQuestionData"
             v-if="shortQuestionData.length != 0"
             v-on:delete-entry="deleteShortEntry"
-          />
-        </div>
-        <div :key="videodata">
-          <VideoCard
-            :data="videodata"
-            v-if="videodata.length != 0"
-            v-on:delete-entry="deleteVideoEntry"
+            v-on:edit-entry="editShortQuestion"
           />
         </div>
         <div :key="mcqdata">
@@ -134,6 +110,7 @@
             :data="mcqdata"
             v-if="mcqdata.length != 0"
             v-on:delete-entry="deleteMcqEntry"
+            v-on:edit-entry="editMcqQuestion"
           />
         </div>
       </b-col>
@@ -146,34 +123,21 @@
             v-if="longanswer"
             v-on:delete-form="longanswer = false"
             v-on:question-added="addlongquestion"
-            :entry="editLong"
+            :entry="editLongID"
           />
         </div>
         <ShortAnswer
           v-if="shortAnswer"
           v-on:delete-form="shortAnswer = false"
           v-on:question-added="addshortquestion"
-        />
-        <ImageQuestion
-          v-if="image"
-          v-on:delete-form="image = false"
-          v-on:question-added="addimagequestion"
-        />
-        <Video
-          v-if="video"
-          v-on:delete-form="video = false"
-          v-on:question-added="addvideoquestion"
-        />
-        <Audio
-          v-if="audio"
-          v-on:delete-form="audio = false"
-          v-on:question-added="addaudioquestion"
+          :entry="editShortID"
         />
         <MatchTheFollowing v-if="match" v-on:delete-form="match = false" />
         <mcq
           v-if="mcq"
           v-on:delete-form="mcq = false"
           v-on:question-added="addmcq"
+          :entry="editMcqID"
         />
         <Comprehensive
           v-if="Comprehensive"
@@ -187,18 +151,12 @@
 <script>
 // @ is an alias to /src
 import LongAnswerCard from "../components/displayCards/longAnswerCard";
-import AudioCard from "../components/displayCards/audioCard";
-import ImageCard from "../components/displayCards/imageCard";
 import MatchTheFollowing from "../components/forms/MatchTheFollowing.vue";
 import MCQCard from "../components/displayCards/mcqCard.vue";
 // import multipleTypeQuestions from "../components/forms/multipleType";
 import LongAnswer from "../components/forms/longAnswer";
 import ShortAnswer from "../components/forms/shortAnswer";
-import ImageQuestion from "../components/forms/imageQuestion";
-import Video from "../components/forms/videoQuestion";
 import mcq from "../components/forms/Mcq";
-import Audio from "../components/forms/audioQuestion";
-import VideoCard from "../components/displayCards/videoCard";
 import ShortAnswerCard from "../components/displayCards/shortAnswerCard";
 import { getMCQquestion, getCommonQuestion } from "../apiFunctions";
 import Comprehensive from "../components/forms/Comprehensive";
@@ -209,16 +167,10 @@ export default {
     // multipleTypeQuestions,
     LongAnswer,
     ShortAnswer,
-    ImageQuestion,
-    Video,
-    Audio,
     MatchTheFollowing,
-    AudioCard,
-    ImageCard,
     LongAnswerCard,
     mcq,
     ShortAnswerCard,
-    VideoCard,
     MCQCard,
     Comprehensive
   },
@@ -226,34 +178,32 @@ export default {
     return {
       shortAnswer: false,
       longanswer: false,
-      image: false,
-      video: false,
-      audio: false,
       match: false,
       mcq: false,
       Comprehensive: false,
-      audiodata: [],
-      imagedata: [],
       longQuestionData: [],
       shortQuestionData: [],
-      videodata: [],
       mcqdata: [],
       ComprehensiveData: [],
-      editLong: {},
-      longfiletype: "",
+      editLongID: -1,
+      editShortID: -1,
+      editMcqID: -1
     };
   },
   methods: {
-    formActivity() {
+    checkQuestions() {
       if (
-        this.shortAnswer ||
-        this.longanswer ||
-        this.mcq ||
-        this.match ||
-        this.image ||
-        this.audio ||
-        this.video
+        this.longQuestionData.length != 0 ||
+        this.shortQuestionData.length != 0 ||
+        this.mcqdata.length != 0
       ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    formActivity() {
+      if (this.shortAnswer || this.longanswer || this.mcq || this.match) {
         return true;
       } else {
         return false;
@@ -264,31 +214,16 @@ export default {
         data => data.question != question
       );
     },
-    deleteaudioEntry(question) {
-      this.audiodata = this.audiodata.filter(data => data.question != question);
-    },
-    deleteImageEntry(question) {
-      this.imagedata = this.imagedata.filter(data => data.question != question);
-    },
     deleteShortEntry(question) {
       this.shortQuestionData = this.shortQuestionData.filter(
         data => data.question != question
       );
     },
-    deleteVideoEntry(question) {
-      this.videodata = this.videodata.filter(data => data.question != question);
-    },
+
     deleteMcqEntry(question) {
       this.mcqdata = this.mcqdata.filter(data => data.question != question);
     },
-    addaudioquestion(audiodata) {
-      this.audiodata.push(audiodata);
-      this.audio = false;
-    },
-    addimagequestion(imagedata) {
-      this.imagedata.push(imagedata);
-      this.image = false;
-    },
+
     addlongquestion(longquesdata) {
       this.longQuestionData.push(longquesdata);
       this.longanswer = false;
@@ -297,10 +232,7 @@ export default {
       this.shortQuestionData.push(shortquesdata);
       this.shortAnswer = false;
     },
-    addvideoquestion(videodata) {
-      this.videodata.push(videodata);
-      this.video = false;
-    },
+
     addmcq(mcqdata) {
       this.mcqdata.push(mcqdata);
       this.mcq = false;
@@ -309,16 +241,17 @@ export default {
       this.ComprehensiveData.push(ComprehensiveData);
       this.Comprehensive = false;
     },
-    editLongQuestion(identifierQues) {
-      var i = 0;
-      while (i < this.longQuestionData.length) {
-        if (this.longQuestionData[i].question == identifierQues) {
-          this.editLong = this.longQuestionData[i];
-          console.log(this.editLong);
-          this.longQuestionData.splice(i, 1);
-          this.longanswer = true;
-        }
-      }
+    editLongQuestion(id) {
+      this.editLongID = id;
+      this.longanswer = true;
+    },
+    editShortQuestion(id) {
+      this.editShortID = id;
+      this.shortAnswer = true;
+    },
+    editMcqQuestion(id) {
+      this.editMcqID = id;
+      this.mcq = true;
     }
   },
   created: function() {
@@ -350,5 +283,12 @@ export default {
   width: 90px;
   border: 1px dashed;
   padding: 0px;
+}
+.card {
+  height: 75vh;
+  display: grid;
+  align-items: center;
+  padding: 150px;
+  background: transparent;
 }
 </style>

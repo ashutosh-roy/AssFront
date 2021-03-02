@@ -2,29 +2,34 @@
   <div>
     <b-card
       class="card"
-      sub-title="Long Answer Questions"
       v-for="entry in data"
       :key="entry.question"
       header-tag="header"
     >
       <template #header>
         <div>
-          <b-row align-h="end">
-            <b-button
-              variant="outline"
-              @click="$emit('edit-entry', entry.question)"
-              style="border:none"
-              ><i class="fas fa-edit"></i
-            ></b-button>
-            <b-button
-              variant="outline"
-              @click="$emit('delete-entry', entry.question)"
-              style="border:none"
-              ><i class="fas fa-trash"></i
-            ></b-button>
+          <b-row>
+            <b-col>
+              <b-row align-h="end">
+                <b-button
+                  variant="outline"
+                  @click="$emit('edit-entry', entry.id)"
+                  style="border:none"
+                  ><i class="fas fa-edit"></i
+                ></b-button>
+                <b-button
+                  variant="outline"
+                  @click="$emit('delete-entry', entry.question)"
+                  style="border:none"
+                  ><i class="fas fa-trash"></i
+                ></b-button>
+              </b-row>
+            </b-col>
           </b-row>
         </div>
       </template>
+      Long Answer Type
+      <br />
       <span style="color:grey" class="ml-3">Question</span>
       <br />
       <div>
@@ -32,7 +37,7 @@
           <div>
             <div v-if="isImage(entry.fileType)">
               <div v-if="entry.fileUpload.length > 0">
-                <img class="preview" :src="entry.fileUpload" />
+                <img class="audio-preview" :src="entry.fileUpload" />
               </div>
             </div>
             <div v-if="isAudio(entry.fileType)">
@@ -94,9 +99,13 @@
   </div>
 </template>
 <script>
+import Media from "@dongido/vue-viaudio";
 import { isImage, isVideo, isAudio } from "../../checkFileType.js";
 export default {
   name: "LongAnswerCard",
+  components: {
+    Media
+  },
   props: {
     data: Array,
     type: String

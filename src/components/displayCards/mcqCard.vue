@@ -1,6 +1,37 @@
 <template>
   <div>
-    <b-card class="card" v-for="entry in data" :key="entry.question">
+    <b-card
+      class="card"
+      v-for="entry in data"
+      :key="entry.question"
+      header-tag="header"
+    >
+      <template #header>
+        <div>
+          <b-row>
+            <b-col>
+              MCQ
+            </b-col>
+            <b-col>
+              <b-row align-h="end">
+                <b-button
+                  variant="outline"
+                  @click="$emit('edit-entry', entry.id)"
+                  style="border:none"
+                  ><i class="fas fa-edit"></i
+                ></b-button>
+                <b-button
+                  variant="outline"
+                  @click="$emit('delete-entry', entry.question)"
+                  style="border:none"
+                  ><i class="fas fa-trash"></i
+                ></b-button>
+              </b-row>
+            </b-col>
+          </b-row>
+        </div>
+      </template>
+
       <b-card-text>
         <b-card-title style="float:left"
           >Multiple Choice Question(MCQ)</b-card-title

@@ -57,7 +57,7 @@
                 <div>
                   <div v-if="isImage(questions.fileType)">
                     <div v-if="questions.fileUpload.length > 0">
-                      <img class="preview" :src="questions.fileUpload" />
+                      <img class="audio-preview" :src="questions.fileUpload" />
                     </div>
                   </div>
                   <div v-if="isAudio(questions.fileType)">
@@ -176,9 +176,17 @@
   </div>
 </template>
 <script>
+import Media from "@dongido/vue-viaudio";
 import { isImage, isVideo, isAudio } from "../../checkFileType.js";
+import { postCommonQuestion, getCommonQuestion } from "../../apiFunctions";
 export default {
   name: "ShortAnswer",
+  components: {
+    Media
+  },
+  props: {
+    entry: Number
+  },
   data() {
     return {
       file: "",
@@ -194,7 +202,7 @@ export default {
         addToDatabank: false,
         sizelimit: 0,
         fileUpload: "",
-        fileType:""
+        fileType: ""
       },
       options: [
         { value: null, text: "Difficulty", disabled: true },
@@ -216,6 +224,9 @@ export default {
     isVideo,
     isAudio,
     addquestion() {
+      postCommonQuestion(this.questions)
+        .then(res => console.log("ShortAnser data saved" + res))
+        .catch(err => console.log(err));
       this.$emit("question-added", this.questions);
     },
     previewFile: function(event) {
@@ -229,6 +240,19 @@ export default {
         this.questions.fileType = input.files[0].name;
         this.$bvModal.hide("modal-3");
       }
+    }
+  },
+  created: function() {
+    if (this.entry != -1) {
+      getCommonQuestion().then(res => {
+        var i = 0;
+        while (i < res.data.data.length) {
+          if (res.data.data[i].id == this.entry) {
+            this.questions = res.data.data[i];
+          }
+          i++;
+        }
+      });
     }
   }
 };

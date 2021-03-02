@@ -57,7 +57,7 @@
                 <div>
                   <div v-if="isImage(questions.fileType)">
                     <div v-if="questions.fileUpload.length > 0">
-                      <img class="preview" :src="questions.fileUpload" />
+                      <img class="audio-preview" :src="questions.fileUpload" />
                     </div>
                   </div>
                   <div v-if="isAudio(questions.fileType)">
@@ -175,9 +175,17 @@
   </div>
 </template>
 <script>
+import Media from "@dongido/vue-viaudio";
 import { isImage, isVideo, isAudio } from "../../checkFileType.js";
+import { postCommonQuestion, getCommonQuestion } from "../../apiFunctions";
 export default {
   name: "LongAnswer",
+  components: {
+    Media
+  },
+  props: {
+    entry: Number
+  },
   data() {
     return {
       questions: {
@@ -185,7 +193,7 @@ export default {
         difficultyLevel: null,
         question: "",
         questionType: "Long Answer Questions",
-        answerKey: "",
+        answerKey: "some answer",
         autoCorrection: 0,
         required: 0,
         addToPublic: false,
@@ -265,7 +273,7 @@ export default {
     isAudio,
     isVideo,
     addquestion() {
-      this.$emit("question-added", this.questions, this.file);
+      this.$emit("question-added", this.questions);
     },
     previewFile: function(event) {
       var input = event.target;
@@ -275,11 +283,26 @@ export default {
           this.questions.fileUpload = e.target.result;
         };
         this.questions.fileType = input.files[0].name;
-        console.log(this.file);
         // console.log("-------------------------")
         reader.readAsDataURL(input.files[0]);
         this.$bvModal.hide("modal-3");
       }
+      postCommonQuestion(this.questions)
+        .then(res => console.log("LongAnswer data saved" + res))
+        .catch(err => console.log(err));
+    }
+  },
+  created: function() {
+    if (this.entry != -1) {
+      getCommonQuestion().then(res => {
+        var i = 0;
+        while (i < res.data.data.length) {
+          if (res.data.data[i].id == this.entry) {
+            this.questions = res.data.data[i];
+          }
+          i++;
+        }
+      });
     }
   }
 };
