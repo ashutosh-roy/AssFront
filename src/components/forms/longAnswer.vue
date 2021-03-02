@@ -17,38 +17,80 @@
       <b-card-text>
         <b-form inline>
           <div style="width:100%">
-           <b-modal
-                id="modal-3"
-                centered
-                hide-footer
-                title="Upload a file"
-                style="width:90vh"
-              >
-                <div class="container">
-                  <div class="upload-container">
-                      <div class="border-container">
-                          <div class="icons fa-4x">
-                              <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
-                              <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
-                              <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
-                          </div>
-                          <b-row class="justify-content-md-center">
-                              <input type="file" @change="previewFile" accept="image/*">
-                          </b-row>
-                      </div>
+            <b-modal
+              id="modal-3"
+              centered
+              hide-footer
+              title="Upload a file"
+              style="width:90vh"
+            >
+              <div class="container">
+                <div class="upload-container">
+                  <div class="border-container">
+                    <div class="icons fa-4x">
+                      <i
+                        class="fas fa-file-image"
+                        data-fa-transform="shrink-3 down-2 left-6 rotate--45"
+                      ></i>
+                      <i
+                        class="fas fa-file-alt"
+                        data-fa-transform="shrink-2 up-4"
+                      ></i>
+                      <i
+                        class="fas fa-file-pdf"
+                        data-fa-transform="shrink-3 down-2 right-6 rotate-45"
+                      ></i>
+                    </div>
+                    <b-row class="justify-content-md-center">
+                      <input
+                        type="file"
+                        @change="previewFile"
+                        accept="audio/*,video/*,image/*"
+                      />
+                    </b-row>
                   </div>
+                </div>
               </div>
-             </b-modal>
+            </b-modal>
             <div>
               <b-row align-h="center">
-                <div class="image-preview" v-if="questions.fileUpload.length>0">
-                    <img class="preview" :src="questions.fileUpload">
+                <div>
+                  <div v-if="isImage(questions.fileType)">
+                    <div v-if="questions.fileUpload.length > 0">
+                      <img class="preview" :src="questions.fileUpload" />
+                    </div>
+                  </div>
+                  <div v-if="isAudio(questions.fileType)">
+                    <Media
+                      :kind="'audio'"
+                      :isMuted="false"
+                      :src="questions.fileUpload"
+                      :autoplay="false"
+                      :controls="true"
+                      :loop="true"
+                      width="70%"
+                      class="audio-preview"
+                    ></Media>
+                  </div>
+                  <div v-if="isVideo(questions.fileType)">
+                    <Media
+                      :kind="'video'"
+                      :isMuted="false"
+                      :src="questions.fileUpload"
+                      :autoplay="false"
+                      :controls="true"
+                      :loop="true"
+                      width="70%"
+                      height="30%"
+                      class="preview"
+                    ></Media>
+                  </div>
                 </div>
               </b-row>
             </div>
-             <b-row>
+            <b-row>
               <b-col cols="4" md="4">
-               <b-form-input
+                <b-form-input
                   class="input"
                   v-model="questions.topic"
                   autofocus
@@ -63,12 +105,20 @@
                 ></b-form-select>
               </b-col>
               <b-col cols="4" md="3" align-h="end">
-                <b-button 
-              style="float:right; margin-left:90%"
-              v-b-modal.modal-3
-              ><i class="fas fa-image"></i></b-button>
+                <b-button style="float:right; margin-left:90%" v-b-modal.modal-3
+                  ><i class="fas fa-image"></i
+                ></b-button>
               </b-col>
             </b-row>
+            <br />
+            <b-form-input
+              class="input"
+              v-model="questions.question"
+              placeholder="Question"
+              style="width:100%;margin-top:1vh"
+            >
+              ></b-form-input
+            >
             <b-row align-h="end">
               <b-form-checkbox
                 v-model="questions.autoCorrection"
@@ -125,12 +175,11 @@
   </div>
 </template>
 <script>
+import { isImage, isVideo, isAudio } from "../../checkFileType.js";
 export default {
   name: "LongAnswer",
   data() {
     return {
-      // databank:false,
-      // publicly:false,
       questions: {
         topic: "",
         difficultyLevel: null,
@@ -143,6 +192,7 @@ export default {
         addToDatabank: false,
         sizelimit: 0,
         fileUpload: "",
+        fileType: ""
       },
       selected: "null",
       options: [
@@ -151,26 +201,87 @@ export default {
         { value: "2", text: "Difficulty Level 2" },
         { value: "3", text: "Difficulty Level 3" },
         { value: "4", text: "Difficulty Level 4" },
-        { value: "5", text: "Difficulty Level 5" },
-      ],
+        { value: "5", text: "Difficulty Level 5" }
+      ]
     };
   },
+  mounted() {
+    isImage(this.questions.fileType);
+    isVideo(this.questions.fileType);
+    isAudio(this.questions.fileType);
+  },
   methods: {
+    // getExtension(filename)
+    // {
+    //   var parts = filename.split('.');
+    //   return parts[parts.length - 1];
+    // },
+    // isImage(filename)
+    // {
+    //   var parts = filename.split('.');
+    //   var ext = parts[parts.length - 1];
+    //   switch (ext.toLowerCase()) {
+    //     case 'jpg':
+    //     case 'gif':
+    //     case 'bmp':
+    //     case 'png':
+    //       //etc
+    //       return true;
+    //   }
+    //   return false;
+    // },
+    // isVideo(filename) {
+    //   var parts = filename.split('.');
+    //   var ext = parts[parts.length - 1];
+    //   switch (ext.toLowerCase()) {
+    //     case 'm4v':
+    //     case 'avi':
+    //     case 'mpg':
+    //     case 'mp4':
+    //       // etc
+    //       return true;
+    //   }
+    //   return false;
+    // },
+    // isAudio(filename) {
+    //   var parts = filename.split('.');
+    //   var ext = parts[parts.length - 1];
+    //   switch (ext.toLowerCase()) {
+    //     case 'pcm':
+    //     case 'wav':
+    //     case 'aiff':
+    //     case 'mp3':
+    //     case 'ogg':
+    //     case 'aac':
+    //     case 'wma':
+    //     case 'flac':
+    //     case 'alac':
+    //       // etc
+    //       return true;
+    //   }
+    //   return false;
+    // },
+    isImage,
+    isAudio,
+    isVideo,
     addquestion() {
-      this.$emit("question-added", this.questions);
+      this.$emit("question-added", this.questions, this.file);
     },
-    previewFile: function (event) {
+    previewFile: function(event) {
       var input = event.target;
       if (input.files && input.files[0]) {
         var reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
           this.questions.fileUpload = e.target.result;
         };
+        this.questions.fileType = input.files[0].name;
+        console.log(this.file);
+        // console.log("-------------------------")
         reader.readAsDataURL(input.files[0]);
-        this.$bvModal.hide('modal-3');
+        this.$bvModal.hide("modal-3");
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
@@ -200,7 +311,6 @@ export default {
   margin-right: 2vh;
 }
 
-
 /* FILE UPLOAD CSS */
 * {
   box-sizing: border-box;
@@ -229,8 +339,8 @@ body {
   /*box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 
               0 0 0 1px rgba(0, 0, 0, 0.1);*/
 }
-img.preview {
-  width: 200px;
+.audio-preview {
+  width: 500px;
   background-color: white;
   border: 1px solid #ddd;
   padding: 5px;
@@ -238,7 +348,16 @@ img.preview {
   flex-wrap: wrap;
   align-content: center;
 }
-
+.preview {
+  width: 500px;
+  height: 500px !important;
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
 h1 {
   color: #130f40;
   font-family: "Varela Round", sans-serif;

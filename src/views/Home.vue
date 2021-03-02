@@ -81,46 +81,74 @@
         "
         >Match the Following</b-button
       >
-      <b-button class="buttonchoice" variant="outline-secondary"
+      <b-button
+        class="buttonchoice"
+        variant="outline-secondary"
+        @click="
+          Comprehensive = true;
+          $bvModal.hide('modal-1');
+        "
         >Unseen Passage</b-button
       >
     </b-modal>
     <b-row align-h="center">
-      <b-col cols="7">
+      <b-col md="7" sm="12">
         <div :key="audiodata">
-          <AudioCard :data="audiodata" v-if="audiodata.length != 0" />
+          <AudioCard
+            :data="audiodata"
+            v-if="audiodata.length != 0"
+            v-on:delete-entry="deleteaudioEntry"
+          />
         </div>
         <div :key="imagedata">
-          <ImageCard :data="imagedata" v-if="imagedata.length != 0" />
+          <ImageCard
+            :data="imagedata"
+            v-if="imagedata.length != 0"
+            v-on:delete-entry="deleteImageEntry"
+          />
         </div>
         <div :key="longQuestionData">
           <LongAnswerCard
             :data="longQuestionData"
             v-if="longQuestionData.length != 0"
+            v-on:delete-entry="deleteEntry"
+            v-on:edit-entry="editLongQuestion"
           />
         </div>
         <div :key="shortQuestionData">
           <ShortAnswerCard
             :data="shortQuestionData"
             v-if="shortQuestionData.length != 0"
+            v-on:delete-entry="deleteShortEntry"
           />
         </div>
         <div :key="videodata">
-          <VideoCard :data="videodata" v-if="videodata.length != 0" />
+          <VideoCard
+            :data="videodata"
+            v-if="videodata.length != 0"
+            v-on:delete-entry="deleteVideoEntry"
+          />
         </div>
         <div :key="mcqdata">
-          <MCQCard :data="mcqdata" v-if="mcqdata.length != 0" />
+          <MCQCard
+            :data="mcqdata"
+            v-if="mcqdata.length != 0"
+            v-on:delete-entry="deleteMcqEntry"
+          />
         </div>
       </b-col>
     </b-row>
     <b-row align-h="center">
-      <b-col cols="7">
+      <b-col md="7" sm="12">
         <!-- <multipleTypeQuestions v-show="false" /> -->
-        <LongAnswer
-          v-if="longanswer"
-          v-on:delete-form="longanswer = false"
-          v-on:question-added="addlongquestion"
-        />
+        <div :key="longanswer">
+          <LongAnswer
+            v-if="longanswer"
+            v-on:delete-form="longanswer = false"
+            v-on:question-added="addlongquestion"
+            :entry="editLong"
+          />
+        </div>
         <ShortAnswer
           v-if="shortAnswer"
           v-on:delete-form="shortAnswer = false"
@@ -147,6 +175,10 @@
           v-on:delete-form="mcq = false"
           v-on:question-added="addmcq"
         />
+        <Comprehensive
+          v-if="Comprehensive"
+          v-on:delete-form="Comprehensive = false"
+        />
       </b-col>
     </b-row>
   </div>
@@ -168,6 +200,9 @@ import mcq from "../components/forms/Mcq";
 import Audio from "../components/forms/audioQuestion";
 import VideoCard from "../components/displayCards/videoCard";
 import ShortAnswerCard from "../components/displayCards/shortAnswerCard";
+import { getMCQquestion, getCommonQuestion } from "../apiFunctions";
+import Comprehensive from "../components/forms/Comprehensive";
+
 export default {
   name: "Home",
   components: {
@@ -185,6 +220,7 @@ export default {
     ShortAnswerCard,
     VideoCard,
     MCQCard,
+    Comprehensive
   },
   data() {
     return {
@@ -195,21 +231,55 @@ export default {
       audio: false,
       match: false,
       mcq: false,
+      Comprehensive: false,
       audiodata: [],
       imagedata: [],
       longQuestionData: [],
       shortQuestionData: [],
       videodata: [],
       mcqdata: [],
+      ComprehensiveData: [],
+      editLong: {},
+      longfiletype: "",
     };
   },
   methods: {
     formActivity() {
-      if (this.shortAnswer == true || this.longanswer == true) {
+      if (
+        this.shortAnswer ||
+        this.longanswer ||
+        this.mcq ||
+        this.match ||
+        this.image ||
+        this.audio ||
+        this.video
+      ) {
         return true;
       } else {
         return false;
       }
+    },
+    deleteEntry(question) {
+      this.longQuestionData = this.longQuestionData.filter(
+        data => data.question != question
+      );
+    },
+    deleteaudioEntry(question) {
+      this.audiodata = this.audiodata.filter(data => data.question != question);
+    },
+    deleteImageEntry(question) {
+      this.imagedata = this.imagedata.filter(data => data.question != question);
+    },
+    deleteShortEntry(question) {
+      this.shortQuestionData = this.shortQuestionData.filter(
+        data => data.question != question
+      );
+    },
+    deleteVideoEntry(question) {
+      this.videodata = this.videodata.filter(data => data.question != question);
+    },
+    deleteMcqEntry(question) {
+      this.mcqdata = this.mcqdata.filter(data => data.question != question);
     },
     addaudioquestion(audiodata) {
       this.audiodata.push(audiodata);
@@ -235,7 +305,43 @@ export default {
       this.mcqdata.push(mcqdata);
       this.mcq = false;
     },
+    addComprehensive(ComprehensiveData) {
+      this.ComprehensiveData.push(ComprehensiveData);
+      this.Comprehensive = false;
+    },
+    editLongQuestion(identifierQues) {
+      var i = 0;
+      while (i < this.longQuestionData.length) {
+        if (this.longQuestionData[i].question == identifierQues) {
+          this.editLong = this.longQuestionData[i];
+          console.log(this.editLong);
+          this.longQuestionData.splice(i, 1);
+          this.longanswer = true;
+        }
+      }
+    }
   },
+  created: function() {
+    getMCQquestion()
+      .then(res => (this.mcqdata = res.data.data))
+      .catch(err => console.log(err));
+    getCommonQuestion().then(res => {
+      var i = 0;
+      while (i < res.data.data.length) {
+        if (res.data.data[i].questionType == "Long Answer Questions") {
+          this.longQuestionData.push(res.data.data[i]);
+        } else if (res.data.data[i].questionType == "Short Answer Questions") {
+          this.shortQuestionData.push(res.data.data[i]);
+        } else if (res.data.data[i].questionType == "Video") {
+          this.videodata.push(res.data.data[i]);
+        } else if (res.data.data[i].questionType == "Audio") {
+          this.audiodata.push(res.data.data[i]);
+        } else {
+          this.imagedata.push(res.data.data[i]);
+        }
+      }
+    });
+  }
 };
 </script>
 <style scoped>

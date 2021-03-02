@@ -1,57 +1,62 @@
 <template>
   <div class="container">
-        <div class="upload-container">
-            <div class="border-container">
-                <div class="icons fa-4x">
-                    <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
-                    <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
-                    <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
-                </div>
-                <b-row class="justify-content-md-center">
-                    <input type="file" @change="previewImage" accept="image/*">
-                </b-row>
-            </div>
+    <div class="upload-container">
+      <div class="border-container">
+        <div class="icons fa-4x">
+          <i
+            class="fas fa-file-image"
+            data-fa-transform="shrink-3 down-2 left-6 rotate--45"
+          ></i>
+          <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
+          <i
+            class="fas fa-file-pdf"
+            data-fa-transform="shrink-3 down-2 right-6 rotate-45"
+          ></i>
         </div>
+        <b-row class="justify-content-md-center">
+          <input type="file" @change="previewImage" accept="image/*" />
+        </b-row>
+      </div>
     </div>
+  </div>
 </template>
 <script>
 export default {
   name: "fileUpload",
   data() {
     return {
-        fileLocation:null
+      fileLocation: null
     };
   },
   methods: {
-    previewImage: function (event) {
-        
-    const image = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(image);
-    reader.onload = e =>{
+    previewImage: function(event) {
+      const image = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.onload = e => {
         this.fileLocation = e.target.result;
-        console.log("-----------------------")
+        console.log("-----------------------");
         console.log(this.fileLocation);
-    };
-    //   var input = event.target;
-    //   // Ensure that you have a file before attempting to read it
-    //   if (input.files && input.files[0]) {
-    //     // create a new FileReader to read this image and convert to base64 format
-    //     var reader = new FileReader();
-    //     // Define a callback function to run, when FileReader finishes its job
-    //     reader.onload = (e) => {
-    //       // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
-    //       // Read image as base64 and set to imageData
-    //       this.fileLocation = e.target.result;
-    //       // console.log(this.imagedata.fileUpload)
-    //     };
-    //     // Start the reader job - read file as a data url (base64 format)
-    //     console.log("--------Reader FIle----------------");
-    //     console.log(this.fileLocation);
-    //   }
-    this.$emit('file-upload',this.fileLocation);    
-    },
-  },
+      };
+      //   var input = event.target;
+      //   // Ensure that you have a file before attempting to read it
+      //   if (input.files && input.files[0]) {
+      //     // create a new FileReader to read this image and convert to base64 format
+      //     var reader = new FileReader();
+      //     // Define a callback function to run, when FileReader finishes its job
+      //     reader.onload = (e) => {
+      //       // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
+      //       // Read image as base64 and set to imageData
+      //       this.fileLocation = e.target.result;
+      //       // console.log(this.imagedata.fileUpload)
+      //     };
+      //     // Start the reader job - read file as a data url (base64 format)
+      //     console.log("--------Reader FIle----------------");
+      //     console.log(this.fileLocation);
+      //   }
+      this.$emit("file-upload", this.fileLocation);
+    }
+  }
 };
 </script>
 <style scoped>

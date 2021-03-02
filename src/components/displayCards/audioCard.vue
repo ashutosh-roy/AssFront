@@ -6,6 +6,19 @@
       v-for="entry in data"
       :key="entry.question"
     >
+      <template #header>
+        <div>
+          Audio
+          <b-row align-h="end">
+            <b-button
+              variant="outline"
+              @click="$emit('delete-entry', entry.question)"
+              style="border:none"
+              ><i class="fas fa-trash"></i
+            ></b-button>
+          </b-row>
+        </div>
+      </template>
       <span style="color:grey" class="ml-3">Question</span>
       <br />
       <Media
@@ -35,6 +48,7 @@
               class="switch"
               name="check-button"
               switch
+              disabled
             >
               Auto Correction
             </b-form-checkbox>
@@ -44,6 +58,7 @@
               class="switch"
               name="check-button"
               switch
+              disabled
             >
               Required
             </b-form-checkbox>
@@ -58,11 +73,11 @@ import Media from "@dongido/vue-viaudio";
 export default {
   name: "AudioCard",
   components: {
-    Media,
+    Media
   },
   props: {
-    data: Array,
-  },
+    data: Array
+  }
 };
 </script>
 <style scoped>

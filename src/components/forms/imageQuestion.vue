@@ -17,38 +17,54 @@
       <b-card-text>
         <b-form inline>
           <div style="width:100%">
-              <b-modal
-                id="modal-2"
-                centered
-                hide-footer
-                title="Upload a file"
-                style="width:90vh"
-              >
-                <div class="container">
-                  <div class="upload-container">
-                      <div class="border-container">
-                          <div class="icons fa-4x">
-                              <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
-                              <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
-                              <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
-                          </div>
-                          <b-row class="justify-content-md-center">
-                              <input type="file" @change="previewFile" accept="image/*">
-                          </b-row>
-                      </div>
+            <b-modal
+              id="modal-2"
+              centered
+              hide-footer
+              title="Upload a file"
+              style="width:90vh"
+            >
+              <div class="container">
+                <div class="upload-container">
+                  <div class="border-container">
+                    <div class="icons fa-4x">
+                      <i
+                        class="fas fa-file-image"
+                        data-fa-transform="shrink-3 down-2 left-6 rotate--45"
+                      ></i>
+                      <i
+                        class="fas fa-file-alt"
+                        data-fa-transform="shrink-2 up-4"
+                      ></i>
+                      <i
+                        class="fas fa-file-pdf"
+                        data-fa-transform="shrink-3 down-2 right-6 rotate-45"
+                      ></i>
+                    </div>
+                    <b-row class="justify-content-md-center">
+                      <input
+                        type="file"
+                        @change="previewFile"
+                        accept="image/*"
+                      />
+                    </b-row>
                   </div>
+                </div>
               </div>
-             </b-modal>
+            </b-modal>
             <div>
               <b-row align-h="center">
-                <div class="image-preview" v-if="imagedata.fileUpload.length>0">
-                    <img class="preview" :src="imagedata.fileUpload">
+                <div
+                  class="image-preview"
+                  v-if="imagedata.fileUpload.length > 0"
+                >
+                  <img class="preview" :src="imagedata.fileUpload" />
                 </div>
               </b-row>
             </div>
-             <b-row>
+            <b-row>
               <b-col cols="4" md="4">
-               <b-form-input
+                <b-form-input
                   class="input"
                   v-model="imagedata.topic"
                   autofocus
@@ -63,69 +79,70 @@
                 ></b-form-select>
               </b-col>
               <b-col cols="4" md="3" align-h="end">
-                <b-button 
-              style="float:right; margin-left:90%"
-              v-b-modal.modal-2
-              ><i class="fas fa-image"></i></b-button>
+                <b-button style="float:right; margin-left:90%" v-b-modal.modal-2
+                  ><i class="fas fa-image"></i
+                ></b-button>
               </b-col>
             </b-row>
-                <br />
-                <b-form-input
-                  class="input"
-                  v-model="imagedata.question"
-                  placeholder="Question"
-                  style="width:100%;margin-top:1vh"
-                >
-                  ></b-form-input>
+            <br />
+            <b-form-input
+              class="input"
+              v-model="imagedata.question"
+              placeholder="Question"
+              style="width:100%;margin-top:1vh"
+            >
+              ></b-form-input
+            >
 
-              <b-row align-h="end">
-                <b-form-checkbox
-                  v-model="imagedata.autoCorrection"
-                  class="switch"
-                  name="check-button"
-                  switch
-                >
-                  Auto Correction
-                </b-form-checkbox>
+            <b-row align-h="end">
+              <b-form-checkbox
+                v-model="imagedata.autoCorrection"
+                class="switch"
+                name="check-button"
+                switch
+              >
+                Auto Correction
+              </b-form-checkbox>
 
-                <b-form-checkbox
-                  v-model="imagedata.required"
-                  class="switch"
-                  name="check-button"
-                  switch
+              <b-form-checkbox
+                v-model="imagedata.required"
+                class="switch"
+                name="check-button"
+                switch
+              >
+                Required
+              </b-form-checkbox>
+              <b-dropdown
+                split
+                text="Add"
+                class="m-2 p-0 "
+                variant="primary"
+                @click="addquestion()"
+              >
+                <b-dropdown-item
+                  @click="imagedata.addToDatabank = !imagedata.addToDatabank"
                 >
-                  Required
-                </b-form-checkbox>
-                <b-dropdown
-                  split
-                  text="Add"
-                  class="m-2 p-0 "
-                  variant="primary"
-                  @click="addquestion()"
+                  <b-form-checkbox
+                    id="checkbox-1"
+                    v-model="imagedata.addToDatabank"
+                    name="checkbox-1"
+                  >
+                    Add to Databank
+                  </b-form-checkbox>
+                </b-dropdown-item>
+                <b-dropdown-item
+                  @click="imagedata.addToPublic = !imagedata.addToPublic"
                 >
-                  <b-dropdown-item
-                    @click="imagedata.addToDatabank = !imagedata.addToDatabank"
+                  <b-form-checkbox
+                    id="checkbox-2"
+                    v-model="imagedata.addToPublic"
+                    name="checkbox-2"
                   >
-                    <b-form-checkbox
-                      id="checkbox-1"
-                      v-model="imagedata.addToDatabank"
-                      name="checkbox-1"
-                    >
-                      Add to Databank
-                    </b-form-checkbox>
-                  </b-dropdown-item>
-                  <b-dropdown-item
-                    @click="imagedata.addToPublic = !imagedata.addToPublic"
-                  >
-                    <b-form-checkbox
-                      id="checkbox-2"
-                      v-model="imagedata.addToPublic"
-                      name="checkbox-2"
-                    >
-                      Add Publicly
-                    </b-form-checkbox></b-dropdown-item>
-                </b-dropdown>
-              </b-row>
+                    Add Publicly
+                  </b-form-checkbox></b-dropdown-item
+                >
+              </b-dropdown>
+            </b-row>
           </div>
         </b-form>
       </b-card-text>
@@ -145,25 +162,24 @@ export default {
         { value: "2", text: "Difficulty Level 2" },
         { value: "3", text: "Difficulty Level 3" },
         { value: "4", text: "Difficulty Level 4" },
-        { value: "5", text: "Difficulty Level 5" },
+        { value: "5", text: "Difficulty Level 5" }
       ],
       imagedata: {
         topic: "",
         difficultyLevel: null,
         question: "",
-        questionType: "image",
+        questionType: "Image",
         answerKey: "",
         autoCorrection: 0,
         required: 0,
         addToPublic: false,
         addToDatabank: false,
         sizelimit: 0,
-        fileUpload: "",
-      },
+        fileUpload: ""
+      }
     };
   },
-  methods: 
-  {
+  methods: {
     // getFileLocation(filelocation)
     // {
     //   this.imagedata.fileUpload=filelocation;
@@ -174,14 +190,14 @@ export default {
     addquestion() {
       this.$emit("question-added", this.imagedata);
     },
-    previewFile: function (event) {
+    previewImage: function(event) {
       var input = event.target;
       // Ensure that you have a file before attempting to read it
       if (input.files && input.files[0]) {
         // create a new FileReader to read this image and convert to base64 format
         var reader = new FileReader();
         // Define a callback function to run, when FileReader finishes its job
-        reader.onload = (e) => {
+        reader.onload = e => {
           // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
           // Read image as base64 and set to imageData
           this.imagedata.fileUpload = e.target.result;
@@ -189,14 +205,10 @@ export default {
         };
         // Start the reader job - read file as a data url (base64 format)
         reader.readAsDataURL(input.files[0]);
-        console.log("-----------Inputed Data-----------");
         console.log(input.files[0]);
-        console.log("-----------File Upload Data-----------");
-        console.log(this.imagedata.fileUpload);
-        this.$bvModal.hide('modal-2');
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
@@ -229,41 +241,9 @@ export default {
 .image-preview {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-}
-
-/* FILE UPLOAD CSS */
-* {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-}
-
-body {
-  font-family: "Montserrat", sans-serif;
-  background: #535c68;
-}
-
-.wrapper {
-  margin: auto;
-  max-width: 640px;
-  padding-top: 60px;
-  text-align: center;
-}
-
-.container {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  /*border: 0.5px solid rgba(130, 130, 130, 0.25);*/
-  /*box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 
-              0 0 0 1px rgba(0, 0, 0, 0.1);*/
 }
 img.preview {
-  width: auto;
+  width: 200px;
   background-color: white;
   border: 1px solid #ddd;
   padding: 5px;

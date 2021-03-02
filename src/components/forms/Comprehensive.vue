@@ -1,214 +1,254 @@
 <template>
-    <div id="asp">
-    <b-card class="card">
-      
+  <div>
+    <b-card class="card" header="header">
+      <template #header>
+        <div>
+          Comprehensive
+          <b-row align-h="end">
+            <b-button
+              variant="outline-secondary"
+              @click="$emit('delete-form')"
+              style="border:none"
+              ><i class="fas fa-trash"></i
+            ></b-button>
+          </b-row>
+        </div>
+      </template>
       <b-card-text>
         <b-form inline @submit.prevent>
-        
-          
-            <b-form-input 
-          class="input"
-          v-model="text"
-          autofocus
-          placeholder="Topic">
-          </b-form-input>
-        
+          <div style="width:100%">
+            <b-form-input
+              class="input"
+              v-model="text"
+              autofocus
+              placeholder="Topic"
+            >
+            </b-form-input>
 
-      <b-form-select
-      v-model="selected"
-      :options="options"
-      class="input"
-      ></b-form-select>
-      <br>
+            <b-form-select
+              v-model="selected"
+              :options="options"
+              class="input"
+            ></b-form-select>
+            <br />
 
-      <b-button variant="outline" class="btnn" type="submit">  <i class="fas fa-trash"></i></b-button>
-  
-      <b-form-input 
-      class="input"
-      v-model="text2"
-      placeholder="Comprehension"
-      style="width:80%;margin-top:1vh">
-      </b-form-input>
-          <b-button variant="outline" class="btnn" type="submit">  <i class="fas fa-images"></i></b-button>
-      <br>
-      <br>
-      <br>
-<div class="base">
-  <div v-for="(ball, bat) in answerlist" :key="bat"  >
+            <b-form-input
+              class="input"
+              v-model="text2"
+              placeholder="Comprehension"
+              style="width:80%;margin-top:1vh"
+            >
+            </b-form-input>
+            <b-button variant="outline" class="btnn">
+              <i class="fas fa-images"></i
+            ></b-button>
+            <br />
 
-       <b-input-group>
-    <b-input-group-prepend is-text>
-      <input type="radio" disabled>
-    </b-input-group-prepend>
- 
-       
-<div class="question-3">
-    <b-form-input 
-     v-on:keyup.enter="addQuestions" 
-      class="question-2"
-      v-model="ball.bat"
-      placeholder="Question"
-      style="width:80%;margin-top:1vh;">
-      </b-form-input>
+            <b-dropdown
+              id="dropdown-1"
+              text="Select Question Type"
+              class="m-md-2"
+            >
+              <b-dropdown-item @click="longQuestions += 1"
+                >Long Answer</b-dropdown-item
+              >
+              <b-dropdown-item @click="shortQuestions += 1"
+                >Short Answer</b-dropdown-item
+              >
+              <b-dropdown-item @click="mcqQuestions += 1"
+                >Multiple Choice</b-dropdown-item
+              >
+              <b-dropdown-item @click="fillInBlanks += 1"
+                >Fill in the Blanks</b-dropdown-item
+              >
+              <b-dropdown-item @click="matchthefollowing += 1"
+                >Match the Following</b-dropdown-item
+              >
+            </b-dropdown>
 
-     <b-button variant="outline" >
-          <i class="fas fa-images"></i>
-                 </b-button>
-                  <b-button variant="outline" @click="deleteOptions(item.index)">
-          <i class="fas fa-trash"></i>
-                 </b-button>
-    
-</div>
-           </b-input-group>
-            
-           
-<div v-for="(item, index) in answerlist" :key="index"  >
-  <b-input-group>
-    <b-input-group-prepend is-text>
-      <input type="radio" disabled>
-    </b-input-group-prepend>
+            <div name="longAnswerQuestions" v-for="i in longQuestions" :key="i">
+              <b-form-input
+                class="input"
+                v-model="text"
+                placeholder="Long Answer Question"
+                style="width:100%;margin-top:1vh"
+              ></b-form-input>
+            </div>
+            <div
+              name="shortAnswerQuestions"
+              v-for="i in shortQuestions"
+              :key="i"
+            >
+              <b-form-input
+                class="input"
+                v-model="text"
+                placeholder="Short Answer Question"
+                style="width:100%;margin-top:1vh"
+              ></b-form-input>
+            </div>
+            <div name="mcqQuestions" v-for="i in mcqQuestions" :key="i">
+              <b-form-input
+                class="input"
+                v-model="question"
+                placeholder="Question"
+                style="width:80%;margin-top:1vh"
+              >
+              </b-form-input>
+              <b-button variant="outline" class="btnn">
+                <i class="fas fa-images"></i
+              ></b-button>
+              <br />
+              <br />
+              <br />
+              <div class="base">
+                <div v-for="b in optionnum" :key="b">
+                  <b-input-group>
+                    <b-input-group-prepend is-text>
+                      <input type="radio" disabled />
+                    </b-input-group-prepend>
+                    <b-form-input
+                      autofocus
+                      class="input"
+                      placeholder="Answer"
+                      style="width:60%;margin-top:1vh"
+                    >
+                    </b-form-input>
+                    <div>
+                      <b-button style="border:none">
+                        <i class="fas fa-check 7x"></i>
+                      </b-button>
+                    </div>
 
+                    <b-button variant="outline">
+                      <i class="fas fa-trash" @click="optionnum -= 1"></i>
+                    </b-button>
+                  </b-input-group>
+                </div>
 
-<div>
-    <b-form-input   
-    v-on:keyup.enter="addOptions" 
-    autofocus
-    class="input-type"
-     v-model="item.index"
-     placeholder="Answer"
->
-    </b-form-input>
+                <br />
+                <b-button
+                  variant="outline"
+                  class="btts"
+                  style="float:left"
+                  @click.enter="optionnum += 1"
+                  >Add Option</b-button
+                >
+                <b-button
+                  variant="outline"
+                  class="btts-1"
+                  style="float:left"
+                  @click="optionnum += 1"
+                  >/ Others</b-button
+                >
+              </div>
+            </div>
+            <b-row align-h="end">
+              <b-form-checkbox
+                v-model="checked"
+                class="switch"
+                name="check-button"
+                switch
+              >
+                Auto Correction |
+              </b-form-checkbox>
 
-</div>
-
-        <b-button variant="outline" >
-          <i class="fas fa-check 7x"></i>
-                 </b-button>
-                  <b-button variant="outline" @click="deleteOptions(item.index)">
-          <i class="fas fa-trash"></i>
-                 </b-button>
-     </b-input-group>
-
-        </div>
-      </div>
-<br>
- <b-button variant="outline" class="btts" style="float:left" v-on:click.enter="addOptions">Add Option</b-button>
-  <b-button variant="outline" class="btts-1" style="float:left" @click="addOptions">/ Others</b-button>
-    </div>
-
-
-
- <b-form-select
-      v-model="selected1"
-      :options="options1"
-     style="width:100%;"
-    @change="addQuestions"
-      ></b-form-select>
-
-
-  <b-input-group style="padding-left:70%" >
-      <b-form-checkbox 
-      v-model="checked" 
-      class="switch"
-      name='check-button'
-      switch
-      >
-      Auto Correction |
-      </b-form-checkbox>
-    
-      <b-form-checkbox  
-      v-model="checked"
-      class="switch"
-      name='check-button'
-      switch 
-    
-      >
-      Required
-      </b-form-checkbox>
-      <b-dropdown split variant="primary"  text="Add" class="m-2 mt-2 p-0 add-btn" >
-        <b-dropdown-item>
-          <b-form-checkbox 
-          id="checkbox-1"
-          v-model="status" 
-          name='checkbox-1'
-          >
-          Add to date bank 
-          </b-form-checkbox>
-        </b-dropdown-item>
-        <b-dropdown-item>
-          <b-form-checkbox
-           id="checkbox-1" 
-           v-model="status" 
-           name='checkbox-1'
-           >
-           Add Publicly
-          </b-form-checkbox></b-dropdown-item
-          >
-      </b-dropdown>
-  </b-input-group>
+              <b-form-checkbox
+                v-model="checked"
+                class="switch"
+                name="check-button"
+                switch
+              >
+                Required
+              </b-form-checkbox>
+              <b-dropdown
+                split
+                variant="primary"
+                text="Add"
+                class="m-2 mt-2 p-0 add-btn"
+              >
+                <b-dropdown-item>
+                  <b-form-checkbox
+                    id="checkbox-1"
+                    v-model="status"
+                    name="checkbox-1"
+                  >
+                    Add to date bank
+                  </b-form-checkbox>
+                </b-dropdown-item>
+                <b-dropdown-item>
+                  <b-form-checkbox
+                    id="checkbox-1"
+                    v-model="status"
+                    name="checkbox-1"
+                  >
+                    Add Publicly
+                  </b-form-checkbox></b-dropdown-item
+                >
+              </b-dropdown>
+            </b-row>
+          </div>
         </b-form>
-         
       </b-card-text>
     </b-card>
   </div>
 </template>
 <script>
 export default {
-    name:"Comprehensive",
-    components:{
-
-    },
-     data(){
+  name: "Comprehensive",
+  components: {},
+  data() {
     return {
-      selected:"null",
-      
-      options:[
-        {value:null, text:"Difficulty", disabled:true},
-        {value:"1", text:"Difficulty 1"},
-        {value:"2", text:"Difficulty 2"},
-        {value:"3", text:"Difficulty 3"},
-        {value:"4", text:"Difficulty 4"}, 
-        {value:"5", text:"Difficulty 5"},
+      selected: "null",
+      optionnum: 1,
+      options: [
+        { value: null, text: "Difficulty", disabled: true },
+        { value: "1", text: "Difficulty 1" },
+        { value: "2", text: "Difficulty 2" },
+        { value: "3", text: "Difficulty 3" },
+        { value: "4", text: "Difficulty 4" },
+        { value: "5", text: "Difficulty 5" }
       ],
-      selected1:"null",
-      options1:[
-        {value:null, text:"Select Question Type", disabled:true},
-        { text: 'Long Question', value: '1' },
-        { text: 'Short Question', value: '2' },
-        { text: 'Multiple Choice Question', value: '3' },
-        { text: 'Audio Question', value: '4' },
-        { text: 'Image Question', value: '5' },
-        { text: 'Question', value: '6' },
-      ],
-      answerlist:["as"],
-      addQuestions:['ad']
-      
+      longQuestions: 0,
+      shortQuestions: 0,
+      mcqQuestions: 0,
+      fillInBlanks: 0,
+      matchthefollowing: 0
+    };
+  },
+  methods: {
+    addOptions() {
+      this.answerlist += 1;
+    },
+    addQuestion(selectedQues) {
+      if (selectedQues == "1") {
+        this.longQuestions += 1;
+      } else if (selectedQues == "2") {
+        this.shortQuestions += 1;
+      } else if (selectedQues == "3") {
+        this.mcqQuestions += 1;
+      } else if (selectedQues == "4") {
+        this.fillInBlanks += 1;
+      } else if (selectedQues == "5") {
+        this.matchthefollowing += 1;
       }
-  },
-methods:{
-  addOptions(){
-    this.answerlist.push("as"); 
-  },
-  addQuestions(){
-    this.addQuestions.push("ad")
-  },
-  deleteOptions(option){
-    this.answerlist.splice(option,1)
+    },
+    deleteOptions(option) {
+      this.answerlist.splice(option, 1);
+    }
   }
- 
-}
-}
-
+};
 </script>
 <style scoped>
-.card{
+.card {
   border-radius: 12px;
   margin: 2vh;
   box-shadow: 7px 10px 7px #c5c2c2;
+  text-align: left;
 }
-.input{
+
+.input {
   border-top: none;
-  border-right:none;
+  border-right: none;
   border-left: none;
   border-radius: 0px;
   outline: none;
@@ -216,97 +256,88 @@ methods:{
   margin-right: 2vh;
   outline: 0px;
   background-color: transparent;
-  
 }
-.input::after{
+.input::after {
   border: none;
   outline: none;
   outline-width: 0px;
 }
-.switch{
+.switch {
   margin-top: 2vh;
   margin-right: 2vh;
-  
 }
 .form-control:focus {
   border-color: inherit;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.custom-select:focus{
+.custom-select:focus {
   border-color: inherit;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 
-
-
-.base{
+.base {
   width: 100%;
 }
-.sss{
+.sss {
   border-top: none;
-  border-right:none;
+  border-right: none;
   border-left: none;
-
 }
-.btnn{
-border: none;
+.btnn {
+  border: none;
 }
-.btts{
+.btts {
   border: none;
 }
 
-.btts-1{
+.btts-1 {
   color: blue;
   border: none;
 }
 
-.bottom-button{
+.bottom-button {
   right: 0;
 }
-.add-btn{
-  color:green;
+.add-btn {
+  color: green;
 }
 
-.tsf{
+.tsf {
   margin-left: 15px;
 }
 
-.input-group-text{
+.input-group-text {
   border: none;
   background-color: transparent;
-  
 }
 
-.input-type{
+.input-type {
   border-top: none;
-  border-right:none;
-  border-left: none;
-  width:20%;
-  
-}
-
-
-.question-2{
-  border-top: none;
-  
   border-right: none;
-  border-left:none;
+  border-left: none;
+  width: 20%;
+}
+
+.question-2 {
+  border-top: none;
+
+  border-right: none;
+  border-left: none;
   float: left;
 }
-.question-3{
+.question-3 {
   width: 70%;
 }
 
-.select-2{
+.select-2 {
   border-top: none;
-  border-right:none;
+  border-right: none;
   border-left: none;
-  }
+}
 
 .imag-1 {
   margin-right: 90px;
 }
-
 </style>

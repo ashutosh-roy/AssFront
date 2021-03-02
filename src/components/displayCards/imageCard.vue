@@ -6,13 +6,23 @@
       v-for="entry in data"
       :key="entry.question"
     >
+      <template #header>
+        <div>
+          Image
+          <b-row align-h="end">
+            <b-button
+              variant="outline"
+              @click="$emit('delete-entry', entry.question)"
+              style="border:none"
+              ><i class="fas fa-trash"></i
+            ></b-button>
+          </b-row>
+        </div>
+      </template>
       <span style="color:grey" class="ml-3">Question</span>
+
       <br />
-      <b-img
-        :src='entry.fileUpload'
-        fluid
-        alt="Responsive image"
-      ></b-img>
+      <b-img :src="entry.fileUpload" fluid alt="Responsive image"></b-img>
       <br />
       <span class="ml-5">
         {{ entry.question }}
@@ -26,6 +36,7 @@
               class="switch"
               name="check-button"
               switch
+              disabled
             >
               Auto Correction
             </b-form-checkbox>
@@ -35,6 +46,7 @@
               class="switch"
               name="check-button"
               switch
+              disabled
             >
               Required
             </b-form-checkbox>
@@ -49,8 +61,8 @@ export default {
   name: "ImageCard",
   components: {},
   props: {
-    data: Array,
-  },
+    data: Array
+  }
 };
 </script>
 <style scoped>
