@@ -6,29 +6,29 @@
           >Multiple Choice Question(MCQ)</b-card-title
         >
         <template #header>
-        <div>
-          MCQ
-          <b-row align-h="end">
-            <b-button
-              variant="outline"
-              @click="$emit('delete-entry', entry.question)"
-              style="border:none"
-              ><i class="fas fa-trash"></i
-            ></b-button>
-          </b-row>
-        </div>
-      </template>
+          <div>
+            MCQ
+            <b-row align-h="end">
+              <b-button
+                variant="outline"
+                @click="$emit('delete-entry', entry.question)"
+                style="border:none"
+                ><i class="fas fa-trash"></i
+              ></b-button>
+            </b-row>
+          </div>
+        </template>
         <br />
         <br />
         <b-card-text style="float:left;margin-left:30px">Question</b-card-text>
         <b-row align-h="end">
-            <b-button
-              variant="outline"
-              @click="$emit('delete-entry', entry.question)"
-              style="border:none"
-              ><i class="fas fa-trash"></i
-            ></b-button>
-          </b-row>
+          <b-button
+            variant="outline"
+            @click="$emit('delete-entry', entry.question)"
+            style="border:none"
+            ><i class="fas fa-trash"></i
+          ></b-button>
+        </b-row>
         <br />
 
         <div>

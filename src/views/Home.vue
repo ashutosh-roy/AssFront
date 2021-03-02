@@ -46,33 +46,6 @@
         "
         >Short Answer</b-button
       >
-      <b-button
-        class="buttonchoice"
-        variant="outline-secondary"
-        @click="
-          image = true;
-          $bvModal.hide('modal-1');
-        "
-        >Image</b-button
-      >
-      <b-button
-        class="buttonchoice"
-        variant="outline-secondary"
-        @click="
-          video = true;
-          $bvModal.hide('modal-1');
-        "
-        >Video</b-button
-      >
-      <b-button
-        class="buttonchoice"
-        variant="outline-secondary"
-        @click="
-          audio = true;
-          $bvModal.hide('modal-1');
-        "
-        >Audio</b-button
-      >
       <b-button class="buttonchoice" variant="outline-secondary"
         >Fill in the Blanks</b-button
       >
@@ -97,12 +70,6 @@
     </b-modal>
     <b-row align-h="center">
       <b-col md="7" sm="12">
-        <div :key="audiodata">
-          <AudioCard :data="audiodata" v-if="audiodata.length != 0" v-on:delete-entry="deleteaudioEntry" />
-        </div>
-        <div :key="imagedata">
-          <ImageCard :data="imagedata" v-if="imagedata.length != 0" v-on:delete-entry="deleteImageEntry"/>
-        </div>
         <div :key="longQuestionData">
           <LongAnswerCard
             :data="longQuestionData"
@@ -118,12 +85,14 @@
             v-on:delete-entry="deleteShortEntry"
           />
         </div>
-        <div :key="videodata">
-          <VideoCard :data="videodata" v-if="videodata.length != 0" v-on:delete-entry="deleteVideoEntry" />
-        </div>
+
         <div :key="mcqdata">
-          <MCQCard :data="mcqdata" v-if="mcqdata.length != 0" v-on:delete-entry="deleteMcqEntry" />
-        </div>                
+          <MCQCard
+            :data="mcqdata"
+            v-if="mcqdata.length != 0"
+            v-on:delete-entry="deleteMcqEntry"
+          />
+        </div>
       </b-col>
     </b-row>
     <b-row align-h="center">
@@ -134,28 +103,13 @@
             v-if="longanswer"
             v-on:delete-form="longanswer = false"
             v-on:question-added="addlongquestion"
-            :entry="editLong"
+            :entry="editLongID"
           />
         </div>
         <ShortAnswer
           v-if="shortAnswer"
           v-on:delete-form="shortAnswer = false"
           v-on:question-added="addshortquestion"
-        />
-        <ImageQuestion
-          v-if="image"
-          v-on:delete-form="image = false"
-          v-on:question-added="addimagequestion"
-        />
-        <Video
-          v-if="video"
-          v-on:delete-form="video = false"
-          v-on:question-added="addvideoquestion"
-        />
-        <Audio
-          v-if="audio"
-          v-on:delete-form="audio = false"
-          v-on:question-added="addaudioquestion"
         />
         <MatchTheFollowing v-if="match" v-on:delete-form="match = false" />
         <mcq
@@ -175,18 +129,12 @@
 <script>
 // @ is an alias to /src
 import LongAnswerCard from "../components/displayCards/longAnswerCard";
-import AudioCard from "../components/displayCards/audioCard";
-import ImageCard from "../components/displayCards/imageCard";
 import MatchTheFollowing from "../components/forms/MatchTheFollowing.vue";
 import MCQCard from "../components/displayCards/mcqCard.vue";
 // import multipleTypeQuestions from "../components/forms/multipleType";
 import LongAnswer from "../components/forms/longAnswer";
 import ShortAnswer from "../components/forms/shortAnswer";
-import ImageQuestion from "../components/forms/imageQuestion";
-import Video from "../components/forms/videoQuestion";
 import mcq from "../components/forms/Mcq";
-import Audio from "../components/forms/audioQuestion";
-import VideoCard from "../components/displayCards/videoCard";
 import ShortAnswerCard from "../components/displayCards/shortAnswerCard";
 import { getMCQquestion, getCommonQuestion } from "../apiFunctions";
 import Comprehensive from "../components/forms/Comprehensive";
@@ -197,16 +145,10 @@ export default {
     // multipleTypeQuestions,
     LongAnswer,
     ShortAnswer,
-    ImageQuestion,
-    Video,
-    Audio,
     MatchTheFollowing,
-    AudioCard,
-    ImageCard,
     LongAnswerCard,
     mcq,
     ShortAnswerCard,
-    VideoCard,
     MCQCard,
     Comprehensive,
   },
@@ -214,33 +156,19 @@ export default {
     return {
       shortAnswer: false,
       longanswer: false,
-      image: false,
-      video: false,
-      audio: false,
       match: false,
       mcq: false,
       Comprehensive: false,
-      audiodata: [],
-      imagedata: [],
       longQuestionData: [],
       shortQuestionData: [],
-      videodata: [],
       mcqdata: [],
       ComprehensiveData: [],
-      editLong: {},
+      editLongID: -1,
     };
   },
   methods: {
     formActivity() {
-      if (
-        this.shortAnswer ||
-        this.longanswer ||
-        this.mcq ||
-        this.match ||
-        this.image ||
-        this.audio ||
-        this.video
-      ) {
+      if (this.shortAnswer || this.longanswer || this.mcq || this.match) {
         return true;
       } else {
         return false;
@@ -251,39 +179,17 @@ export default {
         (data) => data.question != question
       );
     },
-    deleteaudioEntry(question) {
-      this.audiodata = this.audiodata.filter(
-        (data) => data.question != question
-      );
-    },
-    deleteImageEntry(question) {
-      this.imagedata = this.imagedata.filter(
-        (data) => data.question != question
-      );
-    },
-    deleteShortEntry(question){
+
+    deleteShortEntry(question) {
       this.shortQuestionData = this.shortQuestionData.filter(
         (data) => data.question != question
       );
     },
-    deleteVideoEntry(question){
-      this.videodata = this.videodata.filter(
-        (data) => data.question != question
-      );
+
+    deleteMcqEntry(question) {
+      this.mcqdata = this.mcqdata.filter((data) => data.question != question);
     },
-    deleteMcqEntry(question){
-      this.mcqdata = this.mcqdata.filter(
-        (data) => data.question != question
-      );
-    },    
-    addaudioquestion(audiodata) {
-      this.audiodata.push(audiodata);
-      this.audio = false;
-    },
-    addimagequestion(imagedata) {
-      this.imagedata.push(imagedata);
-      this.image = false;
-    },
+
     addlongquestion(longquesdata) {
       this.longQuestionData.push(longquesdata);
       this.longanswer = false;
@@ -292,10 +198,7 @@ export default {
       this.shortQuestionData.push(shortquesdata);
       this.shortAnswer = false;
     },
-    addvideoquestion(videodata) {
-      this.videodata.push(videodata);
-      this.video = false;
-    },
+
     addmcq(mcqdata) {
       this.mcqdata.push(mcqdata);
       this.mcq = false;
@@ -304,16 +207,9 @@ export default {
       this.ComprehensiveData.push(ComprehensiveData);
       this.Comprehensive = false;
     },
-    editLongQuestion(identifierQues) {
-      var i = 0;
-      while (i < this.longQuestionData.length) {
-        if (this.longQuestionData[i].question == identifierQues) {
-          this.editLong = this.longQuestionData[i];
-          console.log(this.editLong);
-          this.longQuestionData.splice(i, 1);
-          this.longanswer = true;
-        }
-      }
+    editLongQuestion(id) {
+      this.editLongID = id;
+      this.longanswer = true;
     },
   },
   created: function() {

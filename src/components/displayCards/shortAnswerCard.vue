@@ -4,9 +4,9 @@
       class="card"
       sub-title="Short Questions"
       v-for="entry in data"
-      :key="entry.question"     
+      :key="entry.question"
     >
-    <template #header>
+      <template #header>
         <div>
           Short Answer Questions
           <b-row align-h="end">

@@ -30,8 +30,11 @@
         @click="toogleDataBank"
         >Question Paper Panel</b-col
       >
-      <b-col :lg="DBWidth" v-if="DBWidth == '6'" style="background: #0000ff;"
-      @click="addSection"
+      <b-col
+        :lg="DBWidth"
+        v-if="DBWidth == '6'"
+        style="background: #0000ff;"
+        @click="addSection"
         >Data Bank Panel</b-col
       >
     </b-row>
@@ -46,16 +49,13 @@ export default {
       DBWidth: "6",
       QPWidth: "6",
       sectionLength: "100vw",
-      sections: [
-        { name: "Section 1" }
-      ]
+      sections: [{ name: "Section 1" }]
     };
   },
   computed: {
     cssVars() {
       return {
-        "--seclen": this.sectionLength+"vh",
-        
+        "--seclen": this.sectionLength + "vh"
       };
     }
   },
@@ -70,18 +70,14 @@ export default {
         this.QPWidth = "6";
       }
     },
-    addSection: function(){
-        this.sections.push({name:"Section "+(this.sections.length+1)})
-        if ((((this.sections.length+1)*25)) > 170 ){
-          this.sectionLength = (((this.sections.length+1)*25));
-        }
-        
-
+    addSection: function() {
+      this.sections.push({ name: "Section " + (this.sections.length + 1) });
+      if ((this.sections.length + 1) * 25 > 170) {
+        this.sectionLength = (this.sections.length + 1) * 25;
+      }
     }
   }
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

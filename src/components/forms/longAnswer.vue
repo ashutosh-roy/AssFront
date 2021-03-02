@@ -94,10 +94,11 @@
   </div>
 </template>
 <script>
+import { getCommonQuestion } from "../../apiFunctions";
 export default {
   name: "LongAnswer",
   props: {
-    entry: Object,
+    entry: Number,
   },
   data() {
     return {
@@ -108,7 +109,7 @@ export default {
         difficultyLevel: null,
         question: "",
         questionType: "Long Answer Questions",
-        answerKey: "",
+        answerKey: "some answer",
         autoCorrection: 0,
         required: 0,
         addToPublic: false,
@@ -133,10 +134,16 @@ export default {
     },
   },
   created: function() {
-    alert(this.entry.toString());
-    if (this.entry != {}) {
-      console.log("no");
-      this.questions = this.entry;
+    if (this.entry != -1) {
+      getCommonQuestion().then((res) => {
+        var i = 0;
+        while (i < res.data.data.length) {
+          if (res.data.data[i].id == this.entry) {
+            this.questions = res.data.data[i];
+          }
+          i++;
+        }
+      });
     }
   },
 };

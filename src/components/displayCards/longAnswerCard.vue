@@ -12,7 +12,7 @@
           <b-row align-h="end">
             <b-button
               variant="outline"
-              @click="$emit('edit-entry', entry.question)"
+              @click="$emit('edit-entry', entry.id)"
               style="border:none"
               ><i class="fas fa-edit"></i
             ></b-button>

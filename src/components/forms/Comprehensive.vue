@@ -206,13 +206,13 @@ export default {
         { value: "2", text: "Difficulty 2" },
         { value: "3", text: "Difficulty 3" },
         { value: "4", text: "Difficulty 4" },
-        { value: "5", text: "Difficulty 5" },
+        { value: "5", text: "Difficulty 5" }
       ],
       longQuestions: 0,
       shortQuestions: 0,
       mcqQuestions: 0,
       fillInBlanks: 0,
-      matchthefollowing: 0,
+      matchthefollowing: 0
     };
   },
   methods: {
@@ -234,8 +234,8 @@ export default {
     },
     deleteOptions(option) {
       this.answerlist.splice(option, 1);
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

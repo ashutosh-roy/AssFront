@@ -27,7 +27,7 @@
                   >
                   <template #header>        
                     <i class="fas fa-trash-alt"></i>
-                  </b-button>
+                  
                   <br />
                 </b-col>
               </b-row>
