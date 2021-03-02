@@ -159,6 +159,9 @@
 import { postMCQquestion } from "../../apiFunctions";
 export default {
   name: "mcq",
+  props: {
+    entry: Number,
+  },
   components: {},
   data() {
     return {
@@ -233,6 +236,19 @@ export default {
         .catch((err) => console.log(err));
       this.$emit("question-added", this.question);
     },
+  },
+  created: function() {
+    if (this.entry != -1) {
+      getCommonQuestion().then((res) => {
+        var i = 0;
+        while (i < res.data.data.length) {
+          if (res.data.data[i].id == this.entry) {
+            this.questions = res.data.data[i];
+          }
+          i++;
+        }
+      });
+    }
   },
 };
 </script>
