@@ -16,17 +16,20 @@
       style="height:100%;width:100%;"
       v-if="checkQuestions() == false && formActivity() == false"
     >
-      <b-row align-h="center" align-v="center">
-        <b-button
-          variant="outline"
-          style="border:none; color:grey"
-          v-b-modal.modal-1
-          ><i class="fas fa-plus fa-7x"></i
-        ></b-button>
-      </b-row>
-      <b-row align-h="center" align-v="center">
-        <span style="color:grey">Click to start adding tests</span>
-      </b-row>
+      <b-card class="card">
+        <b-row align-h="center" align-v="center">
+          <b-button
+            variant="outline"
+            style="border:none; color:grey"
+            v-b-modal.modal-1
+            ><i class="fas fa-plus fa-7x"></i
+          ></b-button>
+        </b-row>
+
+        <b-row align-h="center" align-v="center">
+          <span style="color:grey">Click to start adding tests</span>
+        </b-row>
+      </b-card>
     </div>
     <b-modal
       id="modal-1"
@@ -99,6 +102,7 @@
             :data="shortQuestionData"
             v-if="shortQuestionData.length != 0"
             v-on:delete-entry="deleteShortEntry"
+            v-on:edit-entry="editShortQuestion"
           />
         </div>
 
@@ -107,6 +111,7 @@
             :data="mcqdata"
             v-if="mcqdata.length != 0"
             v-on:delete-entry="deleteMcqEntry"
+            v-on:edit-entry="editMcqQuestion"
           />
         </div>
       </b-col>
@@ -126,12 +131,14 @@
           v-if="shortAnswer"
           v-on:delete-form="shortAnswer = false"
           v-on:question-added="addshortquestion"
+          :entry="editShortID"
         />
         <MatchTheFollowing v-if="match" v-on:delete-form="match = false" />
         <mcq
           v-if="mcq"
           v-on:delete-form="mcq = false"
           v-on:question-added="addmcq"
+          :entry="editMcqID"
         />
         <Comprehensive
           v-if="Comprehensive"
@@ -180,6 +187,8 @@ export default {
       mcqdata: [],
       ComprehensiveData: [],
       editLongID: -1,
+      editShortID: -1,
+      editMcqID: -1,
     };
   },
   methods: {
@@ -238,6 +247,14 @@ export default {
       this.editLongID = id;
       this.longanswer = true;
     },
+    editShortQuestion(id) {
+      this.editShortID = id;
+      this.shortAnswer = true;
+    },
+    editMcqQuestion(id) {
+      this.editMcqID = id;
+      this.mcq = true;
+    },
   },
   created: function() {
     getMCQquestion()
@@ -268,5 +285,12 @@ export default {
   width: 90px;
   border: 1px dashed;
   padding: 0px;
+}
+.card {
+  height: 75vh;
+  display: grid;
+  align-items: center;
+  padding: 150px;
+  background: transparent;
 }
 </style>

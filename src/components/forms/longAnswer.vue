@@ -94,7 +94,7 @@
   </div>
 </template>
 <script>
-import { getCommonQuestion } from "../../apiFunctions";
+import { postCommonQuestion,getCommonQuestion } from '../../apiFunctions';
 export default {
   name: "LongAnswer",
   props: {
@@ -130,6 +130,9 @@ export default {
   },
   methods: {
     addquestion() {
+       postCommonQuestion(this.questions)
+       .then(res=> console.log("LongAnswer data saved" + res))
+       .catch(err=> console.log(err));
       this.$emit("question-added", this.questions);
     }
   },

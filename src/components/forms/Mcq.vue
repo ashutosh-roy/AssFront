@@ -6,7 +6,7 @@
           MCQ
           <b-row align-h="end">
             <b-button
-              variant="outline-secondary"
+              variant="outline"
               @click="$emit('delete-form')"
               style="border:none"
               ><i class="fas fa-trash"></i
@@ -170,7 +170,7 @@ export default {
         { value: "2", text: "Difficulty Level 2" },
         { value: "3", text: "Difficulty Level 3" },
         { value: "4", text: "Difficulty Level 4" },
-        { value: "5", text: "Difficulty Level 5" }
+        { value: "5", text: "Difficulty Level 5" },
       ],
 
       optionnum: 1,
@@ -184,8 +184,8 @@ export default {
         required: 0,
         addToPublic: false,
         addToDatabank: false,
-        fileUpload: ""
-      }
+        fileUpload: "",
+      },
 
       /*subject = data["subject"]
         topic = data["topic"]
@@ -213,7 +213,7 @@ export default {
       } else {
         this.answer[i - 1] = "outline-dark";
         this.question.answerkey = this.question.answerkey.filter(
-          added => added != ans
+          (added) => added != ans
         );
         console.log(this.question.answerkey);
       }
@@ -224,16 +224,16 @@ export default {
     },
     deleteOptions(i) {
       this.question.options = this.question.options.filter(
-        choice => choice != choice[i]
+        (choice) => choice != choice[i]
       );
     },
     addquestion() {
       postMCQquestion(this.question)
-        .then(res => console.log("MCQ data saved!" + res))
-        .catch(err => console.log(err));
+        .then((res) => console.log("MCQ data saved!" + res))
+        .catch((err) => console.log(err));
       this.$emit("question-added", this.question);
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
