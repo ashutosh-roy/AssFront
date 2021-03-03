@@ -55,11 +55,11 @@ export default {
     return {
       testnum: 0,
       testnames: [],
-      name: "",
+      name: ""
     };
   },
   components: {
-    TestCard,
+    TestCard
   },
   methods: {
     addtest() {
@@ -71,16 +71,16 @@ export default {
       }
     },
     deleteTest(deletetestname) {
-      this.testnames = this.testnames.filter((name) => name != deletetestname);
+      this.testnames = this.testnames.filter(name => name != deletetestname);
       this.testnum -= 1;
     },
     testConfigurations(testname) {
       this.$router.replace({
         name: "Test Configuration",
-        params: { testname },
+        params: { testname }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

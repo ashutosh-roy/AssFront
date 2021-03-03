@@ -77,12 +77,12 @@ export default {
   name: "TestCofiguration",
   data() {
     return {
-      text: "hbedchsndjcnjsdn",
+      text: "hbedchsndjcnjsdn"
     };
   },
   props: {
-    testname: String,
-  },
+    testname: String
+  }
 };
 </script>
 <style scoped>

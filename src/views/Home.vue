@@ -187,7 +187,7 @@ export default {
       ComprehensiveData: [],
       editLongID: -1,
       editShortID: -1,
-      editMcqID: -1,
+      editMcqID: -1
     };
   },
   methods: {

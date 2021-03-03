@@ -30,7 +30,7 @@
 export default {
   name: "TestCard",
   props: {
-    testname: String,
+    testname: String
   },
   methods: {
     del() {
@@ -38,8 +38,8 @@ export default {
     },
     config() {
       this.$emit("configurations", this.testname);
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

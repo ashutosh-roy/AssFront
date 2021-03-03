@@ -34,7 +34,7 @@ const routes = [
     path: "/testConfiguration",
     name: "Test Configuration",
     component: TestConfiguration,
-    props:true
+    props: true
   },
   {
     path: "/about",

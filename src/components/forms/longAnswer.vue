@@ -181,10 +181,10 @@ import { postCommonQuestion, getCommonQuestion } from "../../apiFunctions";
 export default {
   name: "LongAnswer",
   components: {
-    Media,
+    Media
   },
   props: {
-    entry: Number,
+    entry: Number
   },
   data() {
     return {
@@ -200,7 +200,7 @@ export default {
         addToDatabank: false,
         sizelimit: 0,
         fileUpload: "",
-        fileType: "",
+        fileType: ""
       },
       selected: "null",
       options: [
@@ -209,8 +209,8 @@ export default {
         { value: "2", text: "Difficulty Level 2" },
         { value: "3", text: "Difficulty Level 3" },
         { value: "4", text: "Difficulty Level 4" },
-        { value: "5", text: "Difficulty Level 5" },
-      ],
+        { value: "5", text: "Difficulty Level 5" }
+      ]
     };
   },
   mounted() {
@@ -279,7 +279,7 @@ export default {
       var input = event.target;
       if (input.files && input.files[0]) {
         var reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
           this.questions.fileUpload = e.target.result;
         };
         this.questions.fileType = input.files[0].name;
@@ -288,13 +288,13 @@ export default {
         this.$bvModal.hide("modal-3");
       }
       postCommonQuestion(this.questions)
-        .then((res) => console.log("LongAnswer data saved" + res))
-        .catch((err) => console.log(err));
-    },
+        .then(res => console.log("LongAnswer data saved" + res))
+        .catch(err => console.log(err));
+    }
   },
   created: function() {
     if (this.entry != -1) {
-      getCommonQuestion().then((res) => {
+      getCommonQuestion().then(res => {
         var i = 0;
         while (i < res.data.data.length) {
           if (res.data.data[i].id == this.entry) {
@@ -304,7 +304,7 @@ export default {
         }
       });
     }
-  },
+  }
 };
 </script>
 <style scoped>
