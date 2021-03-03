@@ -105,7 +105,6 @@
             v-on:edit-entry="editShortQuestion"
           />
         </div>
-
         <div :key="mcqdata">
           <MCQCard
             :data="mcqdata"
@@ -173,7 +172,7 @@ export default {
     mcq,
     ShortAnswerCard,
     MCQCard,
-    Comprehensive,
+    Comprehensive
   },
   data() {
     return {
@@ -212,18 +211,17 @@ export default {
     },
     deleteEntry(question) {
       this.longQuestionData = this.longQuestionData.filter(
-        (data) => data.question != question
+        data => data.question != question
       );
     },
-
     deleteShortEntry(question) {
       this.shortQuestionData = this.shortQuestionData.filter(
-        (data) => data.question != question
+        data => data.question != question
       );
     },
 
     deleteMcqEntry(question) {
-      this.mcqdata = this.mcqdata.filter((data) => data.question != question);
+      this.mcqdata = this.mcqdata.filter(data => data.question != question);
     },
 
     addlongquestion(longquesdata) {
@@ -254,13 +252,13 @@ export default {
     editMcqQuestion(id) {
       this.editMcqID = id;
       this.mcq = true;
-    },
+    }
   },
   created: function() {
     getMCQquestion()
-      .then((res) => (this.mcqdata = res.data.data))
-      .catch((err) => console.log(err));
-    getCommonQuestion().then((res) => {
+      .then(res => (this.mcqdata = res.data.data))
+      .catch(err => console.log(err));
+    getCommonQuestion().then(res => {
       var i = 0;
       while (i < res.data.data.length) {
         if (res.data.data[i].questionType == "Long Answer Questions") {
@@ -276,7 +274,7 @@ export default {
         }
       }
     });
-  },
+  }
 };
 </script>
 <style scoped>
