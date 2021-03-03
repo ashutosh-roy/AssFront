@@ -32,14 +32,15 @@
         @click="toogleDataBank"
         >Question Paper Panel</b-col
       >
+      <--
       <b-col
         :lg="DBWidth"
         v-if="DBWidth == '6'"
         style="background: #0000ff;"
         @click="addSection"
         >Data Bank Panel</b-col
-      >
-       -->
+      > -->
+      
           <b-col cols="2">
             <div class="button-1">
               <button class="button-2" type="button" @click="addSection">
@@ -51,7 +52,22 @@
       </b-container>
     </b-card>
     <div v-if="sections.length != 0">
-      <Home />
+      <b-row>
+
+        <b-col cols="7">
+                <Home />
+        </b-col>
+ 
+           <b-col cols="5"> 
+             <b-card >
+               <b-text> hello bro wehre</b-text>
+              <h2>Hahahaha</h2>
+             </b-card>
+        </b-col>
+
+      </b-row>
+
+
     </div>
   </div>
 </template>

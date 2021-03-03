@@ -144,7 +144,9 @@
           v-on:delete-form="Comprehensive = false"
         />
       </b-col>
+    
     </b-row>
+   
   </div>
 </template>
 
