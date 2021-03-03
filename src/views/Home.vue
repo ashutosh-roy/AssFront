@@ -6,7 +6,7 @@
     </b-row> -->
     <b-row align-h="center" v-if="checkQuestions() == true">
       <b-button
-        style="float:right; margin-left:90%"
+        style="float:right; margin-left:90%;"
         v-b-modal.modal-1
         :disabled="formActivity()"
         ><i class="fas fa-plus"></i
@@ -144,9 +144,7 @@
           v-on:delete-form="Comprehensive = false"
         />
       </b-col>
-    
     </b-row>
-   
   </div>
 </template>
 
@@ -199,13 +197,16 @@ export default {
         this.shortQuestionData.length != 0 ||
         this.mcqdata.length != 0
       ) {
+        this.$emit("show-db");
         return true;
       } else {
+        this.$emit("noshow-db");
         return false;
       }
     },
     formActivity() {
       if (this.shortAnswer || this.longanswer || this.mcq || this.match) {
+        this.$emit("show-db");
         return true;
       } else {
         return false;

@@ -40,7 +40,7 @@
         @click="addSection"
         >Data Bank Panel</b-col
       > -->
-      
+
           <b-col cols="2">
             <div class="button-1">
               <button class="button-2" type="button" @click="addSection">
@@ -53,38 +53,35 @@
     </b-card>
     <div v-if="sections.length != 0">
       <b-row>
-
-        <b-col cols="7">
-                <Home />
+        <b-col style="overflow-x:auto;height: 76vh;">
+          <Home v-on:show-db="showdb = true" v-on:noshow-db="showdb = false" />
         </b-col>
- 
-           <b-col cols="5"> 
-             <b-card >
-               <b-text> hello bro wehre</b-text>
-              <h2>Hahahaha</h2>
-             </b-card>
+        <!-- @click="toogleDataBank" -->
+        <b-col cols="5" v-if="showdb">
+          <Databank />
         </b-col>
-
       </b-row>
-
-
     </div>
   </div>
 </template>
 
 <script>
 import Home from "./Home.vue";
+import Databank from "./Databank.vue";
+
 export default {
   name: "QPBuilder",
   components: {
-    Home
+    Home,
+    Databank
   },
   data() {
     return {
       DBWidth: "6",
       QPWidth: "6",
       sectionLength: "100vw",
-      sections: []
+      sections: [],
+      showdb: false
     };
   },
   computed: {
@@ -111,6 +108,9 @@ export default {
         this.sectionLength = (this.sections.length + 1) * 25;
       }
     }
+    // displayScreen:function() {
+
+    // }
   }
 };
 </script>
