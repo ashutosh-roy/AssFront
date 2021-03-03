@@ -1,38 +1,39 @@
 <template>
   <div>
-    <b-card class="card" v-for="entry in data" :key="entry.question" header-tag="header">
+    <b-card
+      class="card"
+      v-for="entry in data"
+      :key="entry.question"
+      header-tag="header"
+    >
       <template #header>
-
         <div>
-        <b-row>  
-          <b-col>
-            Fill In The Blanks            
-          </b-col>     
-          <b-col >
-            <b-row align-h="end">
-              <b-button
-                variant="outline"
-                @click="$emit('edit-entry', entry.id)"
-                style="border:none"
-                ><i class="fas fa-edit"></i
-              ></b-button>
+          <b-row>
+            <b-col>
+              Fill In The Blanks
+            </b-col>
+            <b-col>
+              <b-row align-h="end">
+                <b-button
+                  variant="outline"
+                  @click="$emit('edit-entry', entry.id)"
+                  style="border:none"
+                  ><i class="fas fa-edit"></i
+                ></b-button>
                 <b-button
                   variant="outline"
                   @click="$emit('delete-entry', entry.question)"
                   style="border:none"
                   ><i class="fas fa-trash"></i
                 ></b-button>
-            </b-row>              
-          </b-col>
-        </b-row>       
+              </b-row>
+            </b-col>
+          </b-row>
         </div>
+      </template>
 
-        </template>
-        
       <b-card-text>
-        <b-card-title style="float:left"
-          >Fill In The Blanks</b-card-title
-        >
+        <b-card-title style="float:left">Fill In The Blanks</b-card-title>
         <br />
         <br />
         <b-card-text style="float:left;margin-left:30px">Question</b-card-text>

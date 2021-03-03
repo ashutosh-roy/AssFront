@@ -1,62 +1,62 @@
 <template>
-  <div class="questionboxcontainer">    
-      <b-card class="card">
-        <b-card-text>
-          <b-form inline>
-            <div class="firstrow">
-              <h5>Match The Following</h5>
-              <br />
-              <h6 style="margin-left: -63%">Question</h6>
-            </div>
-            <div class="matchthefollowing">
-              <!-- v-for="(item, key, index) in objectItems -->
-              <div v-for="item in inputs" :key="item.id">
-                <div class="optionrows">
-                  <b-input-group>
-                    <!-- <template #prepend>
+  <div class="questionboxcontainer">
+    <b-card class="card">
+      <b-card-text>
+        <b-form inline>
+          <div class="firstrow">
+            <h5>Match The Following</h5>
+            <br />
+            <h6 style="margin-left: -63%">Question</h6>
+          </div>
+          <div class="matchthefollowing">
+            <!-- v-for="(item, key, index) in objectItems -->
+            <div v-for="item in inputs" :key="item.id">
+              <div class="optionrows">
+                <b-input-group>
+                  <!-- <template #prepend>
                             <b-input-group-text >
                                 <li></li>
                             </b-input-group-text>
                             </template> -->
-                    <template #prepend>
-                      <b-form-radio disabled>
-                        <span class="sr-only"
-                          >Radio for following text input</span
-                        >
-                      </b-form-radio>
-                    </template>
-                    <b-form-input v-model="item.sideA"></b-form-input>
-                    <b-form-input v-model="item.sideB"></b-form-input>
-                  </b-input-group>
-                </div>
+                  <template #prepend>
+                    <b-form-radio disabled>
+                      <span class="sr-only"
+                        >Radio for following text input</span
+                      >
+                    </b-form-radio>
+                  </template>
+                  <b-form-input v-model="item.sideA"></b-form-input>
+                  <b-form-input v-model="item.sideB"></b-form-input>
+                </b-input-group>
               </div>
             </div>
-            <b-input-group style="padding-left:70%">
-              <b-form-checkbox
-                v-model="checked"
-                class="switch"
-                name="check-button"
-                switch
-                disabled
-              >
-                Auto Correction
-              </b-form-checkbox>
+          </div>
+          <b-input-group style="padding-left:70%">
+            <b-form-checkbox
+              v-model="checked"
+              class="switch"
+              name="check-button"
+              switch
+              disabled
+            >
+              Auto Correction
+            </b-form-checkbox>
 
-              <b-form-checkbox
-                v-model="checked"
-                class="switch"
-                name="check-button"
-                switch
-                disabled
-              >
-                Required
-              </b-form-checkbox>
-              <!-- <template #append> -->
-            </b-input-group>
-          </b-form>
-        </b-card-text>
-      </b-card>
-    </div>
+            <b-form-checkbox
+              v-model="checked"
+              class="switch"
+              name="check-button"
+              switch
+              disabled
+            >
+              Required
+            </b-form-checkbox>
+            <!-- <template #append> -->
+          </b-input-group>
+        </b-form>
+      </b-card-text>
+    </b-card>
+  </div>
 </template>
 <script>
 export default {

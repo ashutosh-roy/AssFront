@@ -49,11 +49,15 @@
                         >
                       </b-form-radio>
                     </template>
-                    <b-form-input v-model="questions.answerKey.sideA"></b-form-input>
+                    <b-form-input
+                      v-model="questions.answerKey.sideA"
+                    ></b-form-input>
                     <b-button variant="outline-secondary">
                       <i class="fas fa-file-upload"></i>
                     </b-button>
-                    <b-form-input v-model="questions.answerKey.sideB"></b-form-input>
+                    <b-form-input
+                      v-model="questions.answerKey.sideB"
+                    ></b-form-input>
                     <b-button variant="outline-secondary">
                       <i class="fas fa-file-upload"></i>
                     </b-button>
@@ -83,14 +87,10 @@
                     </b-form-radio>
                   </template>
 
-                  <b-form-input
-                    @click="addsideA(k)"
-                    class="input"
+                  <b-form-input @click="addsideA(k)" class="input"
                     >Side A</b-form-input
                   >
-                  <b-form-input
-                    @click="addsideB(k)"
-                    class="input"
+                  <b-form-input @click="addsideB(k)" class="input"
                     >Side B</b-form-input
                   >
                 </b-input-group>
@@ -172,17 +172,17 @@ export default {
         question: "",
         questionType: "Long Answer Questions",
         answerKey: [
-        {
-          // sideA: "",
-          // sideB: ""
-        }
-       ],
+          {
+            // sideA: "",
+            // sideB: ""
+          }
+        ],
         autoCorrection: 0,
         required: 0,
         addToPublic: false,
         addToDatabank: false,
         sizelimit: 0,
-        fileUpload: "",
+        fileUpload: ""
       },
       selected: "null",
       options: [

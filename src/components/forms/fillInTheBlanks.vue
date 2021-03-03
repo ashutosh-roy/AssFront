@@ -156,11 +156,14 @@
   </div>
 </template>
 <script>
-import { postFillInTheBlanksquestion, getFillInTheBlanksquestion} from "../../apiFunctions";
+import {
+  postFillInTheBlanksquestion,
+  getFillInTheBlanksquestion
+} from "../../apiFunctions";
 export default {
   name: "FillInTheBlanks",
   props: {
-    entry: Number,
+    entry: Number
   },
   components: {},
   data() {
@@ -173,7 +176,7 @@ export default {
         { value: "2", text: "Difficulty Level 2" },
         { value: "3", text: "Difficulty Level 3" },
         { value: "4", text: "Difficulty Level 4" },
-        { value: "5", text: "Difficulty Level 5" },
+        { value: "5", text: "Difficulty Level 5" }
       ],
 
       optionnum: 1,
@@ -187,8 +190,8 @@ export default {
         required: 0,
         addToPublic: false,
         addToDatabank: false,
-        fileUpload: "",
-      },
+        fileUpload: ""
+      }
 
       /*subject = data["subject"]
         topic = data["topic"]
@@ -216,7 +219,7 @@ export default {
       } else {
         this.answer[i - 1] = "outline-dark";
         this.question.answerkey = this.question.answerkey.filter(
-          (added) => added != ans
+          added => added != ans
         );
         console.log(this.question.answerkey);
       }
@@ -227,19 +230,19 @@ export default {
     },
     deleteOptions(i) {
       this.question.options = this.question.options.filter(
-        (choice) => choice != choice[i]
+        choice => choice != choice[i]
       );
     },
     addquestion() {
       postFillInTheBlanksquestion(this.question)
-        .then((res) => console.log("Fill In The Blanks data saved!" + res))
-        .catch((err) => console.log(err));
+        .then(res => console.log("Fill In The Blanks data saved!" + res))
+        .catch(err => console.log(err));
       this.$emit("question-added", this.question);
-    },
+    }
   },
   created: function() {
     if (this.entry != -1) {
-      getFillInTheBlanksquestion().then((res) => {
+      getFillInTheBlanksquestion().then(res => {
         var i = 0;
         while (i < res.data.data.length) {
           if (res.data.data[i].id == this.entry) {
@@ -249,7 +252,7 @@ export default {
         }
       });
     }
-  },
+  }
 };
 </script>
 <style scoped>
