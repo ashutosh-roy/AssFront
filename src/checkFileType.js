@@ -4,6 +4,7 @@ export function isImage(filename) {
   switch (ext.toLowerCase()) {
     case "jpg":
     case "gif":
+    case "jpeg":
     case "bmp":
     case "png":
       //etc
