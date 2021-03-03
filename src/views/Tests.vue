@@ -5,6 +5,25 @@
       style="height: 95vh;
   overflow: auto;"
     >
+      <b-modal id="deleteConfirmation" hide-footer hide-header>
+        <div>
+          <span style="color:grey"
+            >Are you sure you want to delete this test?</span
+          >
+          <br />
+          <b-row align-h="end" class="mr-1">
+            <b-button class="deleteModalbtn" variant="light" @click="delTest()"
+              >Accept</b-button
+            >
+            <b-button
+              class="deleteModalbtn"
+              variant="light"
+              @click="$bvModal.hide('deleteConfirmation')"
+              >Cancel</b-button
+            >
+          </b-row>
+        </div>
+      </b-modal>
       <b-row align-h="end" v-if="testnum != 0">
         <b-button variant="outline" style="border:none" v-b-modal.testNameModal
           ><i class="fas fa-plus fa-2x"></i
@@ -55,11 +74,12 @@ export default {
     return {
       testnum: 0,
       testnames: [],
-      name: ""
+      name: "",
+      tobeDel: "",
     };
   },
   components: {
-    TestCard
+    TestCard,
   },
   methods: {
     addtest() {
@@ -70,17 +90,22 @@ export default {
         this.name = "";
       }
     },
-    deleteTest(deletetestname) {
-      this.testnames = this.testnames.filter(name => name != deletetestname);
+    delTest() {
+      this.testnames = this.testnames.filter((name) => name != this.tobeDel);
       this.testnum -= 1;
+      this.$bvModal.hide("deleteConfirmation");
+    },
+    deleteTest(deletetestname) {
+      this.tobeDel = deletetestname;
+      this.$bvModal.show("deleteConfirmation");
     },
     testConfigurations(testname) {
       this.$router.replace({
         name: "Test Configuration",
-        params: { testname }
+        params: { testname },
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
@@ -89,5 +114,12 @@ export default {
   margin: 2vh;
   box-shadow: 7px 10px 7px #c5c2c2;
   text-align: left;
+}
+.deleteModalbtn {
+  padding-top: 0px;
+  padding-bottom: 0px;
+
+  margin-right: 1vh;
+  box-shadow: 3px 3px 3px #c5c2c2;
 }
 </style>
