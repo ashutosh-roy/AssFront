@@ -6,7 +6,7 @@
           MCQ
           <b-row align-h="end">
             <b-button
-              variant="outline-secondary"
+              variant="outline"
               @click="$emit('delete-form')"
               style="border:none"
               ><i class="fas fa-trash"></i
@@ -156,7 +156,7 @@
   </div>
 </template>
 <script>
-import { postMCQquestion, getMCQQuestion } from "../../apiFunctions";
+import { postMCQquestion, getMCQquestion } from "../../apiFunctions";
 export default {
   name: "mcq",
   props: {
@@ -239,7 +239,7 @@ export default {
   },
   created: function() {
     if (this.entry != -1) {
-      getMCQQuestion().then(res => {
+      getMCQquestion().then(res => {
         var i = 0;
         while (i < res.data.data.length) {
           if (res.data.data[i].id == this.entry) {
