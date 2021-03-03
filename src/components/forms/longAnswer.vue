@@ -283,7 +283,7 @@ export default {
           this.questions.fileUpload = e.target.result;
         };
         this.questions.fileType = input.files[0].name;
-        // console.log("-------------------------")
+
         reader.readAsDataURL(input.files[0]);
         this.$bvModal.hide("modal-3");
       }
