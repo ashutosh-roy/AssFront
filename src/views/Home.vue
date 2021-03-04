@@ -181,7 +181,7 @@ import ShortAnswerCard from "../components/displayCards/shortAnswerCard";
 import {
   getMCQquestion,
   getCommonQuestion,
-  getFillInTheBlanksquestion,
+  getFillInTheBlanksquestion
 } from "../apiFunctions";
 import Comprehensive from "../components/forms/Comprehensive";
 import FillInTheBlanksCard from "../components/displayCards/fillInTheBlanksCard.vue";
@@ -199,7 +199,7 @@ export default {
     MCQCard,
     Comprehensive,
     FillInTheBlanks,
-    FillInTheBlanksCard,
+    FillInTheBlanksCard
   },
   data() {
     return {
@@ -217,7 +217,7 @@ export default {
       editLongID: -1,
       editShortID: -1,
       editMcqID: -1,
-      editFitbID: -1,
+      editFitbID: -1
     };
   },
   methods: {
@@ -225,7 +225,8 @@ export default {
       if (
         this.longQuestionData.length != 0 ||
         this.shortQuestionData.length != 0 ||
-        this.mcqdata.length != 0
+        this.mcqdata.length != 0 ||
+        this.fillInTheBlanksData != 0
       ) {
         this.$emit("show-db");
         return true;
@@ -235,7 +236,13 @@ export default {
       }
     },
     formActivity() {
-      if (this.shortAnswer || this.longanswer || this.mcq || this.match) {
+      if (
+        this.shortAnswer ||
+        this.longanswer ||
+        this.mcq ||
+        this.match ||
+        this.fitb
+      ) {
         this.$emit("show-db");
         return true;
       } else {
@@ -244,22 +251,22 @@ export default {
     },
     deleteEntry(question) {
       this.longQuestionData = this.longQuestionData.filter(
-        (data) => data.question != question
+        data => data.question != question
       );
     },
     deleteShortEntry(question) {
       this.shortQuestionData = this.shortQuestionData.filter(
-        (data) => data.question != question
+        data => data.question != question
       );
     },
 
     deleteMcqEntry(question) {
-      this.mcqdata = this.mcqdata.filter((data) => data.question != question);
+      this.mcqdata = this.mcqdata.filter(data => data.question != question);
     },
 
     deleteFillInTheBlanksEntry(question) {
       this.fillInTheBlanksData = this.fillInTheBlanksData.filter(
-        (data) => data.question != question
+        data => data.question != question
       );
     },
 
@@ -299,16 +306,16 @@ export default {
     editFillInTheBlanksQuestion(id) {
       this.editFitbID = id;
       this.fitb = true;
-    },
+    }
   },
   created: function() {
     getMCQquestion()
-      .then((res) => (this.mcqdata = res.data.data))
-      .catch((err) => console.log(err));
+      .then(res => (this.mcqdata = res.data.data))
+      .catch(err => console.log(err));
     getFillInTheBlanksquestion()
-      .then((res) => (this.fillInTheBlanksData = res.data.data))
-      .catch((err) => console.log(err));
-    getCommonQuestion().then((res) => {
+      .then(res => (this.fillInTheBlanksData = res.data.data))
+      .catch(err => console.log(err));
+    getCommonQuestion().then(res => {
       var i = 0;
       while (i < res.data.data.length) {
         if (res.data.data[i].questionType == "Long Answer Questions") {
@@ -324,7 +331,7 @@ export default {
         }
       }
     });
-  },
+  }
 };
 </script>
 <style scoped>
