@@ -94,7 +94,7 @@
       >
     </b-modal>
     <b-row align-h="center">
-      <b-col md="7" sm="12">
+      <b-col md="9" sm="12">
         <div :key="longQuestionData">
           <LongAnswerCard
             :data="longQuestionData"
@@ -130,7 +130,7 @@
       </b-col>
     </b-row>
     <b-row align-h="center">
-      <b-col md="7" sm="12">
+      <b-col md="9" sm="12">
         <!-- <multipleTypeQuestions v-show="false" /> -->
         <div :key="longanswer">
           <LongAnswer
@@ -178,10 +178,13 @@ import LongAnswer from "../components/forms/longAnswer";
 import ShortAnswer from "../components/forms/shortAnswer";
 import mcq from "../components/forms/Mcq";
 import ShortAnswerCard from "../components/displayCards/shortAnswerCard";
-import { getMCQquestion, getCommonQuestion,getFillInTheBlanksquestion } from "../apiFunctions";
+import {
+  getMCQquestion,
+  getCommonQuestion,
+  getFillInTheBlanksquestion,
+} from "../apiFunctions";
 import Comprehensive from "../components/forms/Comprehensive";
 import FillInTheBlanksCard from "../components/displayCards/fillInTheBlanksCard.vue";
-
 
 export default {
   name: "Home",
@@ -196,7 +199,7 @@ export default {
     MCQCard,
     Comprehensive,
     FillInTheBlanks,
-    FillInTheBlanksCard    
+    FillInTheBlanksCard,
   },
   data() {
     return {
@@ -232,7 +235,7 @@ export default {
       }
     },
     formActivity() {
-      if (this.shortAnswer || this.longanswer || this.mcq || this.match ) {
+      if (this.shortAnswer || this.longanswer || this.mcq || this.match) {
         this.$emit("show-db");
         return true;
       } else {
@@ -241,21 +244,23 @@ export default {
     },
     deleteEntry(question) {
       this.longQuestionData = this.longQuestionData.filter(
-        data => data.question != question
+        (data) => data.question != question
       );
     },
     deleteShortEntry(question) {
       this.shortQuestionData = this.shortQuestionData.filter(
-        data => data.question != question
+        (data) => data.question != question
       );
     },
 
     deleteMcqEntry(question) {
-      this.mcqdata = this.mcqdata.filter(data => data.question != question);
+      this.mcqdata = this.mcqdata.filter((data) => data.question != question);
     },
 
     deleteFillInTheBlanksEntry(question) {
-      this.fillInTheBlanksData = this.fillInTheBlanksData.filter(data => data.question != question);
+      this.fillInTheBlanksData = this.fillInTheBlanksData.filter(
+        (data) => data.question != question
+      );
     },
 
     addlongquestion(longquesdata) {
@@ -294,16 +299,16 @@ export default {
     editFillInTheBlanksQuestion(id) {
       this.editFitbID = id;
       this.fitb = true;
-    }
+    },
   },
   created: function() {
     getMCQquestion()
-      .then(res => (this.mcqdata = res.data.data))
-      .catch(err => console.log(err));
+      .then((res) => (this.mcqdata = res.data.data))
+      .catch((err) => console.log(err));
     getFillInTheBlanksquestion()
-      .then(res => (this.fillInTheBlanksData = res.data.data))
-      .catch(err => console.log(err));
-    getCommonQuestion().then(res => {
+      .then((res) => (this.fillInTheBlanksData = res.data.data))
+      .catch((err) => console.log(err));
+    getCommonQuestion().then((res) => {
       var i = 0;
       while (i < res.data.data.length) {
         if (res.data.data[i].questionType == "Long Answer Questions") {
@@ -319,7 +324,7 @@ export default {
         }
       }
     });
-  }
+  },
 };
 </script>
 <style scoped>
