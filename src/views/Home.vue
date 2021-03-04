@@ -51,6 +51,15 @@
         class="buttonchoice"
         variant="outline-secondary"
         @click="
+          fitb = true;
+          $bvModal.hide('modal-1');
+        "
+        >Fill In The Blanks</b-button
+      >
+      <b-button
+        class="buttonchoice"
+        variant="outline-secondary"
+        @click="
           longanswer = true;
           $bvModal.hide('modal-1');
         "
@@ -64,9 +73,6 @@
           $bvModal.hide('modal-1');
         "
         >Short Answer</b-button
-      >
-      <b-button class="buttonchoice" variant="outline-secondary"
-        >Fill in the Blanks</b-button
       >
       <b-button
         class="buttonchoice"
@@ -113,6 +119,14 @@
             v-on:edit-entry="editMcqQuestion"
           />
         </div>
+        <div :key="fillInTheBlanksData">
+          <FillInTheBlanksCard
+            :data="fillInTheBlanksData"
+            v-if="fillInTheBlanksData.length != 0"
+            v-on:delete-entry="deleteFillInTheBlanksEntry"
+            v-on:edit-entry="editFillInTheBlanksQuestion"
+          />
+        </div>
       </b-col>
     </b-row>
     <b-row align-h="center">
@@ -131,6 +145,12 @@
           v-on:delete-form="shortAnswer = false"
           v-on:question-added="addshortquestion"
           :entry="editShortID"
+        />
+        <FillInTheBlanks
+          v-if="fitb"
+          v-on:delete-form="fitb = false"
+          v-on:question-added="addFillInTheBlanks"
+          :entry="editFitbID"
         />
         <MatchTheFollowing v-if="match" v-on:delete-form="match = false" />
         <mcq
@@ -153,13 +173,15 @@
 import LongAnswerCard from "../components/displayCards/longAnswerCard";
 import MatchTheFollowing from "../components/forms/MatchTheFollowing.vue";
 import MCQCard from "../components/displayCards/mcqCard.vue";
-// import multipleTypeQuestions from "../components/forms/multipleType";
+import FillInTheBlanks from "../components/forms/fillInTheBlanks.vue";
 import LongAnswer from "../components/forms/longAnswer";
 import ShortAnswer from "../components/forms/shortAnswer";
 import mcq from "../components/forms/Mcq";
 import ShortAnswerCard from "../components/displayCards/shortAnswerCard";
-import { getMCQquestion, getCommonQuestion } from "../apiFunctions";
+import { getMCQquestion, getCommonQuestion,getFillInTheBlanksquestion } from "../apiFunctions";
 import Comprehensive from "../components/forms/Comprehensive";
+import FillInTheBlanksCard from "../components/displayCards/fillInTheBlanksCard.vue";
+
 
 export default {
   name: "Home",
@@ -172,7 +194,9 @@ export default {
     mcq,
     ShortAnswerCard,
     MCQCard,
-    Comprehensive
+    Comprehensive,
+    FillInTheBlanks,
+    FillInTheBlanksCard    
   },
   data() {
     return {
@@ -180,14 +204,17 @@ export default {
       longanswer: false,
       match: false,
       mcq: false,
+      fitb: false,
       Comprehensive: false,
       longQuestionData: [],
       shortQuestionData: [],
       mcqdata: [],
       ComprehensiveData: [],
+      fillInTheBlanksData: [],
       editLongID: -1,
       editShortID: -1,
-      editMcqID: -1
+      editMcqID: -1,
+      editFitbID: -1,
     };
   },
   methods: {
@@ -205,7 +232,7 @@ export default {
       }
     },
     formActivity() {
-      if (this.shortAnswer || this.longanswer || this.mcq || this.match) {
+      if (this.shortAnswer || this.longanswer || this.mcq || this.match ) {
         this.$emit("show-db");
         return true;
       } else {
@@ -227,6 +254,10 @@ export default {
       this.mcqdata = this.mcqdata.filter(data => data.question != question);
     },
 
+    deleteFillInTheBlanksEntry(question) {
+      this.fillInTheBlanksData = this.fillInTheBlanksData.filter(data => data.question != question);
+    },
+
     addlongquestion(longquesdata) {
       this.longQuestionData.push(longquesdata);
       this.longanswer = false;
@@ -239,6 +270,10 @@ export default {
     addmcq(mcqdata) {
       this.mcqdata.push(mcqdata);
       this.mcq = false;
+    },
+    addFillInTheBlanks(fillInTheBlanksData) {
+      this.fillInTheBlanksData.push(fillInTheBlanksData);
+      this.fitb = false;
     },
     addComprehensive(ComprehensiveData) {
       this.ComprehensiveData.push(ComprehensiveData);
@@ -255,11 +290,18 @@ export default {
     editMcqQuestion(id) {
       this.editMcqID = id;
       this.mcq = true;
+    },
+    editFillInTheBlanksQuestion(id) {
+      this.editFitbID = id;
+      this.fitb = true;
     }
   },
   created: function() {
     getMCQquestion()
       .then(res => (this.mcqdata = res.data.data))
+      .catch(err => console.log(err));
+    getFillInTheBlanksquestion()
+      .then(res => (this.fillInTheBlanksData = res.data.data))
       .catch(err => console.log(err));
     getCommonQuestion().then(res => {
       var i = 0;
