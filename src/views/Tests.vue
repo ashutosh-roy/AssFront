@@ -5,6 +5,11 @@
       style="height: 85vh;
   overflow: auto;"
     >
+      <b-row align-h="end" v-if="testnum != 0">
+        <b-button variant="outline" style="border:none" v-b-modal.testNameModal
+          ><i class="fas fa-plus fa-2x"></i
+        ></b-button>
+      </b-row>
       <b-modal id="deleteConfirmation" hide-footer hide-header>
         <div>
           <span style="color:grey"
@@ -39,15 +44,6 @@
       </div>
       <b-modal id="testNameModal" centered hide-footer>
         <div>
-          <b-row align-h="end" v-if="testnum != 0">
-            <b-button
-              variant="outline"
-              style="border:none"
-              v-b-modal.testNameModal
-              ><i class="fas fa-plus fa-2x"></i
-            ></b-button>
-          </b-row>
-
           <b-form-input
             autofocus
             v-model="name"
