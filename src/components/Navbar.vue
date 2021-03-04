@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-navbar class="navbar" toggleable="lg">
-      <b-navbar-brand href="#">SimplifyCV</b-navbar-brand>
+      <b-navbar-brand @click="$router.push('QPBuilder')">SimplifyCV</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -12,7 +12,7 @@
 
           <b-nav-item href="#">Contact Us</b-nav-item>
 
-          <b-nav-item href="#">Link</b-nav-item>
+          <b-nav-item href="#">FAQs</b-nav-item>
           <b-button href="#" class="my-2 my-sm-0">Login/Singup</b-button>
         </b-navbar-nav>
       </b-collapse>

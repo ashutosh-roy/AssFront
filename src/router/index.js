@@ -6,6 +6,7 @@ import MatchTheFollowing from "../components/forms/MatchTheFollowing.vue";
 import QPBuilder from "../views/QPBuilder.vue";
 import TestView from "../views/Tests.vue";
 import TestConfiguration from "../views/TestConfiguration.vue";
+import Topics from "../views/Topics.vue";
 
 Vue.use(VueRouter);
 
@@ -19,6 +20,11 @@ const routes = [
     path: "/QPBuilder",
     name: "Question Paper Builder",
     component: QPBuilder
+  },
+  {
+    path:'/Topics',
+    name:'Topics',
+    component:Topics
   },
   {
     path: "/MatchTheFollowing",
