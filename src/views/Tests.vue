@@ -5,30 +5,6 @@
       style="height: 95vh;
   overflow: auto;"
     >
-      <b-modal id="deleteConfirmation" hide-footer hide-header>
-        <div>
-          <span style="color:grey"
-            >Are you sure you want to delete this test?</span
-          >
-          <br />
-          <b-row align-h="end" class="mr-1">
-            <b-button class="deleteModalbtn" variant="light" @click="delTest()"
-              >Accept</b-button
-            >
-            <b-button
-              class="deleteModalbtn"
-              variant="light"
-              @click="$bvModal.hide('deleteConfirmation')"
-              >Cancel</b-button
-            >
-          </b-row>
-        </div>
-      </b-modal>
-      <b-row align-h="end" v-if="testnum != 0">
-        <b-button variant="outline" style="border:none" v-b-modal.testNameModal
-          ><i class="fas fa-plus fa-2x"></i
-        ></b-button>
-      </b-row>
       <div style="height:100%;width:100%;" v-if="testnum == 0">
         <b-row align-h="center" align-v="center">
           <b-button
@@ -44,6 +20,37 @@
       </div>
       <b-modal id="testNameModal" centered hide-footer>
         <div>
+          <b-modal id="deleteConfirmation" hide-footer hide-header>
+            <div>
+              <span style="color:grey"
+                >Are you sure you want to delete this test?</span
+              >
+              <br />
+              <b-row align-h="end" class="mr-1">
+                <b-button
+                  class="deleteModalbtn"
+                  variant="light"
+                  @click="delTest()"
+                  >Accept</b-button
+                >
+                <b-button
+                  class="deleteModalbtn"
+                  variant="light"
+                  @click="$bvModal.hide('deleteConfirmation')"
+                  >Cancel</b-button
+                >
+              </b-row>
+            </div>
+          </b-modal>
+          <b-row align-h="end" v-if="testnum != 0">
+            <b-button
+              variant="outline"
+              style="border:none"
+              v-b-modal.testNameModal
+              ><i class="fas fa-plus fa-2x"></i
+            ></b-button>
+          </b-row>
+
           <b-form-input
             autofocus
             v-model="name"
@@ -75,11 +82,11 @@ export default {
       testnum: 0,
       testnames: [],
       name: "",
-      tobeDel: ""
+      tobeDel: "",
     };
   },
   components: {
-    TestCard
+    TestCard,
   },
   methods: {
     addtest() {
@@ -91,7 +98,7 @@ export default {
       }
     },
     delTest() {
-      this.testnames = this.testnames.filter(name => name != this.tobeDel);
+      this.testnames = this.testnames.filter((name) => name != this.tobeDel);
       this.testnum -= 1;
       this.$bvModal.hide("deleteConfirmation");
     },
@@ -102,10 +109,10 @@ export default {
     testConfigurations(testname) {
       this.$router.replace({
         name: "Test Configuration",
-        params: { testname }
+        params: { testname },
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
