@@ -222,7 +222,8 @@ export default {
       if (
         this.longQuestionData.length != 0 ||
         this.shortQuestionData.length != 0 ||
-        this.mcqdata.length != 0
+        this.mcqdata.length != 0 ||
+        this.fillInTheBlanksData !=0 
       ) {
         this.$emit("show-db");
         return true;
@@ -232,7 +233,7 @@ export default {
       }
     },
     formActivity() {
-      if (this.shortAnswer || this.longanswer || this.mcq || this.match ) {
+      if (this.shortAnswer || this.longanswer || this.mcq || this.match || this.fitb) {
         this.$emit("show-db");
         return true;
       } else {
