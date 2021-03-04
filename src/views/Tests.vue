@@ -2,7 +2,7 @@
   <div>
     <b-card
       class="card"
-      style="height: 95vh;
+      style="height: 85vh;
   overflow: auto;"
     >
       <div style="height:100%;width:100%;" v-if="testnum == 0">
@@ -119,6 +119,8 @@ export default {
 .card {
   border-radius: 12px;
   margin: 2vh;
+  display: grid;
+  align-items: center;
   box-shadow: 7px 10px 7px #c5c2c2;
   text-align: left;
 }

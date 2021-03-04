@@ -4,11 +4,16 @@
       <div class="accordion" role="tablist">
         <b-card no-body class="mb-1">
           <b-card-header header-tag="header" class="p-1" role="tab">
-            <b-button block v-b-toggle.accordion-1 variant="success"
+            <b-button block v-b-toggle.accordion-1 variant="info"
               >Opening screen display</b-button
             >
           </b-card-header>
-          <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
+          <b-collapse
+            id="accordion-1"
+            visible
+            accordion="my-accordion"
+            role="tabpanel"
+          >
             <b-card-body>
               <b-row class="rowx" align-v="center">
                 <b-col class="columnx" cols="6">
@@ -193,7 +198,7 @@
 
         <b-card no-body class="mb-1">
           <b-card-header header-tag="header" class="p-1" role="tab">
-            <b-button block v-b-toggle.accordion-2 variant="success"
+            <b-button block v-b-toggle.accordion-2 variant="info"
               >Questions Behaviour</b-button
             >
           </b-card-header>
@@ -337,7 +342,7 @@
 
         <b-card no-body class="mb-1">
           <b-card-header header-tag="header" class="p-1" role="tab">
-            <b-button block v-b-toggle.accordion-3 variant="success"
+            <b-button block v-b-toggle.accordion-3 variant="info"
               >Test-time Window</b-button
             >
           </b-card-header>
@@ -387,16 +392,11 @@
         </b-card>
         <b-card no-body class="mb-1">
           <b-card-header header-tag="header" class="p-1" role="tab">
-            <b-button block v-b-toggle.accordion-4 variant="success"
+            <b-button block v-b-toggle.accordion-4 variant="info"
               >System Setup</b-button
             >
           </b-card-header>
-          <b-collapse
-            id="accordion-4"
-            accordion="my-accordion"
-            visible
-            role="tabpanel"
-          >
+          <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
             <b-card-body>
               <b-row class="rowx" align-v="center">
                 <b-col class="columnx" cols="6">
@@ -558,13 +558,13 @@ export default {
       screenCapture: 0,
       options: [
         { item: true, name: "Yes" },
-        { item: false, name: "No" }
-      ]
+        { item: false, name: "No" },
+      ],
     };
   },
   props: {
-    testname: String
-  }
+    testname: String,
+  },
 };
 </script>
 <style scoped>
