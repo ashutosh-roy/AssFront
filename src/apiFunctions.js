@@ -53,3 +53,32 @@ export function deleteCommonQuestion(data) {
     data
   });
 }
+
+// Fill in the blanks
+export function putFillInTheBlanksquestion(data) {
+  return service({
+    url: `fillInTheBlanksQuestions/`,
+    method: "put",
+    data
+  });
+}
+export function postFillInTheBlanksquestion(data) {
+  return service({
+    url: `fillInTheBlanksQuestions/`,
+    method: "post",
+    data
+  });
+}
+export function deleteFillInTheBlanksquestion(data) {
+  return service({
+    url: `fillInTheBlanksQuestions/`,
+    method: "delete",
+    data
+  });
+}
+export function getFillInTheBlanksquestion() {
+  return service({
+    url: `fillInTheBlanksQuestions/`,
+    method: "get"
+  });
+}

@@ -24,11 +24,11 @@
                     <b-col>
                       <b-form-input
                         class="input"
-                        v-model="text"
+                        v-model="questions.topic"
                         placeholder="Topic"
                       ></b-form-input>
                       <b-form-select
-                        v-model="selected"
+                        v-model="questions.difficultyLevel"
                         :options="options"
                         class="input"
                       ></b-form-select>
@@ -39,7 +39,7 @@
               <!-- grid implementation endss -->
 
               <!-- radio start -->
-              <div class="inputanswers" v-for="(input, k) in inputs" :key="k">
+              <div class="inputanswers" v-for="i in optionnum" :key="i">
                 <div class="questionrows">
                   <b-input-group class="inputgrp">
                     <template #prepend>
@@ -49,17 +49,21 @@
                         >
                       </b-form-radio>
                     </template>
-                    <b-form-input v-model="inputs.sideA"></b-form-input>
+                    <b-form-input
+                      v-model="questions.answerKey.sideA"
+                    ></b-form-input>
                     <b-button variant="outline-secondary">
                       <i class="fas fa-file-upload"></i>
                     </b-button>
-                    <b-form-input v-model="inputs.sideB"></b-form-input>
+                    <b-form-input
+                      v-model="questions.answerKey.sideB"
+                    ></b-form-input>
                     <b-button variant="outline-secondary">
                       <i class="fas fa-file-upload"></i>
                     </b-button>
                     <b-button
                       @click="remove(k)"
-                      v-show="k || (!k && inputs.length >= 1)"
+                      v-show="k || (!k && questions.answerKey.length >= 1)"
                       variant="outline-secondary"
                       class="deletebutton"
                     >
@@ -83,16 +87,10 @@
                     </b-form-radio>
                   </template>
 
-                  <b-form-input
-                    @click="addsideA(k)"
-                    v-show="k || (!k && inputs.length >= 0)"
-                    class="input"
+                  <b-form-input @click="addsideA(k)" class="input"
                     >Side A</b-form-input
                   >
-                  <b-form-input
-                    @click="addsideB(k)"
-                    v-show="k || (!k && inputs.length >= 0)"
-                    class="input"
+                  <b-form-input @click="addsideB(k)" class="input"
                     >Side B</b-form-input
                   >
                 </b-input-group>
@@ -104,7 +102,7 @@
               <b-row align-h="end">
                 <!-- <b-input-group style="padding-left:70%"> -->
                 <b-form-checkbox
-                  v-model="checked"
+                  v-model="questions.autoCorrection"
                   class="switch"
                   name="check-button"
                   switch
@@ -113,7 +111,7 @@
                 </b-form-checkbox>
 
                 <b-form-checkbox
-                  v-model="checked"
+                  v-model="questions.required"
                   class="switch"
                   name="check-button"
                   switch
@@ -133,7 +131,7 @@
                     <b-dropdown-item>
                       <b-form-checkbox
                         id="checkbox-1"
-                        v-model="status"
+                        v-model="questions.addToDatabank"
                         name="checkbox-1"
                       >
                         Add to databank
@@ -143,7 +141,7 @@
                     <b-dropdown-item>
                       <b-form-checkbox
                         id="checkbox-1"
-                        v-model="status"
+                        v-model="questions.addToPublic"
                         name="checkbox-1"
                       >
                         Add Publicly
@@ -164,15 +162,28 @@
 </template>
 <script>
 export default {
-  name: "multipleTypeQuestions",
+  name: "MatchTheFollowing",
   data() {
     return {
-      inputs: [
-        {
-          sideA: "",
-          sideB: ""
-        }
-      ],
+      optionnum: 1,
+      questions: {
+        topic: "",
+        difficultyLevel: null,
+        question: "",
+        questionType: "Long Answer Questions",
+        answerKey: [
+          {
+            // sideA: "",
+            // sideB: ""
+          }
+        ],
+        autoCorrection: 0,
+        required: 0,
+        addToPublic: false,
+        addToDatabank: false,
+        sizelimit: 0,
+        fileUpload: ""
+      },
       selected: "null",
       options: [
         { value: null, text: "Difficulty" },
@@ -192,21 +203,23 @@ export default {
   },
   methods: {
     addsideA() {
-      this.inputs.push({
+      this.optionnum = this.optionnum + 1;
+      this.questions.answerKey.push({
         sideA: ""
       });
-      console.log(this.inputs);
+      console.log(this.questions.answerKey);
     },
 
     addsideB() {
-      this.inputs.push({
+      this.optionnum = this.optionnum + 1;
+      this.questions.answerKey.push({
         sideB: ""
       });
-      console.log(this.inputs);
+      console.log(this.questions.answerKey);
     },
 
     remove(index) {
-      this.inputs.splice(index, 1);
+      this.questions.answerKey.splice(index, 1);
     }
 
     // remove (index) {

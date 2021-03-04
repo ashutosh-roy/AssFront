@@ -3,7 +3,7 @@
     <b-card class="card" header-tag="header">
       <template #header>
         <div>
-          MCQ
+          Fill In The Blanks
           <b-row align-h="end">
             <b-button
               variant="outline-secondary"
@@ -59,7 +59,7 @@
                     style="width:60%;margin-top:1vh"
                   >
                   </b-form-input>
-                  <div :key="answer[i - 1]">
+                  <!-- <div :key="answer[i - 1]">
                     <b-button
                       :variant="answer[i - 1]"
                       @click="answerchange(question.options[i - 1], i)"
@@ -67,7 +67,7 @@
                     >
                       <i class="fas fa-check 7x"></i>
                     </b-button>
-                  </div>
+                  </div> -->
 
                   <b-button variant="outline">
                     <i
@@ -89,13 +89,13 @@
                 @click.enter="addOptions()"
                 >Add Option</b-button
               >
-              <b-button
+              <!-- <b-button
                 variant="outline"
                 class="btts-1"
                 style="float:left"
                 @click="addOptions()"
                 >/ Others</b-button
-              >
+              > -->
             </div>
 
             <b-row align-h="end">
@@ -139,9 +139,9 @@
                     @click="question.addToPublic = !question.addToPublic"
                   >
                     <b-form-checkbox
-                      id="checkbox-1"
+                      id="checkbox-2"
                       v-model="question.addToPublic"
-                      name="checkbox-1"
+                      name="checkbox-2"
                     >
                       Add Publicly
                     </b-form-checkbox></b-dropdown-item
@@ -156,9 +156,12 @@
   </div>
 </template>
 <script>
-import { postMCQquestion, getMCQquestion } from "../../apiFunctions";
+import {
+  postFillInTheBlanksquestion,
+  getFillInTheBlanksquestion
+} from "../../apiFunctions";
 export default {
-  name: "mcq",
+  name: "FillInTheBlanks",
   props: {
     entry: Number
   },
@@ -231,15 +234,15 @@ export default {
       );
     },
     addquestion() {
-      postMCQquestion(this.question)
-        .then(res => console.log("MCQ data saved!" + res))
+      postFillInTheBlanksquestion(this.question)
+        .then(res => console.log("Fill In The Blanks data saved!" + res))
         .catch(err => console.log(err));
       this.$emit("question-added", this.question);
     }
   },
   created: function() {
     if (this.entry != -1) {
-      getMCQquestion().then(res => {
+      getFillInTheBlanksquestion().then(res => {
         var i = 0;
         while (i < res.data.data.length) {
           if (res.data.data[i].id == this.entry) {
