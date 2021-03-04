@@ -22,9 +22,9 @@ const routes = [
     component: QPBuilder
   },
   {
-    path:'/Topics',
-    name:'Topics',
-    component:Topics
+    path: "/Topics",
+    name: "Topics",
+    component: Topics
   },
   {
     path: "/MatchTheFollowing",

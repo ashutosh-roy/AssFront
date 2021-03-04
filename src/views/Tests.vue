@@ -5,7 +5,26 @@
       style="height: 85vh;
   overflow: auto;"
     >
-      <div style="height:100%;width:100%;" v-if="testnum == 0">
+      <b-modal id="deleteConfirmation" hide-footer hide-header>
+        <div>
+          <span style="color:grey"
+            >Are you sure you want to delete this test?</span
+          >
+          <br />
+          <b-row align-h="end" class="mr-1">
+            <b-button class="deleteModalbtn" variant="light" @click="delTest()"
+              >Accept</b-button
+            >
+            <b-button
+              class="deleteModalbtn"
+              variant="light"
+              @click="$bvModal.hide('deleteConfirmation')"
+              >Cancel</b-button
+            >
+          </b-row>
+        </div>
+      </b-modal>
+      <div style="height:100%;width:100%; margin-top:15%" v-if="testnum == 0">
         <b-row align-h="center" align-v="center">
           <b-button
             variant="outline"
@@ -20,28 +39,6 @@
       </div>
       <b-modal id="testNameModal" centered hide-footer>
         <div>
-          <b-modal id="deleteConfirmation" hide-footer hide-header>
-            <div>
-              <span style="color:grey"
-                >Are you sure you want to delete this test?</span
-              >
-              <br />
-              <b-row align-h="end" class="mr-1">
-                <b-button
-                  class="deleteModalbtn"
-                  variant="light"
-                  @click="delTest()"
-                  >Accept</b-button
-                >
-                <b-button
-                  class="deleteModalbtn"
-                  variant="light"
-                  @click="$bvModal.hide('deleteConfirmation')"
-                  >Cancel</b-button
-                >
-              </b-row>
-            </div>
-          </b-modal>
           <b-row align-h="end" v-if="testnum != 0">
             <b-button
               variant="outline"
@@ -120,7 +117,6 @@ export default {
   border-radius: 12px;
   margin: 2vh;
   display: grid;
-  align-items: center;
   box-shadow: 7px 10px 7px #c5c2c2;
   text-align: left;
 }

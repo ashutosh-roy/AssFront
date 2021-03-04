@@ -94,7 +94,7 @@
       >
     </b-modal>
     <b-row align-h="center">
-      <b-col md="7" sm="12">
+      <b-col md="9" sm="12">
         <div :key="longQuestionData">
           <LongAnswerCard
             :data="longQuestionData"
@@ -130,7 +130,7 @@
       </b-col>
     </b-row>
     <b-row align-h="center">
-      <b-col md="7" sm="12">
+      <b-col md="9" sm="12">
         <!-- <multipleTypeQuestions v-show="false" /> -->
         <div :key="longanswer">
           <LongAnswer
@@ -178,10 +178,13 @@ import LongAnswer from "../components/forms/longAnswer";
 import ShortAnswer from "../components/forms/shortAnswer";
 import mcq from "../components/forms/Mcq";
 import ShortAnswerCard from "../components/displayCards/shortAnswerCard";
-import { getMCQquestion, getCommonQuestion,getFillInTheBlanksquestion } from "../apiFunctions";
+import {
+  getMCQquestion,
+  getCommonQuestion,
+  getFillInTheBlanksquestion
+} from "../apiFunctions";
 import Comprehensive from "../components/forms/Comprehensive";
 import FillInTheBlanksCard from "../components/displayCards/fillInTheBlanksCard.vue";
-
 
 export default {
   name: "Home",
@@ -196,7 +199,7 @@ export default {
     MCQCard,
     Comprehensive,
     FillInTheBlanks,
-    FillInTheBlanksCard    
+    FillInTheBlanksCard
   },
   data() {
     return {
@@ -214,7 +217,7 @@ export default {
       editLongID: -1,
       editShortID: -1,
       editMcqID: -1,
-      editFitbID: -1,
+      editFitbID: -1
     };
   },
   methods: {
@@ -223,7 +226,7 @@ export default {
         this.longQuestionData.length != 0 ||
         this.shortQuestionData.length != 0 ||
         this.mcqdata.length != 0 ||
-        this.fillInTheBlanksData !=0 
+        this.fillInTheBlanksData != 0
       ) {
         this.$emit("show-db");
         return true;
@@ -233,7 +236,13 @@ export default {
       }
     },
     formActivity() {
-      if (this.shortAnswer || this.longanswer || this.mcq || this.match || this.fitb) {
+      if (
+        this.shortAnswer ||
+        this.longanswer ||
+        this.mcq ||
+        this.match ||
+        this.fitb
+      ) {
         this.$emit("show-db");
         return true;
       } else {
@@ -256,7 +265,9 @@ export default {
     },
 
     deleteFillInTheBlanksEntry(question) {
-      this.fillInTheBlanksData = this.fillInTheBlanksData.filter(data => data.question != question);
+      this.fillInTheBlanksData = this.fillInTheBlanksData.filter(
+        data => data.question != question
+      );
     },
 
     addlongquestion(longquesdata) {

@@ -1,7 +1,9 @@
 <template>
   <div>
     <b-navbar class="navbar" toggleable="lg">
-      <b-navbar-brand @click="$router.push('QPBuilder')">SimplifyCV</b-navbar-brand>
+      <b-navbar-brand @click="$router.push('QPBuilder')"
+        >SimplifyCV</b-navbar-brand
+      >
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
