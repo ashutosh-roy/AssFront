@@ -1,6 +1,9 @@
 <template>
   <div>
     <b-card class="cardx">
+      <b-button variant="outline" style="border:none" @click="back()"
+        ><i class="fas fa-arrow-left"></i
+      ></b-button>
       <div class="accordion" role="tablist">
         <b-card no-body class="mb-1">
           <b-card-header header-tag="header" class="p-1" role="tab">
@@ -564,6 +567,11 @@ export default {
   },
   props: {
     testname: String
+  },
+  methods: {
+    back() {
+      this.$router.push("test");
+    }
   }
 };
 </script>

@@ -25,13 +25,10 @@
         </div>
       </b-modal> -->
       <b-row align-h="end" v-if="topicnum != 0">
-            <b-button
-              variant="outline"
-              style="border:none"
-              v-b-modal.topicNameModal
-              ><i class="fas fa-plus fa-2x"></i
-            ></b-button>
-          </b-row>
+        <b-button variant="outline" style="border:none" v-b-modal.topicNameModal
+          ><i class="fas fa-plus fa-2x"></i
+        ></b-button>
+      </b-row>
       <div style="height:100%;width:100%; margin-top:15%" v-if="topicnum == 0">
         <b-row align-h="center" align-v="center">
           <b-button
@@ -47,8 +44,6 @@
       </div>
       <b-modal id="topicNameModal" centered hide-footer>
         <div>
-          
-
           <b-form-input
             autofocus
             v-model="name"
@@ -61,10 +56,8 @@
         </div>
       </b-modal>
       <div v-for="i in topicnum" :key="i">
-      <TopicCard 
-        :topicname="topicnames[i - 1]"
-          />
-                <!-- v-on:delete-topic="deleteTopic" -->
+        <TopicCard :topicname="topicnames[i - 1]" />
+        <!-- v-on:delete-topic="deleteTopic" -->
       </div>
     </b-card>
   </div>
@@ -78,22 +71,22 @@ export default {
     return {
       topicnum: 0,
       topicnames: [],
-      name: "",
-    //   tobeDel: "",
+      name: ""
+      //   tobeDel: "",
     };
   },
   components: {
-    TopicCard,
+    TopicCard
   },
   methods: {
-      addtopic(){
-          if(this.name != ""){
-              this.topicnames.push(this.name);
-              this.topicnum += 1;
-              this.$bvModal.hide("topicNameModal");
-              this.name = "";
-          }
-      },
+    addtopic() {
+      if (this.name != "") {
+        this.topicnames.push(this.name);
+        this.topicnum += 1;
+        this.$bvModal.hide("topicNameModal");
+        this.name = "";
+      }
+    }
     //   delTopic(){
     //       this.topicnames = this.topicnames.filter((name) => name != this.tobeDel);
     //       this.topicnum -= 1;
@@ -103,11 +96,8 @@ export default {
     //       this.tobeDel = deletetopicname;
     //       this.$bvModal.hide("deleteConfirmation");
     //   },
-
-    
   }
 };
-
 </script>
 <style scoped>
 .card {

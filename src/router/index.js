@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+// import Home from "../views/Home.vue";
 // import multipleTypeQuestions from "../components/forms/multipleType.vue"
 import MatchTheFollowing from "../components/forms/MatchTheFollowing.vue";
 import QPBuilder from "../views/QPBuilder.vue";
@@ -13,18 +13,13 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: Home
+    name: "Topics",
+    component: Topics
   },
   {
     path: "/QPBuilder",
     name: "Question Paper Builder",
     component: QPBuilder
-  },
-  {
-    path: "/Topics",
-    name: "Topics",
-    component: Topics
   },
   {
     path: "/MatchTheFollowing",

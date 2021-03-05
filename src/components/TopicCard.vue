@@ -1,5 +1,5 @@
 <template>
-  <b-card class="card">
+  <b-card class="card" @click="$router.push('test')">
     <div>
       <b-row>
         <b-col>
@@ -11,10 +11,7 @@
             <!-- <b-button variant="outline" style="border:none" @click="config()"
               ><i class="fas fa-cogs"></i
             ></b-button> -->
-            <b-button
-              variant="outline"
-              style="border:none"
-            
+            <b-button variant="outline" style="border:none"
               ><i class="fas fa-ellipsis-v"></i>
             </b-button>
             <!-- <b-button variant="outline" style="border:none" @click="del()"
@@ -29,20 +26,20 @@
 
 <script>
 export default {
-    name:"TopicCard",
-    props: {
-        topicname:String,
-    },
-    // methods: {
-    //     del() {
-    //     this.$emit("delete-topic", this.topicname);
-    //     },
-    // },
-}
+  name: "TopicCard",
+  props: {
+    topicname: String
+  }
+  // methods: {
+  //     del() {
+  //     this.$emit("delete-topic", this.topicname);
+  //     },
+  // },
+};
 </script>
 
 <style scoped>
-.card{
+.card {
   border-radius: 0px !important;
   margin: 2vh;
   box-shadow: 7px 10px 7px #c5c2c2;

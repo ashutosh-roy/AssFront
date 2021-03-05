@@ -43,13 +43,32 @@
 
           <b-col cols="2">
             <div class="button-1">
-              <button class="button-2" type="button" @click="addSection">
+              <button
+                class="button-2"
+                type="button"
+                @click="$bvModal.show('sectionNameModal')"
+              >
                 <i class="fas fa-plus fa-3x"></i>
               </button>
             </div>
           </b-col>
         </b-row>
       </b-container>
+      <b-modal id="sectionNameModal" centered hide-footer>
+        <div>
+          <b-form-input
+            autofocus
+            v-model="name"
+            placeholder="Enter Section Name"
+          ></b-form-input>
+          <br />
+          <b-row align-h="end" class="mr-1">
+            <b-button variant="primary" @click="addSection(name)"
+              >Add Section</b-button
+            >
+          </b-row>
+        </div>
+      </b-modal>
     </b-card>
     <div v-if="sections.length != 0">
       <b-row>
@@ -81,7 +100,8 @@ export default {
       QPWidth: "6",
       sectionLength: "100vw",
       sections: [],
-      showdb: false
+      showdb: false,
+      name: ""
     };
   },
   computed: {
@@ -102,11 +122,13 @@ export default {
         this.QPWidth = "6";
       }
     },
-    addSection: function() {
-      this.sections.push({ name: "Section " + (this.sections.length + 1) });
+    addSection(secName) {
+      this.sections.push({ name: secName });
       if ((this.sections.length + 1) * 25 > 170) {
         this.sectionLength = (this.sections.length + 1) * 25;
       }
+      this.$bvModal.hide("sectionNameModal");
+      this.name = "";
     }
     // displayScreen:function() {
 
