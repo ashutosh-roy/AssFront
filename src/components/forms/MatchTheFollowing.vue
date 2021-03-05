@@ -16,8 +16,7 @@
         </template>
         <b-card-text>
           <b-form inline>
-            <div style="width:100%">
-              <!-- grid implementation -->
+            <div style="width:100%">              
               <b-container class="bv-example-row">
                 <div>
                   <b-row>
@@ -35,37 +34,29 @@
                     </b-col>
                   </b-row>
                 </div>
-              </b-container>
-              <!-- grid implementation endss -->
-
-              <!-- radio start -->
-              <div class="inputanswers" v-for="i in optionnum" :key="i">
+              </b-container>              
+              <div class="inputanswers" v-for="i in matchQues" :key="i">
                 <div class="questionrows">
                   <b-input-group class="inputgrp">
                     <template #prepend>
                       <b-form-radio disabled>
                         <span class="sr-only"
-                          >Radio for following text input</span
+                          ></span
                         >
                       </b-form-radio>
                     </template>
-                    <b-form-input
-                      v-model="questions.answerKey.sideA"
-                    ></b-form-input>
+                    <b-form-input v-model="questions.question.sideA[i-1]"></b-form-input>
                     <b-button variant="outline-secondary">
                       <i class="fas fa-file-upload"></i>
                     </b-button>
-                    <b-form-input
-                      v-model="questions.answerKey.sideB"
-                    ></b-form-input>
+                    <b-form-input v-model="questions.question.sideB[i-1]"></b-form-input>
                     <b-button variant="outline-secondary">
                       <i class="fas fa-file-upload"></i>
                     </b-button>
                     <b-button
-                      @click="remove(k)"
-                      v-show="k || (!k && questions.answerKey.length >= 1)"
                       variant="outline-secondary"
                       class="deletebutton"
+                      @click="removerows(i - 1)"                       
                     >
                       <i class="fas fa-trash"></i>
                     </b-button>
@@ -87,11 +78,17 @@
                     </b-form-radio>
                   </template>
 
-                  <b-form-input @click="addsideA(k)" class="input"
-                    >Side A</b-form-input
+                  <b-form-input
+                    @click="addInput()"
+                    placeholder="Side A"
+                    class="input"
+                    readonly></b-form-input
                   >
-                  <b-form-input @click="addsideB(k)" class="input"
-                    >Side B</b-form-input
+                  <b-form-input
+                    @click="addInput()"
+                    placeholder="Side B"
+                    class="input"
+                    readonly></b-form-input
                   >
                 </b-input-group>
               </div>
@@ -123,10 +120,13 @@
                 <b-button-group class="m-2 mt-4 p-0">
                   <!-- <b-button @click="add(k)" v-show="k || ( !k && inputs.length >= 0)">ADD</b-button> -->
                   <b-dropdown
+                    split
                     variant="primary"
                     text="Add"
                     right
+                    class="add-btn"
                     style="margin-bottom:1%"
+                    @click="addquestion()"
                   >
                     <b-dropdown-item>
                       <b-form-checkbox
@@ -161,28 +161,28 @@
   </div>
 </template>
 <script>
+import { postMatchTheFollowingQuestion,getMatchTheFollowingQuestion } from "../../apiFunctions";
 export default {
   name: "MatchTheFollowing",
   data() {
     return {
       optionnum: 1,
+      matchQues:0,
       questions: {
         topic: "",
         difficultyLevel: null,
-        question: "",
-        questionType: "Long Answer Questions",
-        answerKey: [
-          {
-            // sideA: "",
-            // sideB: ""
-          }
-        ],
+        question: {
+          sideA:[],
+          sideB:[]
+        },
+        questionType: "Mtach the following Questions",
+        answerKey: this.question,
         autoCorrection: 0,
         required: 0,
         addToPublic: false,
         addToDatabank: false,
         sizelimit: 0,
-        fileUpload: ""
+        fileUpload: "",
       },
       selected: "null",
       options: [
@@ -202,30 +202,44 @@ export default {
     };
   },
   methods: {
-    addsideA() {
-      this.optionnum = this.optionnum + 1;
-      this.questions.answerKey.push({
-        sideA: ""
-      });
-      console.log(this.questions.answerKey);
+    addquestion() {
+      postMatchTheFollowingQuestion(this.questions)
+        .then((res) => console.log("MCQ data saved!" + res))
+        .catch((err) => console.log(err));
+      this.$emit("question-added", this.questions);
     },
-
-    addsideB() {
+    addInput(){
+      this.matchQues+=1;
+      console.log(this.matchQues)
+    },
+    addsides() {
       this.optionnum = this.optionnum + 1;
+      // this.answer.push("outline-dark");
       this.questions.answerKey.push({
+        sideA: "",
         sideB: ""
       });
       console.log(this.questions.answerKey);
-    },
-
-    remove(index) {
-      this.questions.answerKey.splice(index, 1);
+    },    
+    removerows(index) {
+      this.questions.question.sideA.splice(index, 1);
+      this.questions.question.sideB.splice(index,1)
+      this.matchQues-=1
+    }    
+  },
+created: function() {
+    if (this.entry != -1) {
+      getMatchTheFollowingQuestion().then((res) => {
+        var i = 0;
+        while (i < res.data.data.length) {
+          if (res.data.data[i].id == this.entry) {
+            this.questions = res.data.data[i];
+          }
+          i++;
+        }
+      });
     }
-
-    // remove (index) {
-    //   this.inputs.splice(index, 1)
-    // },
-  }
+  },
 };
 </script>
 <style scoped>

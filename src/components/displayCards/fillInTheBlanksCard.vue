@@ -58,7 +58,7 @@
         <br />
         <br />
 
-        <b-card-text style="float:left;margin-left:30px">Options</b-card-text>
+        <b-card-text style="float:left;margin-left:30px">Answers</b-card-text>
         <br />
         <br />
 
@@ -70,34 +70,20 @@
         :aria-describedby="ariaDescribedby"
         name="radio-options-slots"
       > -->
-          <div class="options">
-            <b-row>
-              <b-col style="text-align:left;" cols="6">
-                <b-form-radio disabled>
-                  {{ entry.options[0] }}
-                </b-form-radio>
-              </b-col>
 
+      <b-row>
+          <div class="options" v-for="option in entry.options"
+          :key="option">
+            
               <b-col style="text-align:left;" cols="6">
                 <b-form-radio disabled>
-                  {{ entry.options[1] }}
+                  {{option}}
                 </b-form-radio>
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col style="text-align:left;" cols="6">
-                <b-form-radio disabled>
-                  {{ entry.options[2] }}
-                </b-form-radio>
-              </b-col>
-              <b-col style="text-align:left;" cols="6">
-                <b-form-radio disabled>
-                  {{ entry.options[3] }}
-                </b-form-radio>
-              </b-col>
-            </b-row>
+              </b-col>              
+                    
             <!-- Radios in the default slot will appear after any option generated radios -->
           </div>
+          </b-row>    
           <!-- </b-form-radio-group> -->
         </b-form-group>
 
@@ -133,6 +119,9 @@ export default {
   name: "FillInTheBlanksCard",
   props: {
     data: Array
+  },
+  created:function(){
+    console.log(this.data)
   }
 };
 </script>

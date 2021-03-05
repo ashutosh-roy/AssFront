@@ -82,3 +82,27 @@ export function getFillInTheBlanksquestion() {
     method: "get"
   });
 }
+export function postMatchTheFollowingQuestion() {
+  return service({
+    url: `postMatchTheFollowingQuestion/`,
+    method: "post"
+  });
+}
+export function putMatchTheFollowingQuestion() {
+  return service({
+    url: `puttMatchTheFollowingQuestion/`,
+    method: "put"
+  });
+}
+export function getMatchTheFollowingQuestion() {
+  return service({
+    url: `getMatchTheFollowingQuestion/`,
+    method: "get"
+  });
+}
+export function deleteMatchTheFollowingQuestion() {
+  return service({
+    url: `deleteMatchTheFollowingQuestion/`,
+    method: "delete"
+  });
+}

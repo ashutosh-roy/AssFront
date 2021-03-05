@@ -127,6 +127,14 @@
             v-on:edit-entry="editFillInTheBlanksQuestion"
           />
         </div>
+        <div :key="MatchTheFollowingData">
+          <MatchTheFollowingCard
+            :data="MatchTheFollowingData"
+            v-if="MatchTheFollowingData.length != 0"
+            v-on:delete-entry="deleteMatchTheFollowingEntry"
+            v-on:edit-entry="editMatchTheFollowing"
+          />
+        </div>
       </b-col>
     </b-row>
     <b-row align-h="center">
@@ -152,7 +160,12 @@
           v-on:question-added="addFillInTheBlanks"
           :entry="editFitbID"
         />
-        <MatchTheFollowing v-if="match" v-on:delete-form="match = false" />
+        <MatchTheFollowing 
+          v-if="match" 
+          v-on:delete-form="match = false"
+          v-on:question-added="addMatchTheFollowing"
+          :entry="editMatchID"
+        />
         <mcq
           v-if="mcq"
           v-on:delete-form="mcq = false"
@@ -178,25 +191,27 @@ import LongAnswer from "../components/forms/longAnswer";
 import ShortAnswer from "../components/forms/shortAnswer";
 import mcq from "../components/forms/Mcq";
 import ShortAnswerCard from "../components/displayCards/shortAnswerCard";
-import { getMCQquestion, getCommonQuestion,getFillInTheBlanksquestion } from "../apiFunctions";
+import { getMCQquestion, getCommonQuestion,getFillInTheBlanksquestion, getMatchTheFollowingQuestion } from "../apiFunctions";
 import Comprehensive from "../components/forms/Comprehensive";
 import FillInTheBlanksCard from "../components/displayCards/fillInTheBlanksCard.vue";
+import MatchTheFollowingCard from "../components/displayCards/matchTheFollowingCard.vue";
 
 
 export default {
   name: "Home",
   components: {
     // multipleTypeQuestions,
+    LongAnswerCard,
     LongAnswer,
     ShortAnswer,
-    MatchTheFollowing,
-    LongAnswerCard,
     mcq,
     ShortAnswerCard,
     MCQCard,
     Comprehensive,
     FillInTheBlanks,
-    FillInTheBlanksCard    
+    FillInTheBlanksCard,
+    MatchTheFollowingCard,
+    MatchTheFollowing 
   },
   data() {
     return {
@@ -211,10 +226,12 @@ export default {
       mcqdata: [],
       ComprehensiveData: [],
       fillInTheBlanksData: [],
+      MatchTheFollowingData:[],
       editLongID: -1,
       editShortID: -1,
       editMcqID: -1,
       editFitbID: -1,
+      editMatchID: -1
     };
   },
   methods: {
@@ -222,7 +239,9 @@ export default {
       if (
         this.longQuestionData.length != 0 ||
         this.shortQuestionData.length != 0 ||
-        this.mcqdata.length != 0
+        this.mcqdata.length != 0 ||
+        this.MatchTheFollowingData.length != 0 ||
+        this.fillInTheBlanksData.length != 0
       ) {
         this.$emit("show-db");
         return true;
@@ -258,6 +277,10 @@ export default {
       this.fillInTheBlanksData = this.fillInTheBlanksData.filter(data => data.question != question);
     },
 
+    deleteMatchTheFollowingEntry(question) {
+      this.MatchTheFollowingData = this.MatchTheFollowingData.filter(data => data.question != question);
+    },
+
     addlongquestion(longquesdata) {
       this.longQuestionData.push(longquesdata);
       this.longanswer = false;
@@ -274,6 +297,10 @@ export default {
     addFillInTheBlanks(fillInTheBlanksData) {
       this.fillInTheBlanksData.push(fillInTheBlanksData);
       this.fitb = false;
+    },
+    addMatchTheFollowing(MatchTheFollowingData) {
+      this.MatchTheFollowingData.push(MatchTheFollowingData);
+      this.match = false;
     },
     addComprehensive(ComprehensiveData) {
       this.ComprehensiveData.push(ComprehensiveData);
@@ -294,6 +321,10 @@ export default {
     editFillInTheBlanksQuestion(id) {
       this.editFitbID = id;
       this.fitb = true;
+    },
+    editMatchTheFollowing(id) {
+      this.editMatchID = id;
+      this.match = true;
     }
   },
   created: function() {
@@ -302,6 +333,9 @@ export default {
       .catch(err => console.log(err));
     getFillInTheBlanksquestion()
       .then(res => (this.fillInTheBlanksData = res.data.data))
+      .catch(err => console.log(err));
+    getMatchTheFollowingQuestion()
+      .then((res) => (this.MatchTheFollowingData = res.data.data))
       .catch(err => console.log(err));
     getCommonQuestion().then(res => {
       var i = 0;
