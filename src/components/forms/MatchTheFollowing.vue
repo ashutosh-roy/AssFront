@@ -3,6 +3,7 @@
     <div class="questionboxcard1">
       <b-card class="card" header-tag="header">
         <template #header>
+          Match The Following
           <div style="height:4vh">
             <b-row align-h="end">
               <b-button
@@ -82,13 +83,13 @@
                     @click="addInput()"
                     placeholder="Side A"
                     class="input"
-                    readonly></b-form-input
+                    readonly style="background-color:transparent"></b-form-input
                   >
                   <b-form-input
                     @click="addInput()"
                     placeholder="Side B"
                     class="input"
-                    readonly></b-form-input
+                    readonly style="background-color:transparent"></b-form-input
                   >
                 </b-input-group>
               </div>
