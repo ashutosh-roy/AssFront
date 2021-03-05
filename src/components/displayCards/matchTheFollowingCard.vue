@@ -9,9 +9,8 @@
       <template #header>
         <div>
           <b-row>
-            <b-col>
-              Match The Following
-            </b-col>
+            <b-card-title style="float:left">Match The Following</b-card-title>
+
             <b-col>
               <b-row align-h="end">
                 <b-button
@@ -33,10 +32,6 @@
       </template>
 
       <b-card-text>
-        <b-card-title style="float:left">Match The Following</b-card-title>
-        <br />
-        <br />
-        <b-card-text style="float:left;margin-left:30px">Question</b-card-text>
         <!-- <b-row align-h="end">
           <b-button
             variant="outline"
@@ -45,68 +40,47 @@
             ><i class="fas fa-trash"></i
           ></b-button>
         </b-row> -->
-        <br />       
 
         <div>
           <b-row align-h="start">
             <b-card-text>
               <!-- {{ entry.question.sideA }} -->
-              <b-card-text style="float:left;margin-left:30px">Answers</b-card-text>
+              <b-card-text style="float:left;margin-left:30px"
+                >Answers</b-card-text
+              >
               <br />
-              <div class="inputanswers" v-for="i in entry.question.sideA.length" :key="i">
+              <div
+                class="inputanswers ml-5"
+                v-for="i in entry.question.sideA.length"
+                :key="i"
+              >
                 <!-- <b-row> -->
-                  <div class="questionrows">
-                    <b-col style="text-align:left;" cols="6">
-                    <b-input-group class="inputgrp">                                          
-                    <template #prepend>
-                       <b-form-radio disabled>
-                        <span class="sr-only"
-                          ></span
-                        >
-                      </b-form-radio>
-                    </template>
-                    <b-form-input v-model="entry.question.sideA[i-1]" style="border:none"></b-form-input>
-                    
-                    <b-form-input v-model="entry.question.sideB[i-1]" class="ml-2" style="border:none"></b-form-input>
-                    </b-input-group>                    
-                    </b-col>                     
+                <div class="questionrows">
+                  <b-col style="text-align:left;" cols="6">
+                    <b-input-group class="inputgrp">
+                      <template #prepend>
+                        <b-form-radio disabled>
+                          <span class="sr-only"></span>
+                        </b-form-radio>
+                      </template>
+                      <b-form-input
+                        v-model="entry.question.sideA[i - 1]"
+                        style="border:none"
+                      ></b-form-input>
+
+                      <b-form-input
+                        v-model="entry.question.sideB[i - 1]"
+                        class="ml-2"
+                        style="border:none"
+                      ></b-form-input>
+                    </b-input-group>
+                  </b-col>
                 </div>
                 <!-- </b-row>                 -->
               </div>
             </b-card-text>
           </b-row>
         </div>
-
-        <br />
-        <br />
-
-        
-        <br />
-
-        <b-form-group>
-          <!-- <b-form-radio-group
-        id="radio-slots"
-        v-model="selected1"
-        :options="options1"
-        :aria-describedby="ariaDescribedby"
-        name="radio-options-slots"
-      > -->
-
-      <b-row>
-          <div class="options" v-for="answer in entry.answerKey"
-          :key="answer">
-            
-              <b-col style="text-align:left;" cols="6">
-                <b-form-radio disabled>
-                  {{answer}}
-                </b-form-radio>
-              </b-col>              
-                    
-            <!-- Radios in the default slot will appear after any option generated radios -->
-          </div>
-          </b-row>    
-          <!-- </b-form-radio-group> -->
-        </b-form-group>
 
         <div>
           <b-row align-h="end">
@@ -139,11 +113,11 @@
 export default {
   name: "FillInTheBlanksCard",
   props: {
-    data: Array
+    data: Array,
   },
-  created:function(){
-    console.log(this.data)
-  }
+  created: function() {
+    console.log(this.data);
+  },
 };
 </script>
 <style scoped>

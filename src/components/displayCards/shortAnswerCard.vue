@@ -4,6 +4,7 @@
       <template #header>
         <div>
           <b-row>
+            <b-card-title style="float:left">Short Answer Type</b-card-title>
             <b-col>
               <b-row align-h="end">
                 <b-button
@@ -99,10 +100,10 @@ import { isImage, isVideo, isAudio } from "../../checkFileType.js";
 export default {
   name: "ShortAnswerCard",
   components: {
-    Media
+    Media,
   },
   props: {
-    data: Array
+    data: Array,
   },
   mounted() {
     isImage(this.file);
@@ -112,8 +113,8 @@ export default {
   methods: {
     isImage,
     isAudio,
-    isVideo
-  }
+    isVideo,
+  },
 };
 </script>
 <style scoped>

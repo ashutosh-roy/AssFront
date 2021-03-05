@@ -9,6 +9,7 @@
       <template #header>
         <div>
           <b-row>
+            <b-card-title style="float:left">Long Answer Type</b-card-title>
             <b-col>
               <b-row align-h="end">
                 <b-button
@@ -28,7 +29,7 @@
           </b-row>
         </div>
       </template>
-      Long Answer Type
+
       <br />
       <span style="color:grey" class="ml-3">Question</span>
       <br />
@@ -104,11 +105,11 @@ import { isImage, isVideo, isAudio } from "../../checkFileType.js";
 export default {
   name: "LongAnswerCard",
   components: {
-    Media
+    Media,
   },
   props: {
     data: Array,
-    type: String
+    type: String,
   },
   mounted() {
     isImage(this.file);
@@ -118,8 +119,8 @@ export default {
   methods: {
     isImage,
     isAudio,
-    isVideo
-  }
+    isVideo,
+  },
 };
 </script>
 <style scoped>
