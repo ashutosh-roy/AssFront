@@ -44,11 +44,10 @@
         <div>
           <b-row align-h="start">
             <b-card-text>
+              <span class="ml-3">
+                Answers
+              </span>
               <!-- {{ entry.question.sideA }} -->
-              <b-card-text style="float:left;margin-left:30px"
-                >Answers</b-card-text
-              >
-              <br />
               <div
                 class="inputanswers ml-5"
                 v-for="i in entry.question.sideA.length"
@@ -56,7 +55,7 @@
               >
                 <!-- <b-row> -->
                 <div class="questionrows">
-                  <b-col style="text-align:left;" cols="6">
+                  <b-col style="text-align:left" cols="6">
                     <b-input-group class="inputgrp">
                       <template #prepend>
                         <b-form-radio disabled>
@@ -65,13 +64,15 @@
                       </template>
                       <b-form-input
                         v-model="entry.question.sideA[i - 1]"
-                        style="border:none"
+                        style="border:none;background-color:transparent"
+                        disabled
                       ></b-form-input>
 
                       <b-form-input
                         v-model="entry.question.sideB[i - 1]"
                         class="ml-2"
-                        style="border:none"
+                        style="border:none; background-color:transparent"
+                        disabled
                       ></b-form-input>
                     </b-input-group>
                   </b-col>
