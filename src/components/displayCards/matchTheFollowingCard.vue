@@ -36,7 +36,7 @@
         <b-card-title style="float:left">Match The Following</b-card-title>
         <br />
         <br />
-        <b-card-text style="float:left;margin-left:30px">Question</b-card-text>
+        <!-- <b-card-text style="float:left;margin-left:30px"></b-card-text> -->
         <!-- <b-row align-h="end">
           <b-button
             variant="outline"
@@ -50,13 +50,11 @@
         <div>
           <b-row align-h="start">
             <b-card-text>
-              <!-- {{ entry.question.sideA }} -->
-              <b-card-text style="float:left;margin-left:30px">Answers</b-card-text>
-              <br />
+              <!-- {{ entry.question.sideA }} -->              
               <div class="inputanswers" v-for="i in entry.question.sideA.length" :key="i">
                 <!-- <b-row> -->
                   <div class="questionrows">
-                    <b-col style="text-align:left;" cols="6">
+                    <b-col style="text-align:left" cols="6">
                     <b-input-group class="inputgrp">                                          
                     <template #prepend>
                        <b-form-radio disabled>
@@ -65,9 +63,9 @@
                         >
                       </b-form-radio>
                     </template>
-                    <b-form-input v-model="entry.question.sideA[i-1]" style="border:none"></b-form-input>
+                    <b-form-input v-model="entry.question.sideA[i-1]" style="border:none;background-color:transparent" disabled></b-form-input>
                     
-                    <b-form-input v-model="entry.question.sideB[i-1]" class="ml-2" style="border:none"></b-form-input>
+                    <b-form-input v-model="entry.question.sideB[i-1]" class="ml-2" style="border:none; background-color:transparent" disabled></b-form-input>
                     </b-input-group>                    
                     </b-col>                     
                 </div>
@@ -83,7 +81,7 @@
         
         <br />
 
-        <b-form-group>
+        <b-form-group disabled>
           <!-- <b-form-radio-group
         id="radio-slots"
         v-model="selected1"
@@ -97,9 +95,10 @@
           :key="answer">
             
               <b-col style="text-align:left;" cols="6">
-                <b-form-radio disabled>
+                <b-form-radio>
                   {{answer}}
                 </b-form-radio>
+                  
               </b-col>              
                     
             <!-- Radios in the default slot will appear after any option generated radios -->
