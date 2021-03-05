@@ -71,12 +71,12 @@ export default {
     return {
       topicnum: 1,
       topicnames: ["Sample Topic"],
-      name: "",
+      name: ""
       //   tobeDel: "",
     };
   },
   components: {
-    TopicCard,
+    TopicCard
   },
   methods: {
     addtopic() {
@@ -86,7 +86,7 @@ export default {
         this.$bvModal.hide("topicNameModal");
         this.name = "";
       }
-    },
+    }
     //   delTopic(){
     //       this.topicnames = this.topicnames.filter((name) => name != this.tobeDel);
     //       this.topicnum -= 1;
@@ -96,7 +96,7 @@ export default {
     //       this.tobeDel = deletetopicname;
     //       this.$bvModal.hide("deleteConfirmation");
     //   },
-  },
+  }
 };
 </script>
 <style scoped>

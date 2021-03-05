@@ -100,10 +100,10 @@ import { isImage, isVideo, isAudio } from "../../checkFileType.js";
 export default {
   name: "ShortAnswerCard",
   components: {
-    Media,
+    Media
   },
   props: {
-    data: Array,
+    data: Array
   },
   mounted() {
     isImage(this.file);
@@ -113,8 +113,8 @@ export default {
   methods: {
     isImage,
     isAudio,
-    isVideo,
-  },
+    isVideo
+  }
 };
 </script>
 <style scoped>

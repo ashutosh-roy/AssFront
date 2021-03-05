@@ -16,7 +16,7 @@
         </template>
         <b-card-text>
           <b-form inline>
-            <div style="width:100%">              
+            <div style="width:100%">
               <b-container class="bv-example-row">
                 <div>
                   <b-row>
@@ -34,29 +34,31 @@
                     </b-col>
                   </b-row>
                 </div>
-              </b-container>              
+              </b-container>
               <div class="inputanswers" v-for="i in matchQues" :key="i">
                 <div class="questionrows">
                   <b-input-group class="inputgrp">
                     <template #prepend>
                       <b-form-radio disabled>
-                        <span class="sr-only"
-                          ></span
-                        >
+                        <span class="sr-only"></span>
                       </b-form-radio>
                     </template>
-                    <b-form-input v-model="questions.question.sideA[i-1]"></b-form-input>
+                    <b-form-input
+                      v-model="questions.question.sideA[i - 1]"
+                    ></b-form-input>
                     <b-button variant="outline-secondary">
                       <i class="fas fa-file-upload"></i>
                     </b-button>
-                    <b-form-input v-model="questions.question.sideB[i-1]"></b-form-input>
+                    <b-form-input
+                      v-model="questions.question.sideB[i - 1]"
+                    ></b-form-input>
                     <b-button variant="outline-secondary">
                       <i class="fas fa-file-upload"></i>
                     </b-button>
                     <b-button
                       variant="outline-secondary"
                       class="deletebutton"
-                      @click="removerows(i - 1)"                       
+                      @click="removerows(i - 1)"
                     >
                       <i class="fas fa-trash"></i>
                     </b-button>
@@ -82,14 +84,14 @@
                     @click="addInput()"
                     placeholder="Side A"
                     class="input"
-                    readonly></b-form-input
-                  >
+                    readonly
+                  ></b-form-input>
                   <b-form-input
                     @click="addInput()"
                     placeholder="Side B"
                     class="input"
-                    readonly></b-form-input
-                  >
+                    readonly
+                  ></b-form-input>
                 </b-input-group>
               </div>
               <!-- </div> -->
@@ -161,27 +163,30 @@
   </div>
 </template>
 <script>
-import { postMatchTheFollowingQuestion,getMatchTheFollowingQuestion } from "../../apiFunctions";
+import {
+  postMatchTheFollowingQuestion,
+  getMatchTheFollowingQuestion
+} from "../../apiFunctions";
 export default {
   name: "MatchTheFollowing",
   data() {
     return {
       optionnum: 1,
-      matchQues:0,
+      matchQues: 0,
       questions: {
         topic: "",
         difficultyLevel: null,
         question: {
-          sideA:[],
-          sideB:[]
+          sideA: [],
+          sideB: []
         },
         questionType: "Mtach the following Questions",
         answerKey: this.question,
         autoCorrection: 0,
         required: 0,
         addToPublic: false,
-        addToDatabank: false,        
-        fileUpload: "",
+        addToDatabank: false,
+        fileUpload: ""
       },
       selected: "null",
       options: [
@@ -203,13 +208,13 @@ export default {
   methods: {
     addquestion() {
       postMatchTheFollowingQuestion(this.questions)
-        .then((res) => console.log("MCQ data saved!" + res))
-        .catch((err) => console.log(err));
+        .then(res => console.log("MCQ data saved!" + res))
+        .catch(err => console.log(err));
       this.$emit("question-added", this.questions);
     },
-    addInput(){
-      this.matchQues+=1;
-      console.log(this.matchQues)
+    addInput() {
+      this.matchQues += 1;
+      console.log(this.matchQues);
     },
     addsides() {
       this.optionnum = this.optionnum + 1;
@@ -219,16 +224,16 @@ export default {
         sideB: ""
       });
       console.log(this.questions.answerKey);
-    },    
+    },
     removerows(index) {
       this.questions.question.sideA.splice(index, 1);
-      this.questions.question.sideB.splice(index,1)
-      this.matchQues-=1
-    }    
+      this.questions.question.sideB.splice(index, 1);
+      this.matchQues -= 1;
+    }
   },
-created: function() {
+  created: function() {
     if (this.entry != -1) {
-      getMatchTheFollowingQuestion().then((res) => {
+      getMatchTheFollowingQuestion().then(res => {
         var i = 0;
         while (i < res.data.data.length) {
           if (res.data.data[i].id == this.entry) {
@@ -238,7 +243,7 @@ created: function() {
         }
       });
     }
-  },
+  }
 };
 </script>
 <style scoped>

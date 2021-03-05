@@ -75,11 +75,11 @@ export default {
       testnum: 1,
       testnames: ["Sample Test"],
       name: "",
-      tobeDel: "",
+      tobeDel: ""
     };
   },
   components: {
-    TestCard,
+    TestCard
   },
   methods: {
     addtest() {
@@ -91,7 +91,7 @@ export default {
       }
     },
     delTest() {
-      this.testnames = this.testnames.filter((name) => name != this.tobeDel);
+      this.testnames = this.testnames.filter(name => name != this.tobeDel);
       this.testnum -= 1;
       this.$bvModal.hide("deleteConfirmation");
     },
@@ -102,10 +102,10 @@ export default {
     testConfigurations(testname) {
       this.$router.replace({
         name: "Test Configuration",
-        params: { testname },
+        params: { testname }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

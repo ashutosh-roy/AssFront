@@ -105,11 +105,11 @@ import { isImage, isVideo, isAudio } from "../../checkFileType.js";
 export default {
   name: "LongAnswerCard",
   components: {
-    Media,
+    Media
   },
   props: {
     data: Array,
-    type: String,
+    type: String
   },
   mounted() {
     isImage(this.file);
@@ -119,8 +119,8 @@ export default {
   methods: {
     isImage,
     isAudio,
-    isVideo,
-  },
+    isVideo
+  }
 };
 </script>
 <style scoped>

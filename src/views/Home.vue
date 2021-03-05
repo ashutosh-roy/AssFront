@@ -195,7 +195,7 @@ import {
   getMCQquestion,
   getCommonQuestion,
   getFillInTheBlanksquestion,
-  getMatchTheFollowingQuestion,
+  getMatchTheFollowingQuestion
 } from "../apiFunctions";
 import Comprehensive from "../components/forms/Comprehensive";
 import FillInTheBlanksCard from "../components/displayCards/fillInTheBlanksCard.vue";
@@ -215,7 +215,7 @@ export default {
     FillInTheBlanks,
     FillInTheBlanksCard,
     MatchTheFollowingCard,
-    MatchTheFollowing,
+    MatchTheFollowing
   },
   data() {
     return {
@@ -235,7 +235,7 @@ export default {
       editShortID: -1,
       editMcqID: -1,
       editFitbID: -1,
-      editMatchID: -1,
+      editMatchID: -1
     };
   },
   methods: {
@@ -270,28 +270,28 @@ export default {
     },
     deleteEntry(question) {
       this.longQuestionData = this.longQuestionData.filter(
-        (data) => data.question != question
+        data => data.question != question
       );
     },
     deleteShortEntry(question) {
       this.shortQuestionData = this.shortQuestionData.filter(
-        (data) => data.question != question
+        data => data.question != question
       );
     },
 
     deleteMcqEntry(question) {
-      this.mcqdata = this.mcqdata.filter((data) => data.question != question);
+      this.mcqdata = this.mcqdata.filter(data => data.question != question);
     },
 
     deleteFillInTheBlanksEntry(question) {
       this.fillInTheBlanksData = this.fillInTheBlanksData.filter(
-        (data) => data.question != question
+        data => data.question != question
       );
     },
 
     deleteMatchTheFollowingEntry(question) {
       this.MatchTheFollowingData = this.MatchTheFollowingData.filter(
-        (data) => data.question != question
+        data => data.question != question
       );
     },
 
@@ -339,19 +339,19 @@ export default {
     editMatchTheFollowing(id) {
       this.editMatchID = id;
       this.match = true;
-    },
+    }
   },
   created: function() {
     getMCQquestion()
-      .then((res) => (this.mcqdata = res.data.data))
-      .catch((err) => console.log(err));
+      .then(res => (this.mcqdata = res.data.data))
+      .catch(err => console.log(err));
     getFillInTheBlanksquestion()
-      .then((res) => (this.fillInTheBlanksData = res.data.data))
-      .catch((err) => console.log(err));
+      .then(res => (this.fillInTheBlanksData = res.data.data))
+      .catch(err => console.log(err));
     getMatchTheFollowingQuestion()
-      .then((res) => (this.MatchTheFollowingData = res.data.data))
-      .catch((err) => console.log(err));
-    getCommonQuestion().then((res) => {
+      .then(res => (this.MatchTheFollowingData = res.data.data))
+      .catch(err => console.log(err));
+    getCommonQuestion().then(res => {
       var i = 0;
       while (i < res.data.data.length) {
         if (res.data.data[i].questionType == "Long Answer Questions") {
@@ -367,7 +367,7 @@ export default {
         }
       }
     });
-  },
+  }
 };
 </script>
 <style scoped>

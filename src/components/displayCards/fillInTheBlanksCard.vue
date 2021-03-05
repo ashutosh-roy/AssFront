@@ -110,11 +110,11 @@
 export default {
   name: "FillInTheBlanksCard",
   props: {
-    data: Array,
+    data: Array
   },
   created: function() {
     console.log(this.data);
-  },
+  }
 };
 </script>
 <style scoped>
