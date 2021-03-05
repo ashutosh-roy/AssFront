@@ -1,6 +1,9 @@
 <template>
   <div>
     <b-card class="cardx">
+      <b-button variant="outline" style="border:none" @click="back()"
+        ><i class="fas fa-arrow-left"></i
+      ></b-button>
       <div class="accordion" role="tablist">
         <b-card no-body class="mb-1">
           <b-card-header header-tag="header" class="p-1" role="tab">
@@ -558,13 +561,18 @@ export default {
       screenCapture: 0,
       options: [
         { item: true, name: "Yes" },
-        { item: false, name: "No" },
-      ],
+        { item: false, name: "No" }
+      ]
     };
   },
   props: {
-    testname: String,
+    testname: String
   },
+  methods: {
+    back() {
+      this.$router.push("test");
+    }
+  }
 };
 </script>
 <style scoped>

@@ -1,5 +1,5 @@
 <template>
-  <div id="asp">
+  <div>
     <b-card class="card" header-tag="header">
       <template #header>
         <div>

@@ -1,39 +1,117 @@
 <template>
-  <div class="questionboxcontainer">
-    <b-card class="card">
+  <div>
+    <b-card
+      class="card"
+      v-for="entry in data"
+      :key="entry.question"
+      header-tag="header"
+    >
+      <template #header>
+        <div>
+          <b-row>
+            <b-col>
+              Match The Following
+            </b-col>
+            <b-col>
+              <b-row align-h="end">
+                <b-button
+                  variant="outline"
+                  @click="$emit('edit-entry', entry.id)"
+                  style="border:none"
+                  ><i class="fas fa-edit"></i
+                ></b-button>
+                <b-button
+                  variant="outline"
+                  @click="$emit('delete-entry', entry.question)"
+                  style="border:none"
+                  ><i class="fas fa-trash"></i
+                ></b-button>
+              </b-row>
+            </b-col>
+          </b-row>
+        </div>
+      </template>
+
       <b-card-text>
-        <b-form inline>
-          <div class="firstrow">
-            <h5>Match The Following</h5>
-            <br />
-            <h6 style="margin-left: -63%">Question</h6>
-          </div>
-          <div class="matchthefollowing">
-            <!-- v-for="(item, key, index) in objectItems -->
-            <div v-for="item in inputs" :key="item.id">
-              <div class="optionrows">
-                <b-input-group>
-                  <!-- <template #prepend>
-                            <b-input-group-text >
-                                <li></li>
-                            </b-input-group-text>
-                            </template> -->
-                  <template #prepend>
-                    <b-form-radio disabled>
-                      <span class="sr-only"
-                        >Radio for following text input</span
-                      >
-                    </b-form-radio>
-                  </template>
-                  <b-form-input v-model="item.sideA"></b-form-input>
-                  <b-form-input v-model="item.sideB"></b-form-input>
-                </b-input-group>
+        <b-card-title style="float:left">Match The Following</b-card-title>
+        <br />
+        <br />
+        <b-card-text style="float:left;margin-left:30px">Question</b-card-text>
+        <!-- <b-row align-h="end">
+          <b-button
+            variant="outline"
+            @click="$emit('delete-entry', entry.question)"
+            style="border:none"
+            ><i class="fas fa-trash"></i
+          ></b-button>
+        </b-row> -->
+        <br />       
+
+        <div>
+          <b-row align-h="start">
+            <b-card-text>
+              <!-- {{ entry.question.sideA }} -->
+              <b-card-text style="float:left;margin-left:30px">Answers</b-card-text>
+              <br />
+              <div class="inputanswers" v-for="i in entry.question.sideA.length" :key="i">
+                <!-- <b-row> -->
+                  <div class="questionrows">
+                    <b-col style="text-align:left;" cols="6">
+                    <b-input-group class="inputgrp">                                          
+                    <template #prepend>
+                       <b-form-radio disabled>
+                        <span class="sr-only"
+                          ></span
+                        >
+                      </b-form-radio>
+                    </template>
+                    <b-form-input v-model="entry.question.sideA[i-1]" style="border:none"></b-form-input>
+                    
+                    <b-form-input v-model="entry.question.sideB[i-1]" class="ml-2" style="border:none"></b-form-input>
+                    </b-input-group>                    
+                    </b-col>                     
+                </div>
+                <!-- </b-row>                 -->
               </div>
-            </div>
+            </b-card-text>
+          </b-row>
+        </div>
+
+        <br />
+        <br />
+
+        
+        <br />
+
+        <b-form-group>
+          <!-- <b-form-radio-group
+        id="radio-slots"
+        v-model="selected1"
+        :options="options1"
+        :aria-describedby="ariaDescribedby"
+        name="radio-options-slots"
+      > -->
+
+      <b-row>
+          <div class="options" v-for="answer in entry.answerKey"
+          :key="answer">
+            
+              <b-col style="text-align:left;" cols="6">
+                <b-form-radio disabled>
+                  {{answer}}
+                </b-form-radio>
+              </b-col>              
+                    
+            <!-- Radios in the default slot will appear after any option generated radios -->
           </div>
-          <b-input-group style="padding-left:70%">
+          </b-row>    
+          <!-- </b-form-radio-group> -->
+        </b-form-group>
+
+        <div>
+          <b-row align-h="end">
             <b-form-checkbox
-              v-model="checked"
+              v-model="entry.autoCorrection"
               class="switch"
               name="check-button"
               switch
@@ -43,7 +121,7 @@
             </b-form-checkbox>
 
             <b-form-checkbox
-              v-model="checked"
+              v-model="entry.required"
               class="switch"
               name="check-button"
               switch
@@ -51,63 +129,20 @@
             >
               Required
             </b-form-checkbox>
-            <!-- <template #append> -->
-          </b-input-group>
-        </b-form>
+          </b-row>
+        </div>
       </b-card-text>
     </b-card>
   </div>
 </template>
 <script>
 export default {
-  name: "MatchTheFollowingCard",
-  data() {
-    return {
-      inputs: [
-        {
-          sideA: "",
-          sideB: ""
-        }
-      ],
-      selected: "null",
-      options: [
-        { value: null, text: "Difficulty" },
-        { value: "1", text: "Difficulty Level 1" },
-        { value: "2", text: "Difficulty Level 2" },
-        { value: "3", text: "Difficulty Level 3" },
-        { value: "4", text: "Difficulty Level 4" },
-        { value: "5", text: "Difficulty Level 5" }
-      ]
-      //   selectedoptions: 'first',
-      //     options1: [
-      //       { text: 'First radio', value: 'first' },
-      //       { text: 'Second radio', value: 'second' },
-      //       { text: 'Third radio', value: 'third' }
-      //     ]
-    };
+  name: "FillInTheBlanksCard",
+  props: {
+    data: Array
   },
-  methods: {
-    addsideA() {
-      this.inputs.push({
-        sideA: ""
-      });
-      console.log(this.inputs);
-    },
-
-    addsideB() {
-      this.inputs.push({
-        sideB: ""
-      });
-      console.log(this.inputs);
-    },
-
-    remove(index) {
-      this.inputs.splice(index, 1);
-    }
-
-    // remove (index) {
-    //   this.inputs.splice(index, 1)
-    // },
+  created:function(){
+    console.log(this.data)
   }
 };
 </script>
@@ -117,78 +152,61 @@ export default {
   margin: 2vh;
   box-shadow: 7px 10px 7px #c5c2c2;
 }
-
 .input {
-  border-left: none;
-  border-right: none;
   border-top: none;
+  border-right: none;
+  border-left: none;
   border-radius: 0px;
+  outline: none;
   width: fit-content;
   margin-right: 2vh;
-}
-.input:focus {
+  outline: 0px;
   background-color: transparent;
+}
+.input::after {
+  border: none;
+  outline: none;
   outline-width: 0px;
 }
 .switch {
   margin-top: 2vh;
   margin-right: 2vh;
 }
-.inputanswers {
-  padding-top: 1%;
-  width: 100%;
-}
-.matchthefollowing {
-  width: 100%;
-}
-/* .inputgrp{
-    
-} */
-.form-control {
-  margin: 1%;
-  background-color: transparent;
-  outline-width: 0px;
-}
 .form-control:focus {
   border-color: inherit;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.btn {
-  border: none;
-  padding-top: 0.5%;
-  margin-top: 1%;
-  margin-bottom: 0.7%;
-}
-.deletebutton {
-  margin-left: 0.5%;
-}
-/* .delbutton{
-    margin-left: 200%;
-    
- } */
-/*  
-.inputfield{
-    width: 100%;
-    margin-left:-1%;
-
-} */
-.input-group-text {
-  padding-top: 0.5%;
-  margin-top: 28%;
-  margin-bottom: 2%;
-  border: none;
-}
-.input:focus {
+.custom-select:focus {
   border-color: inherit;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* .col-10 {
-    margin-left: -38%;
-} */
-.custom-control {
-  padding-left: 3rem;
-  padding-top: 1.2rem;
+
+.base {
+  width: 100%;
+}
+.sss {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+.btnn {
+  border: none;
+}
+.btts {
+  border: none;
+  color: blue;
+}
+
+.bottom-button {
+  right: 0;
+}
+.add-btn {
+  color: green;
+}
+
+.options {
+  margin-left: 20px;
 }
 </style>

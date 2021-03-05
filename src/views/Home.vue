@@ -94,7 +94,7 @@
       >
     </b-modal>
     <b-row align-h="center">
-      <b-col md="7" sm="12">
+      <b-col md="9" sm="12">
         <div :key="longQuestionData">
           <LongAnswerCard
             :data="longQuestionData"
@@ -138,7 +138,7 @@
       </b-col>
     </b-row>
     <b-row align-h="center">
-      <b-col md="7" sm="12">
+      <b-col md="9" sm="12">
         <!-- <multipleTypeQuestions v-show="false" /> -->
         <div :key="longanswer">
           <LongAnswer
