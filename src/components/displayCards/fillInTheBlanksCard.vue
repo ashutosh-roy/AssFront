@@ -9,9 +9,8 @@
       <template #header>
         <div>
           <b-row>
-            <b-col>
-              Fill In The Blanks
-            </b-col>
+            <b-card-title style="float:left">Fill In The Blanks</b-card-title>
+
             <b-col>
               <b-row align-h="end">
                 <b-button
@@ -33,9 +32,6 @@
       </template>
 
       <b-card-text>
-        <b-card-title style="float:left">Fill In The Blanks</b-card-title>
-        <br />
-        <br />
         <b-card-text style="float:left;margin-left:30px">Question</b-card-text>
         <!-- <b-row align-h="end">
           <b-button
@@ -56,10 +52,8 @@
         </div>
 
         <br />
-        <br />
 
         <b-card-text style="float:left;margin-left:30px">Answers</b-card-text>
-        <br />
         <br />
 
         <b-form-group>
@@ -71,19 +65,17 @@
         name="radio-options-slots"
       > -->
 
-      <b-row>
-          <div class="options" v-for="option in entry.options"
-          :key="option">
-            
+          <b-row>
+            <div class="options" v-for="option in entry.options" :key="option">
               <b-col style="text-align:left;" cols="6">
                 <b-form-radio disabled>
-                  {{option}}
+                  {{ option }}
                 </b-form-radio>
-              </b-col>              
-                    
-            <!-- Radios in the default slot will appear after any option generated radios -->
-          </div>
-          </b-row>    
+              </b-col>
+
+              <!-- Radios in the default slot will appear after any option generated radios -->
+            </div>
+          </b-row>
           <!-- </b-form-radio-group> -->
         </b-form-group>
 
@@ -118,11 +110,11 @@
 export default {
   name: "FillInTheBlanksCard",
   props: {
-    data: Array
+    data: Array,
   },
-  created:function(){
-    console.log(this.data)
-  }
+  created: function() {
+    console.log(this.data);
+  },
 };
 </script>
 <style scoped>

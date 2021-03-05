@@ -9,9 +9,9 @@
       <template #header>
         <div>
           <b-row>
-            <b-col>
-              MCQ
-            </b-col>
+            <b-card-title style="float:left"
+              >Multiple Choice Question(MCQ)</b-card-title
+            >
             <b-col>
               <b-row align-h="end">
                 <b-button
@@ -33,35 +33,8 @@
       </template>
 
       <b-card-text>
-        <b-card-title style="float:left"
-          >Multiple Choice Question(MCQ)</b-card-title
-        >
-        <template #header>
-          <div>
-            MCQ
-            <b-row align-h="end">
-              <b-button
-                variant="outline"
-                @click="$emit('delete-entry', entry.question)"
-                style="border:none"
-                ><i class="fas fa-trash"></i
-              ></b-button>
-            </b-row>
-          </div>
-        </template>
-        <br />
-        <br />
         <b-card-text style="float:left;margin-left:30px">Question</b-card-text>
-        <b-row align-h="end">
-          <b-button
-            variant="outline"
-            @click="$emit('delete-entry', entry.question)"
-            style="border:none"
-            ><i class="fas fa-trash"></i
-          ></b-button>
-        </b-row>
         <br />
-
         <div>
           <b-row align-h="start">
             <b-card-text>
@@ -70,13 +43,8 @@
           </b-row>
         </div>
 
-        <br />
-        <br />
-
         <b-card-text style="float:left;margin-left:30px">Options</b-card-text>
         <br />
-        <br />
-
         <b-form-group>
           <!-- <b-form-radio-group
         id="radio-slots"
@@ -85,34 +53,17 @@
         :aria-describedby="ariaDescribedby"
         name="radio-options-slots"
       > -->
-          <div class="options">
-            <b-row>
+          <b-row>
+            <div class="options" v-for="option in entry.options" :key="option">
               <b-col style="text-align:left;" cols="6">
                 <b-form-radio disabled>
-                  {{ entry.options[0] }}
+                  {{ option }}
                 </b-form-radio>
               </b-col>
 
-              <b-col style="text-align:left;" cols="6">
-                <b-form-radio disabled>
-                  {{ entry.options[1] }}
-                </b-form-radio>
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col style="text-align:left;" cols="6">
-                <b-form-radio disabled>
-                  {{ entry.options[2] }}
-                </b-form-radio>
-              </b-col>
-              <b-col style="text-align:left;" cols="6">
-                <b-form-radio disabled>
-                  {{ entry.options[3] }}
-                </b-form-radio>
-              </b-col>
-            </b-row>
-            <!-- Radios in the default slot will appear after any option generated radios -->
-          </div>
+              <!-- Radios in the default slot will appear after any option generated radios -->
+            </div>
+          </b-row>
           <!-- </b-form-radio-group> -->
         </b-form-group>
 
@@ -147,8 +98,8 @@
 export default {
   name: "MCQCard",
   props: {
-    data: Array
-  }
+    data: Array,
+  },
 };
 </script>
 <style scoped>
