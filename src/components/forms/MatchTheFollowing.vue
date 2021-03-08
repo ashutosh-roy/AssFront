@@ -2,9 +2,9 @@
   <div class="questionboxcontainer">
     <div class="questionboxcard1">
       <b-card class="card" header-tag="header">
-        <template #header>
-          Match The Following
-          <div style="height:4vh">
+        <template #header>    
+          <div>
+            Match The Following     
             <b-row align-h="end">
               <b-button
                 style="margin-top:1%"
