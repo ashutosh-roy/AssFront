@@ -84,25 +84,25 @@ export function getFillInTheBlanksquestion() {
 }
 export function postMatchTheFollowingQuestion() {
   return service({
-    url: `postMatchTheFollowingQuestion/`,
+    url: `matchTheFollowingQuestions/`,
     method: "post"
   });
 }
 export function putMatchTheFollowingQuestion() {
   return service({
-    url: `puttMatchTheFollowingQuestion/`,
+    url: `matchTheFollowingQuestions/`,
     method: "put"
   });
 }
 export function getMatchTheFollowingQuestion() {
   return service({
-    url: `getMatchTheFollowingQuestion/`,
+    url: `matchTheFollowingQuestions/`,
     method: "get"
   });
 }
 export function deleteMatchTheFollowingQuestion() {
   return service({
-    url: `deleteMatchTheFollowingQuestion/`,
+    url: `matchTheFollowingQuestions/`,
     method: "delete"
   });
 }

@@ -33,16 +33,8 @@
 
       <b-card-text>
         <b-card-text style="float:left;margin-left:30px">Question</b-card-text>
-        <!-- <b-row align-h="end">
-          <b-button
-            variant="outline"
-            @click="$emit('delete-entry', entry.question)"
-            style="border:none"
-            ><i class="fas fa-trash"></i
-          ></b-button>
-        </b-row> -->
+       
         <br />
-
         <div>
           <b-row align-h="start">
             <b-card-text>
@@ -57,26 +49,15 @@
         <br />
 
         <b-form-group>
-          <!-- <b-form-radio-group
-        id="radio-slots"
-        v-model="selected1"
-        :options="options1"
-        :aria-describedby="ariaDescribedby"
-        name="radio-options-slots"
-      > -->
-
           <b-row>
-            <div class="options" v-for="option in entry.options" :key="option">
+            <div class="options" v-for="option in entry.answerKey" :key="option">
               <b-col style="text-align:left;" cols="6">
                 <b-form-radio disabled>
                   {{ option }}
                 </b-form-radio>
               </b-col>
-
-              <!-- Radios in the default slot will appear after any option generated radios -->
             </div>
           </b-row>
-          <!-- </b-form-radio-group> -->
         </b-form-group>
 
         <div>
