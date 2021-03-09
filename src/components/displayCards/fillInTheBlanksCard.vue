@@ -33,7 +33,7 @@
 
       <b-card-text>
         <b-card-text style="float:left;margin-left:30px">Question</b-card-text>
-       
+
         <br />
         <div>
           <b-row align-h="start">
@@ -50,7 +50,11 @@
 
         <b-form-group>
           <b-row>
-            <div class="options" v-for="option in entry.answerKey" :key="option">
+            <div
+              class="options"
+              v-for="option in entry.answerKey"
+              :key="option"
+            >
               <b-col style="text-align:left;" cols="6">
                 <b-form-radio disabled>
                   {{ option }}

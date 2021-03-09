@@ -175,8 +175,7 @@ export default {
       }
     };
   },
-  methods: 
-  {  
+  methods: {
     addOptions() {
       this.optionnum = this.optionnum + 1;
     },
@@ -186,7 +185,7 @@ export default {
       );
     },
     addquestion() {
-      console.log(this.question.answerKey)
+      console.log(this.question.answerKey);
       postFillInTheBlanksquestion(this.question)
         .then(res => console.log("Fill In The Blanks data saved!" + res))
         .catch(err => console.log(err));
