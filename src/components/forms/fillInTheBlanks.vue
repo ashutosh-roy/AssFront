@@ -54,16 +54,26 @@
                   <b-form-input
                     autofocus
                     class="input"
-                    v-model="question.answerKey[i - 1]"
+                    v-model="question.options[i - 1]"
                     placeholder="Answer"
                     style="width:60%;margin-top:1vh"
                   >
                   </b-form-input>
+                  <!-- <div :key="answer[i - 1]">
+                    <b-button
+                      :variant="answer[i - 1]"
+                      @click="answerchange(question.options[i - 1], i)"
+                      style="border:none"
+                    >
+                      <i class="fas fa-check 7x"></i>
+                    </b-button>
+                  </div> -->
+
                   <b-button variant="outline">
                     <i
                       class="fas fa-trash"
                       @click="
-                        question.answerKey.splice(i - 1, 1);
+                        question.options.splice(i - 1, 1);
                         optionnum -= 1;
                       "
                     ></i>
@@ -79,6 +89,13 @@
                 @click.enter="addOptions()"
                 >Add Option</b-button
               >
+              <!-- <b-button
+                variant="outline"
+                class="btts-1"
+                style="float:left"
+                @click="addOptions()"
+                >/ Others</b-button
+              > -->
             </div>
 
             <b-row align-h="end">
@@ -152,6 +169,7 @@ export default {
   data() {
     return {
       selected: "null",
+      answer: ["outline-dark"],
       options: [
         { value: null, text: "Difficulty", disabled: true },
         { value: "1", text: "Difficulty Level 1" },
@@ -166,27 +184,56 @@ export default {
         topic: "",
         difficultyLevel: null,
         question: "",
-        answerKey: [],
+        options: [],
+        answerkey: [],
         autoCorrection: 0,
         required: 0,
         addToPublic: false,
         addToDatabank: false,
         fileUpload: ""
       }
+
+      /*subject = data["subject"]
+        topic = data["topic"]
+        difficultyLevel = data["difficultyLevel"]
+        question = data["question"]
+        options = json.dumps(data["options"])    
+        answerKey = json.dumps(data["answerKey"])
+        autoCorrection = data["autoCorrection"]
+        required = data["required"]
+        addToPublic = data["addToPublic"]
+        addToDatabank = data["addToDatabank"]
+        fileUpload = data["fileUpload"] */
     };
   },
-  methods: 
-  {  
+  methods: {
+    answerchange(ans, i) {
+      console.log("we're here atleast" + ans);
+      if (this.answer[i - 1] == "outline-dark") {
+        if (ans != null) {
+          this.answer[i - 1] = "outline-success";
+          this.question.answerkey.push(ans);
+        }
+
+        console.log(this.question.answerkey);
+      } else {
+        this.answer[i - 1] = "outline-dark";
+        this.question.answerkey = this.question.answerkey.filter(
+          added => added != ans
+        );
+        console.log(this.question.answerkey);
+      }
+    },
     addOptions() {
       this.optionnum = this.optionnum + 1;
+      this.answer.push("outline-dark");
     },
     deleteOptions(i) {
-      this.question.answerKey = this.question.answerKey.filter(
+      this.question.options = this.question.options.filter(
         choice => choice != choice[i]
       );
     },
     addquestion() {
-      console.log(this.question.answerKey)
       postFillInTheBlanksquestion(this.question)
         .then(res => console.log("Fill In The Blanks data saved!" + res))
         .catch(err => console.log(err));

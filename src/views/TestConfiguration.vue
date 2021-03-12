@@ -557,18 +557,18 @@ export default {
       screenCapture: 0,
       options: [
         { item: true, name: "Yes" },
-        { item: false, name: "No" }
-      ]
+        { item: false, name: "No" },
+      ],
     };
   },
   props: {
-    testname: String
+    testname: String,
   },
   methods: {
     back() {
       this.$router.push("test");
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

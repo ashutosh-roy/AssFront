@@ -8,7 +8,7 @@
         <b-col cols="4">
           <button class="btn btn-dark bank">Question Bank</button>
         </b-col>
-      </b-row>
+      </b-row>  
     </b-container>
 
     <b-card class="card" style="height: 85vh; ">

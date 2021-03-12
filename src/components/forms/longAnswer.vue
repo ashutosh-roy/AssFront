@@ -274,9 +274,6 @@ export default {
     isVideo,
     addquestion() {
       this.$emit("question-added", this.questions);
-      postCommonQuestion(this.questions)
-        .then(res => console.log("LongAnswer data saved" + res))
-        .catch(err => console.log(err));
     },
     previewFile: function(event) {
       var input = event.target;
@@ -290,6 +287,9 @@ export default {
         reader.readAsDataURL(input.files[0]);
         this.$bvModal.hide("modal-3");
       }
+      postCommonQuestion(this.questions)
+        .then(res => console.log("LongAnswer data saved" + res))
+        .catch(err => console.log(err));
     }
   },
   created: function() {

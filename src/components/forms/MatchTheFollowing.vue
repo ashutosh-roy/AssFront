@@ -2,9 +2,9 @@
   <div class="questionboxcontainer">
     <div class="questionboxcard1">
       <b-card class="card" header-tag="header">
-        <template #header>
+        <template #header>    
           <div>
-            Match The Following
+            Match The Following     
             <b-row align-h="end">
               <b-button
                 style="margin-top:1%"
@@ -85,16 +85,14 @@
                     @click="addInput()"
                     placeholder="Side A"
                     class="input"
-                    readonly
-                    style="background-color:transparent"
-                  ></b-form-input>
+                    readonly style="background-color:transparent"></b-form-input
+                  >
                   <b-form-input
                     @click="addInput()"
                     placeholder="Side B"
                     class="input"
-                    readonly
-                    style="background-color:transparent"
-                  ></b-form-input>
+                    readonly style="background-color:transparent"></b-form-input
+                  >
                 </b-input-group>
               </div>
               <!-- </div> -->

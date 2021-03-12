@@ -175,13 +175,14 @@ export default {
         { value: "4", text: "Difficulty Level 4" },
         { value: "5", text: "Difficulty Level 5" }
       ],
+
       optionnum: 1,
       question: {
         topic: "",
         difficultyLevel: null,
         question: "",
         options: [],
-        answerKey: [],
+        answerkey: [],
         autoCorrection: 0,
         required: 0,
         addToPublic: false,
@@ -208,16 +209,16 @@ export default {
       if (this.answer[i - 1] == "outline-dark") {
         if (ans != null) {
           this.answer[i - 1] = "outline-success";
-          this.question.answerKey.push(ans);
+          this.question.answerkey.push(ans);
         }
 
-        console.log(this.question.answerKey);
+        console.log(this.question.answerkey);
       } else {
         this.answer[i - 1] = "outline-dark";
-        this.question.answerKey = this.question.answerKey.filter(
+        this.question.answerkey = this.question.answerkey.filter(
           added => added != ans
         );
-        console.log(this.question.answerKey);
+        console.log(this.question.answerkey);
       }
     },
     addOptions() {
