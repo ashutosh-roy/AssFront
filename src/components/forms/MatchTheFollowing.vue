@@ -165,7 +165,7 @@
 </template>
 <script>
 import {
-  postMatchTheFollowingQuestion,
+  // postMatchTheFollowingQuestion,
   getMatchTheFollowingQuestion
 } from "../../apiFunctions";
 export default {
@@ -181,7 +181,7 @@ export default {
           sideA: [],
           sideB: []
         },
-        questionType: "Mtach the following Questions",
+        questionType: "Match the following Questions",
         answerKey: this.question,
         autoCorrection: 0,
         required: 0,
@@ -208,9 +208,12 @@ export default {
   },
   methods: {
     addquestion() {
-      postMatchTheFollowingQuestion(this.questions)
-        .then(res => console.log("MCQ data saved!" + res))
-        .catch(err => console.log(err));
+      console.log("____________________________________");
+      console.log(this.questions);
+      console.log("____________________________________");
+      // postMatchTheFollowingQuestion(this.questions)
+      //   .then(res => console.log("MCQ data saved!" + res))
+      //   .catch(err => console.log(err));
       this.$emit("question-added", this.questions);
     },
     addInput() {
@@ -224,7 +227,6 @@ export default {
         sideA: "",
         sideB: ""
       });
-      console.log(this.questions.answerKey);
     },
     removerows(index) {
       this.questions.question.sideA.splice(index, 1);

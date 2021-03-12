@@ -207,23 +207,6 @@ export default {
     };
   },
   methods: {
-    answerchange(ans, i) {
-      console.log("we're here atleast" + ans);
-      if (this.answer[i - 1] == "outline-dark") {
-        if (ans != null) {
-          this.answer[i - 1] = "outline-success";
-          this.question.answerkey.push(ans);
-        }
-
-        console.log(this.question.answerkey);
-      } else {
-        this.answer[i - 1] = "outline-dark";
-        this.question.answerkey = this.question.answerkey.filter(
-          added => added != ans
-        );
-        console.log(this.question.answerkey);
-      }
-    },
     addOptions() {
       this.optionnum = this.optionnum + 1;
       this.answer.push("outline-dark");
@@ -234,6 +217,7 @@ export default {
       );
     },
     addquestion() {
+      console.log(this.question.answerKey);
       postFillInTheBlanksquestion(this.question)
         .then(res => console.log("Fill In The Blanks data saved!" + res))
         .catch(err => console.log(err));
